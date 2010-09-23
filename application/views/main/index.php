@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>Welcome to CodeIgniter</title>
+<title>Welcome to Pharma</title>
 
 <style type="text/css">
 
@@ -43,20 +43,9 @@ code {
 </head>
 <body>
 
-<h1>Welcome to CodeIgniter!</h1>
+<h1>Welcome to Pharma Project!</h1>
 
-<p>The page you are looking at is being generated dynamically by CodeIgniter.</p>
-
-<p>If you would like to edit this page you'll find it located at:</p>
-<code>system/application/views/welcome_message.php</code>
-
-<p>The corresponding controller for this page is found at:</p>
-<code>system/application/controllers/welcome.php</code>
-
-<p>If you are exploring CodeIgniter for the very first time, you should start by reading the <a href="user_guide/">User Guide</a>.</p>
-
-
-<p><br />Page rendered in {elapsed_time} seconds</p>
+<p>This will be the homepage</p>
 
 </body>
 </html>

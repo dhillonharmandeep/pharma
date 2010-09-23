@@ -11,7 +11,7 @@
 |	http://example.com/
 |
 */
-$config['base_url']	= "http://localhost/pharma/";
+$config['base_url']	= "http://dev.pharmaseek.com.au";
 
 /*
 |--------------------------------------------------------------------------
@@ -23,7 +23,7 @@ $config['base_url']	= "http://localhost/pharma/";
 | variable so that it is blank.
 |
 */
-$config['index_page'] = "index.php";
+$config['index_page'] = "";
 
 /*
 |--------------------------------------------------------------------------
