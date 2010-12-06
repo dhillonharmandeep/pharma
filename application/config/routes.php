@@ -42,6 +42,9 @@
 
 $route['default_controller'] = "home";
 $route['scaffolding_trigger'] = "";
+$route['signup'] = "admin/signup";
+$route['login'] = "admin/login";
+$route['logout'] = "admin/logout";
 
 /* End of file routes.php */
 /* Location: ./system/application/config/routes.php */

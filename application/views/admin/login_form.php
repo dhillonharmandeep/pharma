@@ -19,10 +19,14 @@
 <body>
 
 <div id="signup_form">
-
+	<?if($this->session->flashdata('flashError')):?>
+	<div class="flashError">
+		<?="Error:".$this->session->flashdata('flashError')?>
+	</div>
+	<?endif?>
 	<p class="heading">User Login</p>
 
-	<?php echo form_open('login/submit'); ?>
+	<?php echo form_open(base_url().'login'); ?>
 
 	<?php echo validation_errors('<p class="error">','</p>'); ?>
 

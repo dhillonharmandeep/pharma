@@ -17,38 +17,46 @@
 </head>
 <body>
 
-<div id="signup_form">
-
-	<p class="heading">New User Signup</p>
-
-	<?php echo form_open('signup/submit'); ?>
-
-	<?php echo validation_errors('<p class="error">','</p>'); ?>
-
-	<p>
-		<label for="username">Username: </label>
-		<?php echo form_input('username',set_value('username')); ?>
-	</p>
-	<p>
-		<label for="password">Password: </label>
-		<?php echo form_password('password'); ?>
-	</p>
-	<p>
-		<label for="passconf">Confirm Password: </label>
-		<?php echo form_password('passconf'); ?>
-	</p>
-	<p>
-		<label for="email">E-mail: </label>
-		<?php echo form_input('email',set_value('email')); ?>
-	</p>
-	<p>
-		<?php echo form_submit('submit','Create my account'); ?>
-	</p>
-	<?php echo form_close(); ?>
-	<p>
-		<?php echo anchor('login','Login Form'); ?>
-	</p>
-</div>
+<?php echo form_open(base_url().'signup', array('id' => 'signup_form')); ?>
+<fieldset>
+	<legend>New User Signup<span class="required">*</span> Required</legend>
+	<ul>
+		<li class="error">
+			<?php echo validation_errors(); ?>
+		</li>
+		<li>
+			<label for="username">Username: <span class="required">*</span></label>
+			<?php echo form_input('username',set_value('username')); ?>
+		</li>
+		<li>
+			<label for="firstname">First Name: <span class="required">*</span></label>
+			<?php echo form_input('firstname',set_value('firstname')); ?>
+		</li>
+		<li>
+			<label for="lastname">Last Name: <span class="required">*</span></label>
+			<?php echo form_input('lastname',set_value('lastname')); ?>
+		</li>
+		<li>
+			<label for="password">Password: <span class="required">*</span></label>
+			<?php echo form_password('password'); ?>
+		</li>
+		<li>
+			<label for="passconf">Confirm Password: <span class="required">*</span></label>
+			<?php echo form_password('passconf'); ?>
+		</li>
+		<li>
+			<label for="email">E-mail: <span class="required">*</span></label>
+			<?php echo form_input('email',set_value('email')); ?>
+		</li>
+		<li>
+			<?php echo form_submit('','Create my account'); ?>
+		</li>
+	</ul>
+</fieldset>
+<?php echo form_close(); ?>
+<p>
+	<?php echo anchor('login','Login Form'); ?>
+</p>
 
 </body>
 </html>
