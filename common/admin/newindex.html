@@ -21,24 +21,14 @@
 <![endif]--> 
 
 
-<link href="css/OriginalStyles.css" rel="stylesheet" type="text/css" />
+<link href="css/layout.css" rel="stylesheet" type="text/css" />
+<link href="css/styles.css" rel="stylesheet" type="text/css" />
 
 </head>
 <body>
 
-<!--// Horisontal submenu edit starts -->
-
-<div class="bodytext" id="submenu"> 
-  <table width="493" border="0" class="class2">
-    <tr>
-      <td valign="middle"><a href="#">Submenu  1</a></td>
-      <td valign="middle"><a href="#">Submenu  2</a></td>
-      <td valign="middle"><a href="#">Submenu  3</a></td>
-      <td valign="middle"><a href="#">Submenu  4</a></td>
-      <td valign="middle"><a href="#">Submenu  5</a></td>
-    </tr>
-  </table>
-</div>
+<!--// header starts -->
+<div id="header">
 
 <!--// Horisontal submenu edit ends -->
 <!--// Logo edit starts -->
@@ -126,6 +116,30 @@
 </div>
 
 <!--// dropdown edit ends -->
+<!--// Horisontal submenu edit starts -->
+
+<div class="bodytext" id="submenu"> 
+  <table width="493" border="0" class="class2">
+    <tr>
+      <td valign="middle"><a href="#">Submenu  1</a></td>
+      <td valign="middle"><a href="#">Submenu  2</a></td>
+      <td valign="middle"><a href="#">Submenu  3</a></td>
+      <td valign="middle"><a href="#">Submenu  4</a></td>
+      <td valign="middle"><a href="#">Submenu  5</a></td>
+    </tr>
+  </table>
+</div>
+<!--// Searchbox starts -->
+
+<div id="searchbox">
+  <label>
+  <input name="serach" type="text" class="search" id="search" onfocus="if (value='Search') {value=''}" onblur="if (value=='') {value='Search'}" value="Search" size="30" maxlength="50" />
+  </label>
+</div>
+
+<!--// Searchbox ends -->
+</div>
+
 <!--// leftcolumn edit starts -->
 	<!--// Mainnavigation edit starts -->
 
@@ -342,145 +356,82 @@
 <!--// Content starts -->
 
 <div id="content"> 
-  <table width="772" border="0">
-    <tr>
-      <th height="58" valign="middle" bgcolor="#E5E5E5" scope="col"><h1 align="left">Welcome to your Admin Panel</h1></th> <!--// H1 title -->
-    </tr>
-    <tr>
-      <td bgcolor="#FFFFFF"><p class="bodytext_paragraph">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Duis sollicitudin tincidunt lacus. Sed non purus. Nullam porttitor ante id sem. <br /> <!--// bodytext -->
-Nam vel metus. Duis vitae lectus. Integer laoreet pulvinar nisi.  Nam vel metus. Duis vitae lectus. Integer laoreet pulvinar nisi.
-Lorem<br />
-ipsum dolor sit amet, consectetuer adipiscing elit. Duis sollicitudin tincidunt lacus. Sed non purus. Duis sollicitudin tincidunt lacus.<br />
-<br />
-Nullam porttitor ante id sem. 
-Nam vel metus. Duis vitae lectus. Integer laoreet pulvinar nisi.  Nam vel metus. 
-Duis vitae lectus. Integer laoreet pulvinar nisi. Nam vel metus.<br />
-      <br />
-      </p></td>
-    </tr>
-  </table>
+  <h1 align="left">Welcome to your Admin Panel</h1><!--// H1 title -->
+  <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Duis sollicitudin tincidunt lacus. Sed non purus. Nullam porttitor ante id sem.
+  Nam vel metus. Duis vitae lectus. Integer laoreet pulvinar nisi.  Nam vel metus. Duis vitae lectus. Integer laoreet pulvinar nisi.
+  Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Duis sollicitudin tincidunt lacus. Sed non purus. Duis sollicitudin tincidunt lacus.
+  </p>
+  <p>Nullam porttitor ante id sem. 
+  Nam vel metus. Duis vitae lectus. Integer laoreet pulvinar nisi.  Nam vel metus. 
+  Duis vitae lectus. Integer laoreet pulvinar nisi. Nam vel metus.
+  </p>
   
   
-  <h2>  This is H2 Header title</h2> <!--// h2 title -->
-  <h3> This is H3 Header title</h3><br /> <!--// h3 title -->
-    <br />
-    <br />
-    <br />
-    <br />
+  <h2>  This is H2 Header title</h2>
+  <h3> This is H3 Header title</h3>
+  <h4> This is H4 Header title</h4>
+  <h5> This is H5 Header title</h5>
+  <h6> This is H6 Header title</h6>
   
+  <div style="height: 150px"></div>
   
+  <p class="msgSuccess">
+     <strong>Congratulations!</strong> Your information has been submitted successfully.
+  </p>
   
-  <div id="positive"> <!--// Positive message -->
-    <table width="450" cellpadding="0" cellspacing="12">
-      <tr>
-        <td width="52"><div align="center"><img src="images/icons/positive.png" alt="positive" width="22" height="16" /></div></td>
-        <td width="388" class="bodytext style3"><strong>Congratulations!</strong> Your information has been submitted suffesfully.<br /></td> <!--// positive message -->
-      </tr>
-    </table>
-  </div>
+  <p class="msgError">
+    <strong>Error!</strong> Please try again, following fields were incorrect...
+  </p>
   
-  
- 
-  <div id="negative"> <!--// error message -->
-    <table width="450" cellpadding="0" cellspacing="12">
-      <tr>
-        <td width="52"><div align="center"><img src="images/icons/negative.png" alt="negative" width="18" height="18" /></div></td>
-        <td width="388" class="bodytext style4"><strong>Error!</strong> Please try again, following fields were incorrect..</td> <!--// error text -->
-      </tr>
-    </table>
-  </div>
-  
-  
-  
-  
-  <div id="tip"> <!--// tip message starts -->
-    <table width="450" cellpadding="0" cellspacing="12">
-      <tr>
-        <td width="52"><div align="center"><img src="images/icons/attention.png" alt="attention" width="22" height="18" /></div></td>
-        <td width="388" class="bodytext style4"><span class=""><strong>ProAdmin TopTip!</strong> You can speed your working with...</span></td> <!--// tip message -->
-      </tr>
-    </table>
-  </div>
-  
-  
-  
-  
-  
-  <div class="bodytext_fieldstitle" id="fieldmedium">Form Fields – Medium</div> <!--// Form title medium -->
-  <div class="bodytext_fieldstitle" id="formtitle">Form Fields – Small</div> <!--// Form title small -->
-  <div class="bodytext_fieldstitle" id="fieldlarge">Form Fields – Large</div> <!--// Form title large -->
-  <div class="bodytext_fieldstitle" id="yourmessage">Your Message</div> <!--// Form title message -->
-  
+  <p class="msgInfo">
+    <strong>ProAdmin TopTip!</strong> You can speed your working with...
+  </p>
   
   <!--// Small form field starts -->
-  
-  <div id="small"> 
+  <div>
+    <label class="formfield">Form Fields – Small</label> 
     <input name="search2" type="text" class="fields" id="search2" onfocus="if (value='Lorem ipsum dolor') {value=''}" onblur="if (value=='') {value='Lorem ipsum dolor'}" value="Lorem ipsum dolor" size="25" />
-    <br />
-    <span class="instructions">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Proin bibendum nisi at ipsum.</span><span class="style9"><br />
-    </span><br />
+    <span class="instructions">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Proin bibendum nisi at ipsum.</span>
   </div>
-  
   <!--// Small form field ends -->
   
-  
-   <!--// medium form field starts -->
-   
-  <div id="medium">
+  <!--// medium form field starts -->
+  <div>
+    <label class="formfield">Form Fields – Medium</label>
     <input name="search3" type="text" class="fields" id="search3" onfocus="if (value='Lorem ipsum dolor') {value=''}" onblur="if (value=='') {value='Lorem ipsum dolor'}" value="Lorem ipsum dolor" size="50" />
-    <br />
-  <span class="instructions">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Proin bibendum nisi at ipsum..</span
-  ></div> 
+    <span class="instructions">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Proin bibendum nisi at ipsum..</span>
+  </div>
+  <!--// medium form field ends--> 
   
-    <!--// medium form field ends--> 
-    
-    
-  
-	 <!--// large form field starts -->
-     
-  <div id="large">
+   <!--// large form field starts -->
+  <div>
+    <label class="formfield">Form Fields – Large</label>
     <input name="search4" type="text" class="fields" id="search4" onfocus="if (value='Lorem ipsum dolor') {value=''}" onblur="if (value=='') {value='Lorem ipsum dolor'}" value="Lorem ipsum dolor" size="80" />
-  <span class="instructions">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Proin bibendum nisi at ipsum.</span>
+    <span class="instructions">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Proin bibendum nisi at ipsum.</span>
   </div>  
-  
    <!--// large form field ends -->
-   
-   
-   <!--// message form field starts -->
-
-  <div id="message"> 
-    <label></label>
+  
+  
+  <!--// message form field starts -->
+  <div> 
+    <label class="formfield">Your Message</label>
     <textarea name="search5" cols="80" rows="10" class="fields" id="search5" onfocus="if (value='Lorem ipsum dolor') {value=''}" onblur="if (value=='') {value='Lorem ipsum dolor'}" >Lorem ipsum dolor</textarea>
-    <span class="instructions">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Proin bibendum nisi at ipsum.    <br />
-    dolor sit amet, consectetuer adipiscing elit. Proin bibendum nisi at ipsum.</span><br />
-    <br />
-    <br />
-    
-    <!--// message form field ends -->
-    
-    <!--// Buttons start-->
+    <span class="instructions">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Proin bibendum nisi at ipsum.
+    dolor sit amet, consectetuer adipiscing elit.</span>
+  </div>
+  <!--// message form field ends -->
+  
+  <!--// Buttons start-->
+  <div>
     <label> 
     <input name="submit" type="submit" class="button" id="submit" value="Submit" /></label> <!--// submit -->
     <input name="reset" type="reset" class="button" id="reset" value="Reset" />  <!--// reset -->
     <input name="browse" type="reset" class="button" id="browse" value="Browse..." /> <!--// browse -->
   </div>  
+  <!--// Buttons start-->
 </div>
-
-	<!--// Buttons ends -->
-
 
 <!--// Content ends -->
-<!--// Searchbox starts -->
-
-<div id="searchbox">
-  <label>
-  <input name="serach" type="text" class="search" id="search" onfocus="if (value='Search') {value=''}" onblur="if (value=='') {value='Search'}" value="Search" size="30" maxlength="50" />
-  </label>
-</div>
-
-<!--// Searchbox ends -->
-
-
 </body>
 </html>
 

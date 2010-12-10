@@ -25,26 +25,19 @@
 	<script defer type="text/javascript" src="<?php echo base_url(); ?>common/admin/js/pngfix.js"></script> 
 	<![endif]--> 
 	
-	<link href="<?php echo base_url(); ?>common/admin/css/styles.css" rel="stylesheet" type="text/css" />
+  <link href="<?php echo base_url(); ?>common/admin/css/layout.css" rel="stylesheet" type="text/css" />
+  <link href="<?php echo base_url(); ?>common/admin/css/styles.css" rel="stylesheet" type="text/css" />
+
+<?php if(isset($googlemaps) && $googlemaps) {?>  
+  <script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAADy2F1JZevUhmdpyOnYpvZhSQgF_ruoSu5-Aul0WSoybPltiq_xSyJz2q9ilFoYa9x1PK1Nl1egaTRA"
+	            type="text/javascript"></script>
+  <script type="text/javascript"src="<?php echo base_url(); ?>common/google/maps.js"></script>
+<?php }//if($googlemaps) {?>  
 
 </head>
 <body>
 
-<!--// Horisontal submenu edit starts -->
-
-<div class="bodytext" id="submenu"> 
-  <table width="493" border="0" class="class2">
-    <tr>
-      <td valign="middle"><a href="#">Submenu  1</a></td>
-      <td valign="middle"><a href="#">Submenu  2</a></td>
-      <td valign="middle"><a href="#">Submenu  3</a></td>
-      <td valign="middle"><a href="#">Submenu  4</a></td>
-      <td valign="middle"><a href="#">Submenu  5</a></td>
-    </tr>
-  </table>
-</div>
-
-<!--// Horisontal submenu edit ends -->
+<div id="header">
 <!--// Logo edit starts -->
 
 <div id="logo">
@@ -65,10 +58,12 @@
 
 <div id="visitsite">
   <div align="center" class="toplinks">
-    <div id="visitsite_icon"><a href="#"><img src="<?php echo base_url(); ?>common/admin/images/icons/big_visitsite.png" alt="big_visitsite" width="30" height="25" border="0" /></a></div>
-    <br />
-    <br />
-      <a href="#"><span class="toplinks">VISIT SITE</span></a></div>
+    <div id="visitsite_icon">
+      <a href="<?php echo base_url(); ?>" target="_blank"><img src="<?php echo base_url(); ?>common/admin/images/icons/big_visitsite.png" alt="big_visitsite" width="30" height="25" border="0" /></a></div>
+      <br />
+      <br />
+      <a href="<?php echo base_url(); ?>" target="_blank"><span class="toplinks">VISIT SITE</span></a>
+    </div>
 </div>
 
 <!--// Visit site edit ends -->
@@ -129,4 +124,29 @@
 <div class="clear"> </div>
 </div>
 
+<!--// Horisontal submenu edit starts -->
+<div class="bodytext" id="submenu"> 
+  <table width="493" border="0" class="class2">
+    <tr>
+      <td valign="middle"><a href="#">Submenu  1</a></td>
+      <td valign="middle"><a href="#">Submenu  2</a></td>
+      <td valign="middle"><a href="#">Submenu  3</a></td>
+      <td valign="middle"><a href="#">Submenu  4</a></td>
+      <td valign="middle"><a href="#">Submenu  5</a></td>
+    </tr>
+  </table>
+</div>
+
+<!--// Horisontal submenu edit ends -->
+<!--// Searchbox starts -->
+  
+<div id="searchbox">
+  <label>
+  <input name="serach" type="text" class="search" id="search" onfocus="if (value='Search') {value=''}" onblur="if (value=='') {value='Search'}" value="Search" size="30" maxlength="50" />
+  </label>
+</div>
+  
+<!--// Searchbox ends -->
+
+</div>
 <!--// dropdown edit ends -->

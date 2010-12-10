@@ -16,30 +16,30 @@
   <div id="navigation"><img src="<?php echo base_url(); ?>common/admin/images/title_bg.png" alt="titlebg" width="180" height="49" />
     <div class="toplinks style1" id="navigationtitle"><strong>Main navigation</strong><br /> <!--// Title -->
       <br />
-      <table width="158" border="0">
+      <table width="175" border="0">
         <tr>
           <td width="18" align="center"><img src="<?php echo base_url(); ?>common/admin/images/icons/dashboard.png" alt="dashboard" width="16" height="13" /></td>
           <td width="130" class="navigation"><a href="<?php echo base_url()?>dashboard">Dashboard</a></td> <!--// Dashboard -->
         </tr>
         <tr>
-          <td align="center"><img src="<?php echo base_url(); ?>common/admin/images/icons/articles.png" alt="articles" width="16" height="13" /></td>
-          <td class="navigation"><a href="<?php echo base_url()?>whchain">WHChains</a></td> <!--// Articles -->
+          <td align="center"><img src="<?php echo base_url(); ?>common/icons/chainbg.png" alt="Chain/Banner Group" width="16" height="13" /></td>
+          <td class="navigation"><a href="<?php echo base_url()?>chainbg">Chain/Banner Group</a></td>
         </tr>
         <tr>
-          <td align="center"><img src="<?php echo base_url(); ?>common/admin/images/icons/gallery.png" alt="galleries" width="18" height="12" /></td>
-          <td class="navigation"><a href="#">Galleries</a></td> <!--// Galleries -->
+          <td align="center"><img src="<?php echo base_url(); ?>common/icons/store.png" alt="Medical Store" width="18" height="12" /></td>
+          <td class="navigation"><a href="#">Store</a></td>
         </tr>
         <tr>
-          <td align="center"><img src="<?php echo base_url(); ?>common/admin/images/icons/calendar.png" alt="calendar" width="15" height="15" /></td>
-          <td class="navigation"><a href="#">Calendar</a></td> <!--// Calendar -->
+          <td align="center"><img src="<?php echo base_url(); ?>common/icons/medicine.png" alt="Medicine" width="15" height="15" /></td>
+          <td class="navigation"><a href="#">Medicine</a></td>
         </tr>
         <tr>
-          <td align="center"><img src="<?php echo base_url(); ?>common/admin/images/icons/users.png" alt="users" width="16" height="18" /></td>
-          <td class="navigation"><a href="#">Users</a></td> <!--// Users -->
+          <td align="center"><img src="<?php echo base_url(); ?>common/icons/salt.png" alt="Medical Salt" width="16" height="18" /></td>
+          <td class="navigation"><a href="<?php echo base_url()?>salt">Medical Salt</a></td> <!--// Users -->
         </tr>
         <tr>
-          <td align="center"><img src="<?php echo base_url(); ?>common/admin/images/icons/statistics.png" alt="statistics" width="14" height="16" /></td>
-          <td class="navigation"><a href="#">Statistics</a></td> <!--// Statistics -->
+          <td align="center"><img src="<?php echo base_url(); ?>common/icons/mtype.png" alt="Medicine Type" width="14" height="16" /></td>
+          <td class="navigation"><a href="<?php echo base_url()?>mtype">Medicine Type</a></td> <!--// Statistics -->
         </tr>
         <tr>
           <td align="center"><img src="<?php echo base_url(); ?>common/admin/images/icons/settings.png" alt="settings" width="14" height="14" /></td>
@@ -47,7 +47,7 @@
         </tr>
         <tr>
           <td align="center"><img src="<?php echo base_url(); ?>common/admin/images/icons/support.png" alt="support" width="16" height="16" /></td>
-          <td class="navigation"><a href="3">Help &amp; Support</a></td> <!--// Support -->
+          <td class="navigation"><a href="#">Help &amp; Support</a></td> <!--// Support -->
         </tr>
       </table>
       <br />
@@ -79,26 +79,6 @@
             <td align="center"><a href="#"><img src="<?php echo base_url(); ?>common/admin/images/icons/edit.png" alt="edit" width="18" height="18" border="0" /></a></td>
             <td class="navigation"><a href="#">Artictle Title #2</a></td>
         </tr>
-          <tr>
-            <td align="center"><a href="#"><img src="<?php echo base_url(); ?>common/admin/images/icons/edit.png" alt="edit" width="18" height="18" border="0" /></a></td>
-            <td class="navigation"><a href="#">Artictle Title #3</a></td>
-          </tr>
-          <tr>
-            <td align="center"><a href="#"><img src="<?php echo base_url(); ?>common/admin/images/icons/edit.png" alt="edit" width="18" height="18" border="0" /></a></td>
-            <td class="navigation"><a href="#">Artictle Title #4</a></td>
-          </tr>
-          <tr>
-            <td align="center"><a href="#"><img src="<?php echo base_url(); ?>common/admin/images/icons/edit.png" alt="edit" width="18" height="18" border="0" /></a></td>
-            <td class="navigation"><a href="#">Artictle Title #5</a></td>
-          </tr>
-          <tr>
-            <td align="center"><a href="#"><img src="<?php echo base_url(); ?>common/admin/images/icons/edit.png" alt="edit" width="18" height="18" border="0" /></a></td>
-            <td class="navigation"><a href="#">Artictle Title #6</a></td>
-          </tr>
-          <tr>
-            <td align="center"><a href="#"><img src="<?php echo base_url(); ?>common/admin/images/icons/edit.png" alt="edit" width="18" height="18" border="0" /></a></td>
-            <td class="navigation"><a href="#">Artictle Title #7</a></td> <!--// ...Article #7 -->
-          </tr>
         </table>
       <br />
     </div>
@@ -187,3 +167,22 @@
 
 	<!--// Copyright ends -->
 <!--// leftcolumn ends -->
+
+<!--// Main content starts -->
+<div id="content">
+  <h1><?php echo $heading?></h1>
+  <?if($this->session->flashdata('flashError')):?>
+    <p class="msgError">
+      <?=$this->session->flashdata('flashError')?>
+    </p>
+  <?endif?>
+  <?if($this->session->flashdata('flashWarning')):?>
+    <p class="msgInfo">
+      <?=$this->session->flashdata('flashWarning')?>
+    </p>
+  <?endif?>
+  <?if($this->session->flashdata('flashConfirm')):?>
+    <p class="msgSuccess">
+      <?=$this->session->flashdata('flashConfirm')?>
+    </p>
+  <?endif?>

@@ -22,7 +22,7 @@ class Dashboard extends Controller {
 	}
 	public function index(){
 		$data['title'] = "Admin Dashboard";
-		$data['heading'] = "Admin Dashboard";
+		$data['heading'] = "Welcome to Pharmaseek Admin Dashboard!";
 		$this->load->view('dashboard/index.php', $data);
 	}
 }

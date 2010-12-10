@@ -7,64 +7,53 @@
  * Created by	: Harman Dhillon
  * Created on 	: Oct 22, 2010
  */
-$this->load->view('dashboard/_header', $title);
+$this->load->view('dashboard/structure/_header', $title);
+$this->load->view('dashboard/structure/_leftmenu', $heading);
 ?>
-<div id="main">
-	<div id="content">
-		<div class="jquery_tab">
-			<div class="content_block">
-				<h2 class="jquery_tab_title"><?php echo $heading?></h2>
+	<p class="back"><a href="<?= base_url()?>whchain">Back to chains listings</a></p>
+	  
 
-				<a href="<?= base_url()?>whchain">Back to chains listings</a>
-
-				<?= form_open(base_url().'whchain/add')?>
-				<fieldset>
-					<legend>Chain details</legend>
-					<ul>
-						<li>
-							<label>Chain Name <span class="required">*</span></label>
-							<?=form_input(array('id'=>'chain_name', 'name'=>'chain_name', 'class' => 'input-small'), set_value('chain_name') )?>
-							<?=form_error('chain_name', '<div class="message formerror"><p>', '</p></div>')?>
-						</li>
-						<li>
-							<label>Address </label>
-							<?=form_input(array('id'=>'address', 'name'=>'address', 'class' => 'input-big'), set_value('address'))?>
-							<?=form_error('address', '<div class="message formerror"><p>', '</p></div>')?>
-						</li>
-						<li>
-							<label>Suburb </label>
-							<?=form_input(array('id'=>'suburb', 'name'=>'suburb', 'class' => 'input-small'), set_value('suburb'))?>
-							<?=form_error('suburb', '<div class="message formerror"><p>', '</p></div>')?>
-						</li>
-						<li>
-							<label>Postcode </label>
-							<?=form_input(array('id'=>'postcode', 'name'=>'postcode', 'class' => 'input-small'), set_value('postcode'))?>
-							<?=form_error('postcode', '<div class="message formerror"><p>', '</p></div>')?>
-						</li>
-						<li>
-							<label>State <span class="required">*</span></label>
-							<?=form_dropdown('state', array('' => '',
-															'ACT' => 'Australian Capital Territory', 
-															'NSW' => 'New South Wales', 
-															'NT' => 'Northern Territory', 
-															'QLD' => 'Queensland', 
-															'SA' => 'Southern Australia', 
-															'TAS' => 'Tasmania', 
-															'VIC' => 'Victoria', 
-															'WA' => 'Western Australia'), set_value('state'))?>
-							<?=form_error('state', '<div class="message formerror"><p>', '</p></div>')?>
-						</li>
-						<li>
-							<?=form_submit(array('name'=>'','class'=>'button', 'value'=> 'Submit'))?>
-						</li>
-					</ul>
-				</fieldset>
-				<?= form_close()?>
-			</div><!--end content_block-->
-		</div><!-- end jquery_tab -->
-	</div><!--end content-->
-</div><!--end main-->
-
+	<?= form_open(base_url().'whchain/add')?>
+	<fieldset>
+		<legend>Chain details</legend>
+    
+      <div>
+				<label class="formfield">Chain Name <span class="required">*</span></label>
+				<?=form_input(array('id'=>'chain_name', 'name'=>'chain_name', 'class' => 'fields'), set_value('chain_name') )?>
+				<?=form_error('chain_name', '<p class="msgForm msgError">', '</p>')?>
+			</div>
+			<div>
+				<label class="formfield">Address </label>
+				<?=form_input(array('id'=>'address', 'name'=>'address', 'class' => 'fields', 'size' => '100'), set_value('address'))?>
+				<?=form_error('address', '<p class="msgForm msgError">', '</p>')?>
+			</div>
+			<div>
+				<label class="formfield">Suburb </label>
+				<?=form_input(array('id'=>'suburb', 'name'=>'suburb', 'class' => 'fields'), set_value('suburb'))?>
+				<?=form_error('suburb', '<p class="msgForm msgError">', '</p>')?>
+			</div>
+			<div>
+				<label class="formfield">Postcode </label>
+				<?=form_input(array('id'=>'postcode', 'name'=>'postcode', 'class' => 'fields', 'size' => '4'), set_value('postcode'))?>
+				<?=form_error('postcode', '<p class="msgForm msgError">', '</p>')?>
+			</div>
+			<div>
+				<label class="formfield">State <span class="required">*</span></label>
+				<?=form_dropdown('state', array('' => '',
+												'ACT' => 'Australian Capital Territory', 
+												'NSW' => 'New South Wales', 
+												'NT' => 'Northern Territory', 
+												'QLD' => 'Queensland', 
+												'SA' => 'Southern Australia', 
+												'TAS' => 'Tasmania', 
+												'VIC' => 'Victoria', 
+												'WA' => 'Western Australia'), set_value('state'), 'class="fields"')?>
+				<?=form_error('state', '<p class="msgForm msgError">', '</p>')?>
+			</div>
+			<div>
+				<?=form_submit(array('name'=>'','class'=>'button', 'value'=> 'Submit'))?>
+			</div>
+	</fieldset>
+	<?= form_close()?>
 <?php
-$this->load->view('dashboard/_leftmenu', array('dashboard' => true));
-$this->load->view('dashboard/_footer');
+$this->load->view('dashboard/structure/_footer');

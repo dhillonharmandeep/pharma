@@ -4,7 +4,7 @@ $lang['required'] 			= "The %s field is required.";
 $lang['isset']				= "The %s field must have a value.";
 $lang['valid_email']		= "The %s field must contain a valid email address.";
 $lang['valid_emails'] 		= "The %s field must contain all valid email addresses.";
-$lang['valid_url'] 			= "The %s field must contain a valid URL.";
+$lang['valid_url']      = "The %s field must contain a valid URL.";
 $lang['valid_ip'] 			= "The %s field must contain a valid IP.";
 $lang['min_length']			= "The %s field must be at least %s characters in length.";
 $lang['max_length']			= "The %s field can not exceed %s characters in length.";
@@ -18,7 +18,9 @@ $lang['integer']			= "The %s field must contain an integer.";
 $lang['matches']			= "The %s field does not match the %s field.";
 $lang['is_natural']			= "The %s field must contain only positive numbers.";
 $lang['is_natural_no_zero']	= "The %s field must contain a number greater than zero.";
-
+// Custum msgs from Harman
+$lang['valid_phone']      = "The %s field must contain a valid phone number.";
+$lang['valid_fax']      = "The %s field must contain a valid fax number.";
 
 /* End of file form_validation_lang.php */
 /* Location: ./system/language/english/form_validation_lang.php */

@@ -1,6 +1,5 @@
-@charset "UTF-8";
+﻿@charset "UTF-8";
 /* CSS Document */
-
 body {
     margin: 0;
     padding: 0;
@@ -8,6 +7,8 @@ body {
     min-width: 600px;
     background-image: url(../images/login_background.jpg);
     background-repeat: repeat-x;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
 }
 #logo {
     position:absolute;
@@ -35,12 +36,20 @@ body {
 }  /* Fields and content DIV  */
 #lostpassword {
     position:absolute;
-    width:88px;
-    height:18px;
+    width:120px;
+    height:50px;
     z-index:3;
-    left: 340px;
-    top: 196px;
+    left: 330px;
+    top: 190px;
 }  /* Password DIV */
+#createaccount {
+    position:absolute;
+    width:120px;
+    height:50px;
+    z-index:3;
+    left: 330px;
+    top: 205px;
+}  /* createaccount DIV */
 #copyright {
     position:absolute;
     width:472px;
@@ -103,3 +112,16 @@ a:hover {
     background-image: url(../images/login_box.jpg);
 } /* Box DIV, do not edit  */
 
+.msgError{
+    background-color: #ffa4aa;
+    border: 1px solid #800000;
+    background-image:url('../images/icons/negative.png');
+    width:424px;
+    line-height:25px;
+    padding: 10px 10px 10px 60px;
+    background-repeat: no-repeat;
+    background-position: 20px center;
+    position: absolute;
+    top: -50px;
+    left: 39px;
+}

@@ -1,4 +1,4 @@
-<div style="border:1px solid #990000;padding-left:20px;margin:0 0 10px 0;">
+<div style="border:5px solid #990000;padding-left:23px;background-color:#FF0000;font-size:20px;position:absolute;z-index:50;top:150px;left:250px;min-height:400px;">
 
 <h4>A PHP Error was encountered</h4>
 

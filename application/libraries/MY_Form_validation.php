@@ -1,30 +1,35 @@
-<?php if (!defined('BASEPATH')) exit('No direct script access allowed');
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /** 
- * My_Form_validation.php
- * Description	: Form Validation Library Extended to include doctrine validations.
+ * MY_Form_validation.php
+ * Description	: Extension to the existing form validation library
  * 
  * 
  * Created by	: Harman Dhillon
- * Created on 	: Oct 4, 2010
+ * Created on 	: Dec 10, 2010
  */
 class MY_Form_validation extends CI_Form_validation {
+  /**
+   * Validate URL
+   *
+   * @access    public
+   * @param    string
+   * @return    string
+   */
+  function valid_url($url)
+  {
+    $pattern = "/^(http|https|ftp):\/\/([A-Z0-9][A-Z0-9_-]*(?:\.[A-Z0-9][A-Z0-9_-]*)+):?(\d+)?\/?/i";;
+    if (!preg_match($pattern, $url))
+    {
+      return FALSE;
+    }
+    return TRUE;
+  } 
+  
+  function valid_phone($str){
+    return (bool)preg_match( '/^[\-+ ]?[0-9\- ]*$/', $str);
+  }
 
-	function unique($value, $params)
-	{
-		$CI =& get_instance();
-
-		$CI->form_validation->set_message('unique', 
-			'The %s is already being used.');
-
-		list($model, $field) = explode(".", $params, 2);
-
-		$find = "findOneBy".$field;
-		
-		if (Doctrine::getTable($model)->$find($value)) {
-			return false;
-		} else {
-			return true;
-		}
-
-	}
+  function valid_fax($str){
+    return (bool)preg_match( '/^[\-+ ]?[0-9\- ]*$/', $str);
+  }
 }

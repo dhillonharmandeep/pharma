@@ -1,0 +1,436 @@
+﻿@charset "UTF-8";
+/* CSS Document */
+* {
+	margin: 0;
+	padding: 0;
+}
+body {
+	/* Body and background image DIV */
+    background-image: url(../images/bg_slice.jpg);
+	background-repeat: repeat-x;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #505050;
+	line-height: 21px;
+	padding: 10px 10px 10px 25px;
+	background-color:#F0F0F0
+}
+/* Link styling */
+a:link {
+	text-decoration: none;
+	font-weight: bold;
+	color: #2b7c98;
+}
+/* normal link */
+a:visited, a:active {
+	text-decoration: none;
+	font-weight: bold;
+	color: #2b7c98;
+}
+/* normal link */
+a:hover {
+	text-decoration: underline;
+	font-weight: bold;
+	color: #000000;
+}
+/* hover link */
+#logo {
+	/* Logo DIV */
+    position: absolute;
+	width: 226px;
+	height: 69px;
+	z-index: 1;
+	background-image: url(../images/logo_bg.jpg);
+	top: 0px;
+	left: 0px;
+}
+#arrows {
+	/* Arrows DIV */
+    position: absolute;
+	width: 132px;
+	height: 69px;
+	z-index: 2;
+	left: 226px;
+	top: 0px;
+	background-image: url(../images/arrows.jpg);
+}
+#hello {
+	/* Hello (user) DIV */
+    position: absolute;
+	width: 206px;
+	height: 32px;
+	z-index: 4;
+	left: 367px;
+	top: 9px;
+}
+/* Dropdown below the admin name */
+#dropdown {
+	/* Hello (user) dropdown DIV */
+    position: absolute;
+	width: 204px;
+	height: 27px;
+	z-index: 16;
+	left: 368px;
+	top: 40px;
+}
+/* Drop down menu styles starts */
+#jsddm {
+	margin: 0;
+	padding: 0;
+}
+#jsddm li {
+	float: left;
+	list-style: none;
+	font: 12px Arial, Arial;
+}
+#jsddm li a {
+	display: block;
+	background: #478da4;
+	padding: 2px 5px;
+	text-decoration: none;
+	width: 190px;
+	color: #FFFFFF;
+	white-space: nowrap;
+}
+#jsddm li a:hover {
+	background: #478da4;
+}
+#jsddm li ul {
+	margin: 0;
+	padding: 0;
+	position: absolute;
+	visibility: hidden;
+}
+#jsddm li ul li {
+	float: none;
+	display: inline;
+}
+#jsddm li ul li a {
+	width: auto;
+	background: #346575;
+	padding: 5px 21px 5px 8px;
+	color: #FFFFFF;
+}
+#jsddm li ul li a:hover {
+	background: #478da4;
+	color: #FFFFFF;
+}
+/* Drop down menu styles ends */
+/* Header big buttons starts */
+#visitsite {
+	/* Visit site DIV */
+    position: absolute;
+	width: 100px;
+	height: 69px;
+	z-index: 8;
+	left: 581px;
+	top: 0px;
+	background-color: #f4f4f4;
+}
+#visitsite_icon {
+	/* Visit site icon DIV */
+    position: absolute;
+	width: 99px;
+	height: 29px;
+	z-index: 6;
+	top: 13px;
+	left: 0px;
+}
+#users {
+	/* Users DIV */
+    position: absolute;
+	width: 100px;
+	height: 69px;
+	z-index: 9;
+	left: 686px;
+	top: 0px;
+	background-color: #F4F4F4;
+}
+#users_icon {
+	/* Users icon DIV */
+    position: absolute;
+	width: 99px;
+	height: 32px;
+	z-index: 6;
+	top: 12px;
+	left: 0px;
+}
+#settings {
+	/* Settings DIV */
+    position: absolute;
+	width: 100px;
+	height: 69px;
+	z-index: 10;
+	left: 790px;
+	top: 0px;
+	background-color: #F4F4F4;
+}
+#settings_icon {
+	/* Settings icon DIV */
+    position: absolute;
+	width: 99px;
+	height: 32px;
+	z-index: 6;
+	top: 13px;
+	left: 0px;
+}
+#logout {
+	/* LogoutDIV */
+    position: absolute;
+	width: 100px;
+	height: 69px;
+	z-index: 11;
+	left: 894px;
+	top: 0px;
+	background-color: #F4F4F4;
+}
+#logout_icon {
+	/* Logout icon DIV */
+    position: absolute;
+	width: 99px;
+	height: 32px;
+	z-index: 6;
+	top: 13px;
+	left: 0px;
+}
+/* Top menu links */
+.toplinks {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #2B7C98;
+	line-height: 20px;
+}
+/* top links, different colors  */
+/* Header big buttons ends */
+/* Top submenu styles start here */
+#submenu {
+	/* Horisontal submenu */
+    position: absolute;
+	width: 527px;
+	height: 26px;
+	z-index: 5;
+	left: 248px;
+	top: 73px;
+}
+/* Submenu links */
+.class2 a:link {
+	color: #FFFFFF;
+	font-family: Arial,Helvetica,sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+	text-decoration: none;
+}
+/* second link, different colors  */
+.class2 a:visited, a:active {
+	color: #FFFFFF;
+	font-family: Arial,Helvetica,sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+	text-decoration: none;
+}
+/* second link, different colors  */
+.class2 a:hover {
+	color: #5DD5FF;
+	font-family: Arial,Helvetica,sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+	text-decoration: underline;
+}
+/* second hover link, different colors  */
+/* Top submenu styles ends here */
+/* Top search box styles start here */
+#searchbox {
+	/* Searchbox */
+    position: absolute;
+	width: 184px;
+	height: 29px;
+	z-index: 17;
+	left: 768px;
+	top: 75px;
+}
+/* Searchbox styles */
+.search {
+	color: #777777;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	padding: 2px;
+	background-color: #FFFFFF;
+	border: 1px solid #dedbd1;
+}
+/* search style  */
+/* Top search box styles end here */
+/* Left column styles begin here */
+#leftcolumn {
+	/* Leftcolumn */
+    position: absolute;
+	width: 225px;
+	height: 1000px;
+	z-index: 12;
+	background-image: url(../images/bg_leftcolumn.jpg);
+	left: 0px;
+	top: 69px;
+}
+#navigation {
+	/* Navigation */
+    position: absolute;
+	width: 167px;
+	height: 53px;
+	z-index: 1;
+	top: 10px;
+}
+#navigationtitle {
+	/* main navigation title and links */
+    position: absolute;
+	width: 154px;
+	height: 274px;
+	z-index: 1;
+	left: 22px;
+	top: 14px;
+}
+#calendar {
+	/* calendar */
+    position: absolute;
+	width: 203px;
+	height: 110px;
+	z-index: 1;
+	top: 663px;
+}
+#calendartitle {
+	/* calendar title and content*/
+    position: absolute;
+	width: 179px;
+	height: 331px;
+	z-index: 1;
+	left: 22px;
+	top: 14px;
+}
+#latest {
+	/* Latest articles */
+    position: absolute;
+	width: 187px;
+	height: 53px;
+	z-index: 1;
+	top: 332px;
+}
+#latestitle {
+	/* latest articles title and content */
+    position: absolute;
+	width: 181px;
+	height: 28px;
+	z-index: 1;
+	left: 22px;
+	top: 14px;
+}
+/* Left Navigation links*/
+.navigation a:link {
+	font-size: 13px;
+	color: #FFFFFF;
+	font-weight: bold;
+	padding-left: 10px;
+	line-height: 26px;
+}
+/* navigation link, different colors  */
+.navigation a:visited {
+	font-size: 13px;
+	color: #FFFFFF;
+	font-weight: bold;
+	padding-left: 10px;
+	line-height: 26px;
+}
+/* navigation link, different colors  */
+.navigation a:hover {
+	font-size: 13px;
+	color: #34cbff;
+	font-weight: bold;
+	padding-left: 10px;
+	line-height: 26px;
+}
+/* navigation hover link, different colors  */
+.navigation a:active {
+	font-size: 13px;
+	color: #FFFFFF;
+	font-weight: bold;
+	padding-left: 10px;
+	line-height: 26px;
+}
+/* navigation link, different colors  */
+/* Left column styles ends here */
+/* Right column styles begin here */
+#tabletmenu {
+	/* Tabbet interface */
+	width: 230px;
+	height: 557px;
+	z-index: 15;
+	float: right;
+	margin: 10px;
+}
+.widget {
+	width: 220px;
+	padding: 5px 5px 5px 5px;
+	background: #317F98;
+	border: 1px solid #dedbd1;
+	margin-bottom: 15px;
+}
+.widget a {
+	color: #FFF;
+	text-decoration: none;
+}
+.widget a:hover {
+	color: #FFF;
+	text-decoration: underline;
+}
+.tabnav li {
+	display: inline;
+	list-style: none;
+	padding-right: 5px;
+}
+.tabnav li a {
+	text-decoration: none;
+	text-transform: uppercase;
+	color: #FFF;
+	font-weight: bold;
+	padding: 5px 5px;
+	outline: none;
+}
+.tabnav li a:hover, .tabnav li a:active, .tabnav li.ui-tabs-selected a {
+	color: #5dd5ff;
+	text-decoration: underline;
+}
+.tabdiv {
+	background: #FFFFFF;
+	padding: 15px;
+}
+.tabdiv li {
+	list-style-image: url("css/star.png");
+	margin-left: 20px;
+}
+.ui-tabs-hide {
+	display: none;
+}
+#featuredvid {
+	text-align: center;
+}
+.fvid {
+	margin-bottom: 5px;
+}
+.vidselector li {
+	text-align: left;
+	list-style: none;
+	padding: 5px;
+	background: #ffffff;
+	border: 1px solid #dedbd1;
+	text-transform: uppercase;
+	margin-bottom: 5px;
+}
+/* Right column styles ends here */
+#content {
+	/* Content */
+    position: absolute; /*    width:771px;
+    height:1141px;*/;
+	z-index: 14;
+	left: 226px;
+	top: 110px;
+	padding: 7px 0 50px 25px;
+	margin-top: -5px;
+	background-color: #FFFFFF;
+}

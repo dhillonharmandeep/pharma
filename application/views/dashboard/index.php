@@ -7,70 +7,54 @@
  * Created by	: Harman Dhillon
  * Created on 	: Nov 4, 2010
  */
-$this->load->view('dashboard/_header', $title);
+$this->load->view('dashboard/structure/_header', $title);
+$this->load->view('dashboard/structure/_leftmenu', $heading);
 ?>
 
-<!--// Tabbed interface starts -->
-
-
+<!--// Right column starts -->
 <div id="tabletmenu">
   <div id="tabvanilla" class="widget">
 
-	<ul class="tabnav">
-	  <li class="class2"><span class="bodytext"><a href="#popular">Updates</a></span></li>
-	  <!--// SIDEBAR LINKS TITLE -->
-	  <li class="class2"><span class="bodytext"><a href="#recent">Comments</a></span></li>
-	  <!--// TOPTIPS TITLE -->
-	</ul>
-	<!--/sidebar links-->
-	<div id="popular" class="tabdiv">
-	  <div class="bodytext">
-		<strong>Latest Updates</strong><br />
+  <ul class="tabnav">
+    <li class="class2"><span class="bodytext"><a href="#popular">Updates</a></span></li>
+    <!--// SIDEBAR LINKS TITLE -->
+    <li class="class2"><span class="bodytext"><a href="#recent">Comments</a></span></li>
+    <!--// TOPTIPS TITLE -->
+  </ul>
+  <!--/sidebar links-->
+  <div id="popular" class="tabdiv">
+    <div class="bodytext">
+    <strong>Latest Updates</strong><br />
           <ul style="margin-left: 10px">
-            <li>Lat-Lng values now calculates, stored and used</li>
-            <li>Google Maps support added</li>
-            <li>CSS for admin section added (for preview only)</li>
-            <li>Chain Update Suburb bug fixed</li>
-            <li>Changed name for warehouse to chain</li>
-            <li>Warehouse CRUD added</li>
+            <li>Chain/Banner Group completed</li>
+            <li>Salt completed</li>
+            <li>Medicine Type completed</li>
+            <li>Lot of fixes made for new admin skin</li>
+            <li>Google Maps support added: Lat-Lng values now calculated and used</li>
           </ul>
     </div>
-	</div>
-		
-		<span class="bodytext"></span>
-		<div id="recent" class="tabdiv">
-		<p><span class="bodytext"><strong>Latest Comments</strong><br />
-		The new stylesheets have been implemented.</span><br />
-		<br />
-	</div>
-  <span class="bodytext"> </span></div>
-</div>
-
-<!--// Tabbed interface ends -->
-
-
-<div id="content">
-<table width="772" border="0">
-  <tr>
-    <th height="58" valign="middle" bgcolor="#E5E5E5" scope="col">
-    <h1 align="left"><?php echo $heading?></h1>
-    </th>
-    <!--// H1 title -->
-  </tr>
-  <tr>
-    <td bgcolor="#FFFFFF">
-    <p class="bodytext_paragraph">
-    Welcome to the admin area!   
-    </p>
-    <p><a href="<?php echo base_url()?>whchain">Chains</a></p>
+  </div>
     
-    </td>
-  </tr>
-</table>
-
+    <div id="recent" class="tabdiv">
+    <p><span class="bodytext"><strong>Latest Comments</strong><br />
+    The new stylesheets implemented.</span><br /></p>
+    <br />
+  </div>
+  </div>
 </div>
 
+<!--// Right column ends -->
+
+  <p>
+    Welcome to the admin area! The following 3 parts have been completed. 
+    You can either click on the links below, or on the links in the left menu.
+    All other links will not work.  
+  </p>
+  <ul>
+  	<li><a href="<?php echo base_url()?>chainbg">Chains/Banner Groups</a></li>
+  	<li><a href="<?php echo base_url()?>mtype">Medicine Types</a></li>
+  	<li><a href="<?php echo base_url()?>salt">Salts</a></li>
+  </ul>
 
 <?php
-$this->load->view('dashboard/_leftmenu', array('dashboard' => false));
-$this->load->view('dashboard/_footer');
+$this->load->view('dashboard/structure/_footer');

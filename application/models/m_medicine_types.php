@@ -21,11 +21,11 @@ class M_medicine_types extends Model
 	function CreateMedicine_type($options = array())
 	{
 		// Check for mandatory columns
-		if(!$this->_required(array('name', 'value'), $options)) return false;
+		if(!_required(array('name'), $options)) return false;
 		
 		// Default columns
-		$options = $this->_default(array('status' => 'Active', 'created_at' => date('Y-m-d h:i:s')), $options);
-		
+		$options = _default(array('value' => $options['name'], 'status' => 'Active', 'created_at' => date('Y-m-d h:i:s')), $options);
+
 		// Run the insert query
 		$this->db->insert('medicine_types', $options);
 		
@@ -102,14 +102,17 @@ class M_medicine_types extends Model
 		$flagAddressChanged = false;
 		 
 		// Check for required columns
-		if(!$this->_required(array('id'), $options)) return false;
-		
+		if(!_required(array('id'), $options)) return false;
+
 		// Set the where condition
 		$this->db->where('id', $options['id']);
 		
 		// Update the fields
 		if(isset($options['name']))
+		{
 			$this->db->set('name', $options['name']);
+			$this->db->set('value', $options['name']);
+		}
 
 		if(isset($options['value']))
 			$this->db->set('value', $options['value']);

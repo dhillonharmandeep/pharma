@@ -20,10 +20,10 @@ class M_salts extends Model
 	function CreateSalt($options = array())
 	{
 		// Check for mandatory columns
-		if(!$this->_required(array('name'), $options)) return false;
+		if(!_required(array('name'), $options)) return false;
 		
 		// Default columns
-		$options = $this->_default(array('status' => 'Active', 'created_at' => date('Y-m-d h:i:s')), $options);
+		$options = _default(array('status' => 'Active', 'created_at' => date('Y-m-d h:i:s')), $options);
 		
 		// Run the insert query
 		$this->db->insert('salts', $options);
@@ -96,7 +96,7 @@ class M_salts extends Model
 		$flagAddressChanged = false;
 		 
 		// Check for required columns
-		if(!$this->_required(array('id'), $options)) return false;
+		if(!_required(array('id'), $options)) return false;
 		
 		// Set the where condition
 		$this->db->where('id', $options['id']);

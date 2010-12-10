@@ -115,8 +115,12 @@ class Admin extends Controller {
 			
 			// If still not found return false
 			if(!$user) {
-				// check if the status is inactive
-				$this->form_validation->set_message('_check_login', 'Your username is not registered with us. Click <a href="'.base_url().'signup">here to register</a>');
+        $user = $this->user->GetUsers(array('username'=> $this->input->post('username')));
+        if(!$user) $user = $this->user->GetUsers(array('email'=> $this->input->post('username')));
+        
+				// set appropriate msg
+				if (!$user) $this->form_validation->set_message('_check_login', 'Your username is not registered with us. Click <a href="'.base_url().'signup">here to register</a>');
+				else $this->form_validation->set_message('_check_login', 'Invalid user/pass combination');
 				return false;	
 			}
 			

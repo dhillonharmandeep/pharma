@@ -141,6 +141,7 @@ class Whchain extends Controller {
 		// TODO: Set the validations (argument true if both the chain name and state are not changed)
 		$this->_form_validaitons(true);
 
+		
 		// Run the validations
 		if($this->form_validation->run())
 		{
@@ -158,7 +159,7 @@ class Whchain extends Controller {
 			}
 			
 			// Redirect to user index
-			redirect('whchain');
+			redirect('whchain/edit/'.$id);
 		}
 		
 		$data['title'] = "Edit Chain";

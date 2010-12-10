@@ -1,6 +1,6 @@
 <?php
 /** 
- * my_model_help.php
+ * my_model_helper.php
  * Description	: The helper utility functions written specially by me for use in the models
  * 
  * 
@@ -16,12 +16,16 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
  * @param $data - array : the actual data
  * @return true if all required variables exist
  */
-function _required($required, $data)
+if ( ! function_exists('_required'))
 {
-	foreach ($required as $field)
-		if(!isset($data[$field])) return false;
-		
-	return true;
+
+	function _required($required, $data)
+	{
+		foreach ($required as $field)
+			if(!isset($data[$field])) return false;
+			
+		return true;
+	}
 }
 
 /**
@@ -29,7 +33,10 @@ function _required($required, $data)
  * @param $default associative array defining the column => default value
  * @param $option associative array containing the actual data.
  */
-function _default($default, $option)
+if ( ! function_exists('_default'))
 {
-	return array_merge($default, $option);
+	function _default($default, $option)
+	{
+		return array_merge($default, $option);
+	}
 }

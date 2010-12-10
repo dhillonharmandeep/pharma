@@ -19,7 +19,7 @@ class Chainbg extends Controller {
 		}
 
 		// Load the the chainbg model - autloaded
-		$this->load->model('m_chainbg');
+    $this->load->model('m_chainbgs');
 	}
 
 	// Helper methods
@@ -33,15 +33,15 @@ class Chainbg extends Controller {
 	{
 		if ($this->input->post('type')){
 			// try to find a chain/bg for the given name and type
-			$chainbg = $this->m_chainbg->ReadChainbgs(array('name' => $this->input->post('name'), 
-																	 'type' => $this->input->post('type'),));
+			$chainbg = $this->m_chainbgs->ReadChainbgs(array('name' => $this->input->post('name'), 
+																	 'type' => $this->input->post('type')));
 			if($this->input->post('type') == 'Chain') $chaintype = "chain";
 			else $chaintype  = "banner group";
 			
 			// If a chain/bg already exists, we do not allow another one to be created
 			if($chainbg){
 				// Set the error message and fail
-				$this->form_validation->set_message('_check_chainname', "A $chaintype with the name '".$this->input->post('chain_name')."' already exists.");
+				$this->form_validation->set_message('_check_chainname', "A $chaintype with the name '".$this->input->post('name')."' already exists.");
 				return false;
 			}
 		}
@@ -49,6 +49,7 @@ class Chainbg extends Controller {
 		// if we reached here, everything is ok
 		return true;
 	}
+	
 	/**
 	 * Validates the input columns on insert/update
 	 * 
@@ -69,17 +70,17 @@ class Chainbg extends Controller {
 		$this->form_validation->set_rules('suburb', 'suburb', 'trim|max_length[100]');
 		$this->form_validation->set_rules('city', 'city', 'trim|max_length[512]');
 		$this->form_validation->set_rules('postcode', 'postcode', 'trim|numeric|exact_length[4]');
-		$this->form_validation->set_rules('state', 'state', 'trim');
-		$this->form_validation->set_rules('website', 'website', 'trim');
+		$this->form_validation->set_rules('state', 'state', 'trim|required');
+		$this->form_validation->set_rules('website', 'website', 'trim|valid_url');
 		$this->form_validation->set_rules('email1', 'email1', 'trim|valid_email');
 		$this->form_validation->set_rules('email2', 'email2', 'trim|valid_email');
 		$this->form_validation->set_rules('email3', 'email3', 'trim|valid_email');
-		$this->form_validation->set_rules('tel1', 'tel1', 'trim');
-		$this->form_validation->set_rules('tel2', 'tel2', 'trim');
-		$this->form_validation->set_rules('tel3', 'tel3', 'trim');
-		$this->form_validation->set_rules('fax1', 'fax1', 'trim');
-		$this->form_validation->set_rules('fax2', 'fax2', 'trim');
-		$this->form_validation->set_rules('fax3', 'fax3', 'trim');
+		$this->form_validation->set_rules('tel1', 'tel1', 'trim|valid_phone');
+		$this->form_validation->set_rules('tel2', 'tel2', 'trim|valid_phone');
+		$this->form_validation->set_rules('tel3', 'tel3', 'trim|valid_phone');
+		$this->form_validation->set_rules('fax1', 'fax1', 'trim|valid_fax');
+		$this->form_validation->set_rules('fax2', 'fax2', 'trim|valid_fax');
+		$this->form_validation->set_rules('fax3', 'fax3', 'trim|valid_fax');
 	}
 	
 	// CRUD methods
@@ -97,7 +98,7 @@ class Chainbg extends Controller {
 		if($this->form_validation->run())
 		{
 			// Validations successful - insert into database
-			$chainbgId = $this->m_chainbg->CreateChainbg($_POST);
+			$chainbgId = $this->m_chainbgs->CreateChainbg($_POST);
 			
 			// Check for success
 			if ($chainbgId)
@@ -116,7 +117,7 @@ class Chainbg extends Controller {
 		$data['heading'] = "Add Chain/Banner Group";
 		
 		// Load the view
-		$this->load->view('admin/chainbg/add', $data);
+		$this->load->view('dashboard/chainbg/add', $data);
 	}
 	
 	/**
@@ -132,13 +133,13 @@ class Chainbg extends Controller {
 		$this->load->library('pagination');
 		
 		// Prepare the pagination config
-		$pag_config['base_url'] = base_url(). 'admin/chainbg/index/'; 
-		$pag_config['total_rows'] =  $this->m_chainbg->ReadChainbgs(array('count' => true));
+		$pag_config['base_url'] = base_url(). 'dashboard/chainbg/index/'; 
+		$pag_config['total_rows'] =  $this->m_chainbgs->ReadChainbgs(array('count' => true));
 		$pag_config['per_page'] = $per_page; 
 		$pag_config['uri_segment'] = 3; 
 		
 		// Get all users (not deleted)
-		$data['chainbgs'] = $this->m_chainbg->ReadChainbgs(array('limit' => $per_page, 'offset' => $offset));
+		$data['chainbgs'] = $this->m_chainbgs->ReadChainbgs(array('limit' => $per_page, 'offset' => $offset));
 		
 		// Initialise the pagination
 		$this->pagination->initialize($pag_config);
@@ -151,7 +152,7 @@ class Chainbg extends Controller {
 		$data['heading'] = "All Chains/Banner Groups";
 		
 		// Load the view with this data
-		$this->load->view('admin/chainbg/index', $data);
+		$this->load->view('dashboard/chainbg/index', $data);
 	}
 	
 	/**
@@ -163,7 +164,7 @@ class Chainbg extends Controller {
 	function edit($id)
 	{
 		// Get the data for this user
-		$data['chainbg'] = $this->m_chainbg->ReadChainbgs(array('id' => $id));
+		$data['chainbg'] = $this->m_chainbgs->ReadChainbgs(array('id' => $id));
 
 		// Check if any data was retrieved
 		if(!$data['chainbg'])
@@ -183,7 +184,7 @@ class Chainbg extends Controller {
 			$_POST['id'] = $id;
 
 			// Check for success
-			if ($this->m_chainbg->UpdateChainbg($_POST))
+			if ($this->m_chainbgs->UpdateChainbgs($_POST))
 			{
 				$this->session->set_flashdata('flashConfirm', 'Chain/Banner Group ( '.$_POST['name'].' ) has been updated');
 			}
@@ -193,14 +194,14 @@ class Chainbg extends Controller {
 			}
 			
 			// Redirect to user index
-			redirect('chainbg/index');
+			redirect('chainbg/edit/'.$id);
 		}
 		
 		$data['title'] = "Edit Chain/Banner Group";
 		$data['heading'] = "Edit Chain/Banner Group";
 		
 		// Load the view
-		$this->load->view('admin/chainbg/edit', $data);
+		$this->load->view('dashboard/chainbg/edit', $data);
 	}
 	
 	/**
@@ -211,7 +212,7 @@ class Chainbg extends Controller {
 	function view($id)
 	{
 		// Get the data for this user
-		$data['chainbg'] = $this->m_chainbg->ReadChainbg(array('id' => $id));
+		$data['chainbg'] = $this->m_chainbgs->ReadChainbgs(array('id' => $id));
 
 		// Check if any data was retrieved
 		if(!$data['chainbg'])
@@ -225,7 +226,7 @@ class Chainbg extends Controller {
 		$data['heading'] = "Chain/Banner Group Details";
 		
 		// Load the view
-		$this->load->view('admin/chainbg/view', $data);
+		$this->load->view('dashboard/chainbg/view', $data);
 	}	
 	
 	/**
@@ -237,7 +238,7 @@ class Chainbg extends Controller {
 	function delete($id)
 	{
 		// Get the data for this user
-		$data['chainbg'] = $this->m_chainbg->ReadChainbg(array('id' => $id));
+		$data['chainbg'] = $this->m_chainbgs->ReadChainbgs(array('id' => $id));
 
 		// Check if any data was retrieved
 		if(!$data['chainbg'])
@@ -248,7 +249,7 @@ class Chainbg extends Controller {
 		}
 		
 		// Delete the user
-		$this->m_chainbg->DeleteChainbg($id);
+		$this->m_chainbgs->DeleteChainbg($id);
 		
 		// set the flashdata
 		$this->session->set_flashdata('flashConfirm', "Chain/Banner Group ( id = $id ) has been deleted");
