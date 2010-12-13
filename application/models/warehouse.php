@@ -273,4 +273,22 @@ class Warehouse extends Model
 	{
 		return($this->UpdateWarehouse(array('id' => $id, 'status' => 'Deleted')));
 	}
+  
+  /**
+   * Queries the database base on the AJAX param
+   * @param $name     : The name of the warehouse entered in the input box
+   *  
+   * @return  The number of rows affected.
+   */
+  function ajaxGetWH($options = array())
+  {
+    // Set all where clauses (if given)
+    $this->db->where('chain_name like', '%'.$options['name'].'%');
+
+    // Run the query
+    $query = $this->db->get("warehouses");
+    
+    return $query->result();
+  }
+  
 }
