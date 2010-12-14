@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?> 
+<response>
+  <books>
+    <book>
+      <title>
+        Building Reponsive Web Applications with AJAX and PHP
+      </title>
+      <isbn>
+        1-904811-82-5
+      </isbn>
+    </book>
+    <book>
+      <title>
+        Beginning PHP 5 and MySQL E-Commerce: From Novice to Professional
+      </title>
+      <isbn>
+        1-59059-392-8
+      </isbn>
+    </book>
+  </books>
+</response>

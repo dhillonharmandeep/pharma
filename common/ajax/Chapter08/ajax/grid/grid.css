@@ -1,0 +1,59 @@
+body
+{
+  font-family: Verdana, Arial;
+  font-size: 10pt
+}
+
+table
+{
+  width: 500px;
+}
+
+td.right
+{
+ 
+  color: darkblue;
+  text-align: right;
+  width: 125px
+}
+
+td.left
+{
+  color: darkblue;
+  text-align: left;
+  width: 125px
+}
+
+table.list
+{
+  border: black 1px solid;
+}
+
+th
+{
+  text-align: left;
+  background-color: navy;
+  color: white
+}
+
+th.th1
+{
+  width: 30px
+}
+
+th.th2
+{
+  width: 300px
+}
+
+input.editName
+{
+  border: black 1px solid;	
+  width: 300px
+}
+
+input.editPrice
+{
+  border: black 1px solid;	
+  width: 50px
+}

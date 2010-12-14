@@ -13,7 +13,7 @@
         }
         xmlhttp.onreadystatechange= function() {
             document.getElementById("myDiv").innerHTML+=xmlhttp.readyState+' - '+xmlhttp.status+' : ' + xmlhttp.responseText + '<hr/>';
-        }
+        };
         xmlhttp.open("POST","ajax/query2",true);
         xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
         xmlhttp.send("fname=Harman&lname=Dhillon&mname=Singh&query=tes");

@@ -1,0 +1,44 @@
+Comparing files smartproxyping.js and SMARTPROXYPING2.JS
+***** smartproxyping.js
+      // display status message
+      alert("There was a problem retrieving server availability data:\n" + 
+            xmlHttp.statusText);
+    }
+***** SMARTPROXYPING2.JS
+      // display status message
+      alert("Error reading server availability:\n" + xmlHttp.statusText);
+    }
+*****
+
+***** smartproxyping.js
+  var response = xmlHttp.responseText;
+  // if the response is long enough, or if it is void, we assuwe we just 
+  // received a server-side error report
+  if(response.length > 5 || response.length == 0)
+    throw(response.length == 0 ? "Server error" : response);
+  // obtain a reference to the <div> element on the page
+***** SMARTPROXYPING2.JS
+  var response = xmlHttp.responseText;
+  // if the response is long enough, we assuwe we just received
+  // a server-side error report
+  if(response.length > 5)
+    throw(response);
+  // obtain a reference to the <div> element on the page
+*****
+
+***** smartproxyping.js
+  var response = xmlHttp.responseText;
+  // if the response is long enough, or if it is void, we assuwe we just 
+  // received a server-side error report
+  if(response.length > 5 || response.length == 0)
+    throw(response.length == 0 ? "Server error" : response);
+  // obtain a reference to the <div> element on the page
+***** SMARTPROXYPING2.JS
+  var response = xmlHttp.responseText;
+  // if the response is long enough, we assuwe we just received
+  // a server-side error report
+  if(response.length > 5)
+    throw(response);
+  // obtain a reference to the <div> element on the page
+*****
+

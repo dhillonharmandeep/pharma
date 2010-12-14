@@ -283,7 +283,7 @@ class Warehouse extends Model
   function ajaxGetWH($options = array())
   {
     // Set all where clauses (if given)
-    $this->db->where('chain_name like', '%'.$options['name'].'%');
+    $this->db->where('chain_name like', $options['name'].'%');
 
     // Run the query
     $query = $this->db->get("warehouses");
