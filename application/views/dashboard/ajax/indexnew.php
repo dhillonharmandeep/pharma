@@ -16,10 +16,11 @@
     <form name="formname" id="formid">
       <div>
         <div id="message">Enter the first letters of your function:</div>
-        <input type="text" onfocus="init(this);" name="keyword" id="keyword" maxlength="70"
+        <input type="text" onfocus="init(this, '/ajax/newquery/');" name="chainbg" id="chainbg" maxlength="70"
                size="69" onkeyup = "handleKeyUp(event)" value="" />
-        <input type="text" onfocus="init(this);" name="keyword2" id="keyword2" maxlength="70"
-               size="69"value="" />
+        <input type="text" onfocus="init(this);" name="chainbg2" id="chainbg2" maxlength="70"
+               size="69" onkeyup = "handleKeyUp(event)" value="" />
+        <input type="button" name="button" id="button" value="Submit" />
         <div id="scroll">
           <div id="suggest">
           </div>

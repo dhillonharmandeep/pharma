@@ -1,6 +1,6 @@
 /* URL to the PHP page called for receiving suggestions for a keyword*/
 //var getFunctionsUrl = "suggest.php?keyword=";
-var getFunctionsUrl = "/ajax/newquery/";
+var getFunctionsUrl = "";
 //var getFunctionsUrl = "/common/chainsuggest/suggest.php?keyword=";
 /* URL for seeing the results for the selected suggestion */
 var phpHelpUrl="http://www.php.net/manual/en/function.";
@@ -36,6 +36,9 @@ var debugMode = true;
 var xmlHttpGetSuggestions = createXmlHttpRequestObject();
 /* the onload event is handled by our init function */
 //window.onload = init;
+/* The timeout id */
+var alertTimerId;
+
 
 // creates an XMLHttpRequest instance
 function createXmlHttpRequestObject() 
@@ -77,20 +80,23 @@ function createXmlHttpRequestObject()
 }
 
 /* function that initializes the page */
-function init(oInput) 
+function init(oInput, ajaxFile) 
 { 
   if(oKeyword !=  oInput) {
+//  alert("initialising " + oInput.name);
     // retrieve the input control for the keyword
     //oKeyword = document.getElementById("keyword");
     oKeyword =  oInput;
+    getFunctionsUrl = ajaxFile;
        
     // prevent browser from starting the autofill function
     oKeyword.setAttribute("autocomplete", "off");  
     // reset the content of the keyword and set the focus on it
-//    oKeyword.value = "";
-//    oKeyword.focus();
+    oKeyword.value = "";
+    oKeyword.focus();
+
     // set the timeout for checking updates in the keyword's value
-    setTimeout("checkForChanges()", 500);
+    alertTimerId = setTimeout("checkForChanges()", 500);
   }
 } 
 
@@ -380,11 +386,9 @@ function displayResults(keyword, results_array)
   oScroll.style.visibility = "visible";
   
   // harman's code starts here
-  var oField = document.getElementById("keyword");
-  
   oScroll.style.position = "absolute";
-  oScroll.style.left = getX(oField)+"px";
-  oScroll.style.top = (getY(oField) + oField.offsetHeight ) +"px";
+  oScroll.style.left = getX(oKeyword)+"px";
+  oScroll.style.top = (getY(oKeyword) + oKeyword.offsetHeight ) +"px";
   // harman's code ends
   
   // if we had results we apply the type ahead for the current keyword
@@ -413,7 +417,9 @@ function checkForChanges()
 {
   // retrieve the keyword object
  
-  var keyword = document.getElementById("keyword").value;
+//  var keyword = document.getElementById("keyword").value;
+  var keyword = oKeyword.value;
+  
   // check to see if the keyword is empty
   if(keyword == "")
   {
@@ -424,7 +430,7 @@ function checkForChanges()
     httpRequestKeyword="";
   }
   // set the timer for a new check 
-  setTimeout("checkForChanges()", 500);
+  alertTimerId = setTimeout("checkForChanges()", 500);
   // check to see if there are any changes
   if((userKeyword != keyword) && 
      (autocompletedKeyword != keyword) && 
@@ -655,22 +661,28 @@ function movedOut()
 {
   // hide the suggestions
   hideSuggestions();
+
   // reset the keywords 
   userKeyword="";
   httpRequestKeyword="";
-  
-  // Move to the next element
-  oKeyword = document.getElementById("keyword");
-  var parentForm = oKeyword.form;
+//  alert("ID = "+alertTimerId);
+  clearTimeout(alertTimerId);
 
-  for (i = 0; i < parentForm.elements.length; i++) {
-      if (parentForm.elements[i] == oKeyword) {
-          parentForm.elements[i+1].focus();
-          if (parentForm.elements[i+1].type == "text")
-              parentForm.elements[i+1].select();
-          break;
-      }
-  }
+//alert(document.getElementById("button"));
+  document.getElementById("button").focus;  
+
+  // // Move to the next element
+  // oKeyword = document.getElementById("keyword");
+  // var parentForm = oKeyword.form;
+  // 
+  // for (i = 0; i < parentForm.elements.length; i++) {
+  //     if (parentForm.elements[i] == oKeyword) {
+  //         parentForm.elements[i+1].focus();
+  //         if (parentForm.elements[i+1].type == "text")
+  //             parentForm.elements[i+1].select();
+  //         break;
+  //     }
+  // }
 }
 
 /* function that displays an error message */
