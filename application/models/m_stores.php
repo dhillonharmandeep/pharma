@@ -40,13 +40,13 @@ class M_stores extends Model
 	function CreateStore($options = array())
 	{
 		// Check for mandatory columns
-		if(!$this->_required(array('type'), $options)) return false;
+		if(!_required(array('type'), $options)) return false;
 		
 		// Default columns
-		$options = $this->_default(array('status' => 'Active', 'created_at' => date('Y-m-d h:i:s')), $options);
+		$options = _default(array('status' => 'Active', 'created_at' => date('Y-m-d h:i:s')), $options);
 		
 		// Calculate and set the 'lat' & 'lng' columns using google maps
-		$coords = $this->_calculateLatLng($options['street'].", ".$options['suburb'].", ".$options['postcode'].", ". $options['state']);
+		$coords = _calculateLatLng($options['street'].", ".$options['suburb'].", ".$options['postcode'].", ". $options['state']);
 
 		// If something was returned without error, add it to the options
 		if($coords['lat'] != "error" && $coords['lng'] != "error")
@@ -208,7 +208,7 @@ class M_stores extends Model
 		$flagAddressChanged = false;
 		 
 		// Check for required columns
-		if(!$this->_required(array('id'), $options)) return false;
+		if(!_required(array('id'), $options)) return false;
 		
 		// Set the where condition
 		$this->db->where('id', $options['id']);
@@ -246,7 +246,7 @@ class M_stores extends Model
 			$flagAddressChanged = true;
 		}
 		
-		if(isset($options['postcode']))
+		if(isset($options['postcode']) && $options['postcode'] != 0)
 		{
 			$this->db->set('postcode', $options['postcode']);
 			$flagAddressChanged = true;
@@ -261,7 +261,7 @@ class M_stores extends Model
 		if($flagAddressChanged)
 		{
 			// Address is changes, re-calculate the lat/lng of new address
-			$coords = $this->_calculateLatLng($options['street'].", ".$options['suburb'].", ".$options['postcode'].", ". $options['state']);
+			$coords = _calculateLatLng($options['street'].", ".$options['suburb'].", ".$options['postcode'].", ". $options['state']);
 	
 			// If something was returned without error, add it to the options
 			if($coords['lat'] != "error" && $coords['lng'] != "error")

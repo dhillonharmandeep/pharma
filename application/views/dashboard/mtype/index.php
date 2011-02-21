@@ -13,7 +13,7 @@ $this->load->view('dashboard/structure/_leftmenu', $heading);
 	<p class="add"><a href="<?= base_url()?>mtype/add">	Add a new medicine type</a></p>
 					
 	<table class="t_results">
-		<caption>All Medicine types: Lists all medicine types (10 per page)</caption>
+		<caption>All Medicine types: Lists all medicine types (10 per page) <strong>[Total Records : <?php echo $tot_count?>]</strong></caption>
 		<tr>
 	        <th>Name</th>
 			<th colspan="2">Actions</th>

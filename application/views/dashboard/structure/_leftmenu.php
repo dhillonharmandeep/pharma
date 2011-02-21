@@ -27,11 +27,11 @@
         </tr>
         <tr>
           <td align="center"><img src="<?php echo base_url(); ?>common/icons/store.png" alt="Medical Store" width="18" height="12" /></td>
-          <td class="navigation"><a href="#">Store</a></td>
+          <td class="navigation"><a href="<?php echo base_url()?>store">Store</a></td>
         </tr>
         <tr>
           <td align="center"><img src="<?php echo base_url(); ?>common/icons/medicine.png" alt="Medicine" width="15" height="15" /></td>
-          <td class="navigation"><a href="#">Medicine</a></td>
+          <td class="navigation"><a href="<?php echo base_url()?>medicine">Medicine</a></td>
         </tr>
         <tr>
           <td align="center"><img src="<?php echo base_url(); ?>common/icons/salt.png" alt="Medical Salt" width="16" height="18" /></td>

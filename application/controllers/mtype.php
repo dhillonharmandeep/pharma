@@ -107,13 +107,14 @@ class Mtype extends Controller {
 		$this->load->library('pagination');
 		
 		// Prepare the pagination config
-		$pag_config['base_url'] = base_url(). 'dashboard/mtype/index/'; 
+		$pag_config['base_url'] = base_url(). 'mtype/index/'; 
 		$pag_config['total_rows'] =  $this->m_medicine_types->ReadMedicine_types(array('count' => true));
 		$pag_config['per_page'] = $per_page; 
 		$pag_config['uri_segment'] = 3; 
 		
 		// Get all users (not deleted)
-		$data['mtypes'] = $this->m_medicine_types->ReadMedicine_types(array('limit' => $per_page, 'offset' => $offset));
+		$data['mtypes'] = $this->m_medicine_types->ReadMedicine_types(array('limit' => $per_page, 'offset' => $offset, 'sortBy' => 'name', 'sortDirection' => 'ASC'));
+    $data['tot_count'] = $pag_config['total_rows']; 
 		
 		// Initialise the pagination
 		$this->pagination->initialize($pag_config);
@@ -206,4 +207,35 @@ class Mtype extends Controller {
 		// Redirect to user index
 		redirect('mtype/index');
 	}
+   /**
+   * Used for calling ajax queries
+   * 
+   * @param $id: the keyword of the store to search
+   * Dec 15, 2010
+   */
+  function ajaxquery($keyword){
+    //headers are sent to prevent browsers from caching
+    header('Expires: Mon, 26 Jul 1997 05:00:00 GMT' ); 
+    header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . 'GMT'); 
+    header('Cache-Control: no-cache, must-revalidate'); 
+    header('Pragma: no-cache');
+    header('Content-Type: text/xml');
+
+    // send the results to the client
+    $output = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>';
+    $output .= '<response>';    
+
+    // Check if type was specified
+    $res = $this->m_medicine_types->ajaxGetMedicineTypes(array('name' => $keyword));
+    
+    foreach ($res as $row) {
+      $output .= '<name>'.$row->name.'</name>';
+    }
+
+//    $output .= '<name>name = '.$keyword.'</name>';
+    $output .= '</response>';   
+    
+    // Print the output
+    echo $output; 
+  } 
 }

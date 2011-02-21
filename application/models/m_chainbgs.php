@@ -44,9 +44,29 @@ class M_chainbgs extends Model
 		// Default columns
 		$options = _default(array('status' => 'Active', 'created_at' => date('Y-m-d h:i:s')), $options);
 		
+		// Prepare the address for geocoding
+		$address = ""; 
+		if (isset($options['street']))
+			$address .= $options['street'].", ";
+			
+		if (isset($options['suburb']))
+			$address .= $options['suburb'].", ";
+		
+		if (isset($options['postcode']))
+			$address .= $options['postcode'].", ";
+		
+		if (isset($options['state']))
+			$address .= $options['state'];
+			
 		// Calculate and set the 'lat' & 'lng' columns using google maps
-		$coords = _calculateLatLng($options['street'].", ".$options['suburb'].", ".$options['postcode'].", ". $options['state']);
-
+		if($address == ''){
+			$coords['lat'] = "error";
+			$coords['lng'] = "error";
+		}
+		else{
+			$coords = _calculateLatLng($address);
+		}
+		
 		// If something was returned without error, add it to the options
 		if($coords['lat'] != "error" && $coords['lng'] != "error")
 			$options = array_merge($coords, $options);
@@ -305,5 +325,27 @@ class M_chainbgs extends Model
 	function DeleteChainbg($id)
 	{
 		return($this->UpdateChainbgs(array('id' => $id, 'status' => 'Deleted')));
+	}
+	
+  /**
+   * Queries the database base on the AJAX param
+   * @param $name     : The (partial) name of the chain/banner group entered in the input box
+   *  
+   * @return  The possible matches
+   */
+	function ajaxGetChainbgs($options = array()){
+    // Set all where clauses (if given)
+    $this->db->where('name like', $options['name'].'%');
+    
+    // Check if type is set
+	if(isset($options['type']))
+		$this->db->where('type', $options['type']);
+    
+	$this->db->where('status !=', 'Deleted');
+    
+    // Run the query
+    $query = $this->db->get("chainbgs");
+    
+    return $query->result();
 	}
 }

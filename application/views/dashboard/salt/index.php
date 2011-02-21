@@ -13,7 +13,7 @@ $this->load->view('dashboard/structure/_leftmenu', $heading);
 	<p class="add"><a href="<?= base_url()?>salt/add">	Add a new salt</a></p>
 					
 	<table class="t_results">
-		<caption>All Salts: Lists all salts (10 per page)</caption>
+		<caption>All Salts: Lists all salts (10 per page) <strong>[Total Records : <?php echo $tot_count?>]</strong></caption>
 		<tr>
 	        <th>Name</th>
 			<th colspan="2">Actions</th>

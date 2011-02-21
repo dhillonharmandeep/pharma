@@ -1,32 +1,34 @@
 <?php
 /** 
- * m_salts.php
- * Description	: CRUD and other operations for salts
+ * m_medicine_salts.php
+ * Description	: CRUD and other operations for medicine_salt
  * 
  * 
  * Created by	: Harman Dhillon
  * Created on 	: Nov 28, 2010
  */
-class M_salts extends Model 
+class M_medicine_salts extends Model 
 {
 	// CRUD methods
 	/**
 	 * 
-	 * To insert users into database...
+	 * To insert date into database...
 	 * @param $options array with info
-	 *  name
+	 *  medicine_id
+	 *  salt_id
+	 *  dosage
 	 *  @return the insert id
 	 */
-	function CreateSalt($options = array())
+	function CreateMedicine_salt($options = array())
 	{
 		// Check for mandatory columns
-		if(!_required(array('name'), $options)) return false;
+		if(!_required(array('medicine_id', 'salt_id', 'dosage'), $options)) return false;
 		
 		// Default columns
 		$options = _default(array('status' => 'Active', 'created_at' => date('Y-m-d h:i:s')), $options);
-		
+
 		// Run the insert query
-		$this->db->insert('salts', $options);
+		$this->db->insert('medicine_salt', $options);
 		
 		// Return the generated id
 		return $this->db->insert_id();
@@ -36,7 +38,9 @@ class M_salts extends Model
 	 * Reads the users provided the details
 	 * @param $options (array)
 	 * 	id			: Select by this id
-	 *  name
+	 *  medicine_id
+	 *  salt_id
+	 *  dosage
 	 *  status		: Select by this status
 	 *  limit		: Limit these namy results
 	 *  offset		: Start showing results from this offset onwards
@@ -45,15 +49,21 @@ class M_salts extends Model
 	 * 
 	 * @return The object of the retrieved result(s)
 	 */
-	function ReadSalts($options = array())
+	function ReadMedicine_salts($options = array())
 	{
 		// Set all where clauses (if given)
 		if(isset($options['id']))
 			$this->db->where('id', $options['id']);
 
-		if(isset($options['name']))
-			$this->db->where('name', $options['name']);
+		if(isset($options['medicine_id']))
+			$this->db->where('medicine_id', $options['medicine_id']);
 
+		if(isset($options['salt_id']))
+			$this->db->where('salt_id', $options['salt_id']);
+
+    if(isset($options['dosage']))
+      $this->db->where('dosage', $options['dosage']);
+			
 		if(isset($options['status']))
 			$this->db->where('status', $options['status']);
 		else 
@@ -70,7 +80,7 @@ class M_salts extends Model
 			$this->db->order_by($options['sortBy'], $options['sortDirection']);
 			
 		// Run the query
-		$query = $this->db->get("salts");
+		$query = $this->db->get("medicine_salt");
 		
 		// Check if only the count is required
 		if(isset($options['count']) && $options['count']) return $query->num_rows(); 	
@@ -83,63 +93,33 @@ class M_salts extends Model
 	}
 
 	/**
-	 * Updates a salts
-	 * @param $options
-	 * 	id			:	The id of the salts to update
-	 *  name
-	 *  status
+	 * Deletes a Medicine_type
+	 * @param $id			:	The id of the medicine_salts to update
 	 *  
 	 * @return	The number of rows affected.
 	 */
-	function UpdateSalts($options = array())
+	function DeleteMedicine_salt($id)
 	{
-		$flagAddressChanged = false;
-		 
-		// Check for required columns
-		if(!_required(array('id'), $options)) return false;
-		
-		// Set the where condition
-		$this->db->where('id', $options['id']);
-		
-		// Update the fields
-		if(isset($options['name']))
-			$this->db->set('name', $options['name']);
-
-		if(isset($options['status']))
-			$this->db->set('status', $options['status']);
-			
-		// Update the database
-		$this->db->update('salts');
-		
-		//return
-		return $this->db->affected_rows();
+    // Set the where condition
+    $this->db->where('id', $id);
+    
+    // Set the value
+    $this->db->set('status', 'Deleted');
+      
+    // Update the database
+    $this->db->update('medicine_salt');
+    
+    //return
+    return $this->db->affected_rows();
 	}
 	
-	/**
-	 * Deletes a Salt
-	 * @param $id			:	The id of the salts to update
-	 *  
-	 * @return	The number of rows affected.
-	 */
-	function DeleteSalt($id)
-	{
-		return($this->UpdateSalts(array('id' => $id, 'status' => 'Deleted')));
+	function FindSaltsForMedicine($id){
+		$query = $this->db->query( 'SELECT ms.id, ms.medicine_id, ms.salt_id, s.name AS salt_name, ms.dosage
+																FROM medicine_salt ms, salts s
+																WHERE ms.salt_id = s.id
+																AND ms.status != \'Deleted\'
+																AND medicine_id = '.$id);
+		
+		return $query->result();
 	}
-
- /**
-   * Queries the database base on the AJAX param
-   * @param $name     : The (partial) name of the salt entered in the input box
-   *  
-   * @return  The possible matches
-   */
-  function ajaxGetSalts($options = array()){
-    // Set all where clauses (if given)
-    $this->db->where('name like', $options['name'].'%');
-    $this->db->where('status !=', 'Deleted');
-    
-    // Run the query
-    $query = $this->db->get("salts");
-    
-    return $query->result();
-  }	
 }

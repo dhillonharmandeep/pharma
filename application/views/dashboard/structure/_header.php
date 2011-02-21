@@ -34,6 +34,11 @@
   <script type="text/javascript"src="<?php echo base_url(); ?>common/google/maps.js"></script>
 <?php }//if($googlemaps) {?>  
 
+<?php if(isset($ajax) && $ajax) {?>  
+    <link href="<?php echo base_url(); ?>common/admin/ajax/suggest.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="<?php echo base_url(); ?>common/admin/ajax/suggest.js"></script>
+<?php }//if($ajax) {?>  
+
 </head>
 <body>
 
@@ -97,10 +102,10 @@
 
 <div id="logout">
   <div align="center">
-    <div id="logout_icon"><a href="admin/logout"><img src="<?php echo base_url(); ?>common/admin/images/icons/big_logout.png" alt="big_logout" width="25" height="25" border="0" /></a></div>
+    <div id="logout_icon"><a href="<?php echo base_url(); ?>admin/logout"><img src="<?php echo base_url(); ?>common/admin/images/icons/big_logout.png" alt="big_logout" width="25" height="25" border="0" /></a></div>
 <span class="toplinks"><br />
       <br />
-      <a href="admin/logout"><span class="toplinks">LOG OUT</span></a></span><br />
+      <a href="<?php echo base_url(); ?>admin/logout"><span class="toplinks">LOG OUT</span></a></span><br />
   </div>
 </div>
 

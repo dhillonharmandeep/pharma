@@ -137,4 +137,21 @@ class M_medicine_types extends Model
 	{
 		return($this->UpdateMedicine_types(array('id' => $id, 'status' => 'Deleted')));
 	}
+
+  /**
+   * Queries the database base on the AJAX param
+   * @param $name     : The (partial) name of the medicine type entered in the input box
+   *  
+   * @return  The possible matches
+   */
+  function ajaxGetMedicineTypes($options = array()){
+    // Set all where clauses (if given)
+    $this->db->where('name like', $options['name'].'%');
+    $this->db->where('status !=', 'Deleted');
+    
+    // Run the query
+    $query = $this->db->get("medicine_types");
+    
+    return $query->result();
+  }	
 }

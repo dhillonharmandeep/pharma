@@ -1,4 +1,4 @@
-﻿/* Main content styles */
+/* Main content styles */
 p {
 	width: 715px;
 	padding: 10px 2px;
@@ -99,9 +99,14 @@ h3 {
 }
 /* Table styles */
 table.t_results {
-	width: 90%;
-	border-collapse: collapse;
-	margin: 20px 0px;
+  width: 90%;
+  border-collapse: collapse;
+  margin: 20px 0px;
+}
+table.t_results caption strong{
+  float: right;
+  color: #FF0033;
+  font-size: 14px;
 }
 table.t_results th {
 	background-image: url("../images/table_bg.jpg");
@@ -124,7 +129,7 @@ tr.even td {
 	background-color: #E5E5E5;
 }
 /* CRUD specific styles */
-.back a, .add a, .edit a, .delete a {
+.back a, .add a, .edit a, .delete a , .map_ico a{
 	line-height: 25px;
 	padding: 10px 10px 10px 25px;
 	background-repeat: no-repeat;
@@ -142,7 +147,10 @@ tr.even td {
 	background-image: url('../images/icons/edit.png');
 }
 .delete a {
-	background-image: url('../images/icons/remove.png');
+  background-image: url('../images/icons/remove.png');
+}
+.map_ico a {
+  background-image: url('../images/icons/map_ico.png');
 }
 #map {
 	margin: 25px auto;
