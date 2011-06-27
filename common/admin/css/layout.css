@@ -239,14 +239,14 @@ a:hover {
 /* second hover link, different colors  */
 /* Top submenu styles ends here */
 /* Top search box styles start here */
-#searchbox {
+#topsearchbox {
 	/* Searchbox */
     position: absolute;
-	width: 184px;
+	width: 250px;
 	height: 29px;
 	z-index: 17;
-	left: 768px;
-	top: 75px;
+	left: 744px;
+	top: 73px;
 }
 /* Searchbox styles */
 .search {

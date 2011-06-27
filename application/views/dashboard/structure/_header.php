@@ -17,10 +17,26 @@
 	<script src="<?php echo base_url(); ?>common/admin/js/jquery.min.js" type="text/javascript"></script>
 	<script src="<?php echo base_url(); ?>common/admin/js/dropmenu.js" type="text/javascript"></script>
 	
+  <script  type="text/javascript" src="<?php echo base_url(); ?>common/jquery-ui/js/jquery-1.4.4.min.js"></script>
+  <script  type="text/javascript" src="<?php echo base_url(); ?>common/jquery-ui/js/jquery-ui-1.8.10.custom.min.js"></script>
+  <link type="text/css" rel="stylesheet" href="<?php echo base_url(); ?>common/jquery-ui/development-bundle/themes/base/jquery.ui.all.css"/>
+  <style type="text/css">
+    .ui-autocomplete-loading { background: white url('<?php echo base_url(); ?>common/admin/images/ui-anim_basic_16x16.gif') right center no-repeat; }
+	  #project-icon {
+	    float: left;
+	    height: 24px;
+	    width: 24px;
+	    margin-right: 5px;
+	  }
+  </style>
+  
+<?php
+/*   
 	<script type="text/javascript" src="<?php echo base_url(); ?>common/admin/js/jquery-1.2.6.min.js"></script>
 	<script type="text/javascript" src="<?php echo base_url(); ?>common/admin/js/jquery-ui-personalized-1.5.2.packed.js"></script>
 	<script type="text/javascript" src="<?php echo base_url(); ?>common/admin/js/sprinkle.js"></script>
-	
+*/
+?> 	
 	<!--[if lt IE 7]>
 	<script defer type="text/javascript" src="<?php echo base_url(); ?>common/admin/js/pngfix.js"></script> 
 	<![endif]--> 
@@ -38,7 +54,6 @@
     <link href="<?php echo base_url(); ?>common/admin/ajax/suggest.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="<?php echo base_url(); ?>common/admin/ajax/suggest.js"></script>
 <?php }//if($ajax) {?>  
-
 </head>
 <body>
 
@@ -145,10 +160,44 @@
 <!--// Horisontal submenu edit ends -->
 <!--// Searchbox starts -->
   
-<div id="searchbox">
-  <label>
-  <input name="serach" type="text" class="search" id="search" onfocus="if (value='Search') {value=''}" onblur="if (value=='') {value='Search'}" value="Search" size="30" maxlength="50" />
-  </label>
+<div id="topsearchbox">
+  <span class="ui-widget">
+  <img alt="icon" id="project-icon" src="<?php echo base_url(); ?>common/icons/transparent_1x1.png"/>
+  <input name="main_search" type="text" class="search" id="main_search" onfocus="if (value='Search') {value=''}" onblur="if (value=='') {value='Search'}" value="Search" size="32" />
+  </span>
+  <script type="text/javascript">
+  $(function() {
+    $( "#main_search" ).autocomplete({
+	    source: function(req, add)
+	    {
+	      $.ajax(
+	    	{
+	        url: '<?php echo site_url('ajax_search/all');?>',
+	        dataType: 'json',
+	        type: 'POST',
+	        data: req,
+	        success:function(data)
+	        {
+	          if(data.response =='true')
+	          {
+	            add(data.message);
+	          }
+	        }
+	      });
+	    },
+      minLength: 1,
+      focus: function( event, ui ) {
+          $( "#main_search" ).val( ui.item.label );
+          $( "#project-icon" ).attr( "src", "<?php echo base_url(); ?>common/icons/" + ui.item.icon );
+          return false;
+        },
+      select: function( event, ui ) 
+      {
+        window.location = ui.item.destination ;
+      }
+  });
+  });
+  </script>  
 </div>
   
 <!--// Searchbox ends -->

@@ -48,6 +48,12 @@ $this->load->view('dashboard/structure/_leftmenu', array('heading' => $heading."
          <?php echo $medicine->company_name; ?>
        </span>
     </div>
+    <div>
+       <span class="label">Notes</span>
+       <span class="value">
+         <?php echo $medicine->notes; ?>
+       </span>
+    </div>    
       <table class="t_results">
       <caption>All salts in this medicine</caption>
       <tr>

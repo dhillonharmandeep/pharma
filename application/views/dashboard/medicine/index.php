@@ -15,16 +15,21 @@ $this->load->view('dashboard/structure/_leftmenu', $heading);
   </p>
 
 	<span class="add"><a href="<?= base_url()?>medicine/add">	Add a new medicine</a></span>
-  
-					
+<?php 
+	$this->load->view('dashboard/ajax/search', array('search_module' => 'medicine'));
+?>
 			<table class="t_results">
-			<caption>All Medicines: Lists all medicine (10 per page) <strong>[Total Records : <?php echo $tot_count?>]</strong></caption>
+			<caption>	
+				All Medicines: Lists all medicine (10 per page) 
+				<strong>[Total Records : <?php echo $tot_count?>]</strong>
+			</caption>
 			<tr>
         <th>Name</th>
         <th>Quantity</th>
         <th>Dosage</th>
 				<th>Type</th>
         <th>Company</th>
+        <th>Notes</th>
 				<th colspan="2">Actions</th>
 			</tr>
 		<?if(isset($medicines) && is_array($medicines) && count($medicines)>0):?>
@@ -40,7 +45,8 @@ $this->load->view('dashboard/structure/_leftmenu', $heading);
           <td><?=$medicine->quantity?></td>
           <td><?=$medicine->dosage?></td>
 					<td><?=$medicine->medicine_type ?></td>
-					<td><?=$medicine->company_name?></td>
+          <td><?=$medicine->company_name?></td>
+          <td><?=strlen($medicine->notes)<25?$medicine->notes:substr($medicine->notes, 0, 25).'...'?></td>
           <td><?=anchor(base_url().'medicine/edit/'.$medicine->id, '<img src="'.base_url().'common/admin/images/icons/edit.png" alt="Edit" width="18" height="18" />')?></td>
 					<td><?=anchor(base_url().'medicine/delete/'.$medicine->id, '<img src="'.base_url().'common/admin/images/icons/remove.png" alt="Remove" width="18" height="18" />')?></td>
 				</tr>

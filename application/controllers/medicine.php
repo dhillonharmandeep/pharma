@@ -175,16 +175,11 @@ class Medicine extends Controller {
 	function _form_validations($edit = false)
 	{
 		// Set the validations
-		// Name cannot be the same if in create mode
-		if (!$edit){
-		  $this->form_validation->set_rules('name', 'name', 'trim|required|max_length[256]|callback__check_name');
-		}
-		else{
 			$this->form_validation->set_rules('name', 'name', 'trim|required|max_length[256]');
-		}
-	    $this->form_validation->set_rules('quantity', 'quantity', 'trim|numeric');
-      $this->form_validation->set_rules('dosage', 'dosage', 'trim|numeric');
+	    $this->form_validation->set_rules('quantity', 'quantity', 'trim');
+      $this->form_validation->set_rules('dosage', 'dosage', 'trim');
       $this->form_validation->set_rules('company_name', 'company_name', 'trim');
+      $this->form_validation->set_rules('notes', 'notes', 'trim');
       $this->form_validation->set_rules('medicine_type', 'medicine type', 'trim|required');
 	}
 
@@ -199,7 +194,7 @@ class Medicine extends Controller {
 	{
 		// Set the validations
 		$this->form_validation->set_rules('msalt_'.$id.'name', 'salt name', 'trim|required');
-		$this->form_validation->set_rules('msalt_'.$id.'dosage', 'salt dosage', 'trim|required|numeric');
+		$this->form_validation->set_rules('msalt_'.$id.'dosage', 'salt dosage', 'trim|required');
   }	
 	/**
 	 * Extracts the data for the medicine table only from the posted data
@@ -539,5 +534,4 @@ class Medicine extends Controller {
     // Redirect to user index
     redirect('medicine/edit/'.$id);
   }
-	
 }

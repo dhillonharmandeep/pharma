@@ -26,7 +26,10 @@ $this->load->view('dashboard/structure/_leftmenu', $heading);
     Click on the address to view details for this chain. 
   </p>
 
-	<p class="add"><a href="<?= base_url()?>chainbg/add">	Add a chain/banner group</a></p>
+	<span class="add"><a href="<?= base_url()?>chainbg/add">	Add a chain/banner group</a></span>
+<?php 
+  $this->load->view('dashboard/ajax/search', array('search_module' => 'chainbg'));
+?>
 					
 			<table class="t_results">
 			<caption>All Chain/Banner Groups: Lists all chains/banner groups (10 per page) <strong>[Total Records : <?php echo $tot_count?>]</strong></caption>

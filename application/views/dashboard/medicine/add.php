@@ -37,7 +37,7 @@ $this->load->view('dashboard/medicine/_saltblockjs');
       <div class="formrowhalf">
         <label class="formfield">Dosage </label>
         <?=form_input(array('id'=>'dosage', 'name'=>'dosage', 'class' => 'fields'), set_value('dosage') )?>
-        <?=form_error('dosage', '<p class="msgForm msgError">', '</p>')?>
+        <?=form_error('chainbg', '<p class="msgForm msgError">', '</p>')?>
       </div>
       <div class="formrowhalf">
         <label class="formfield">Company Name </label>
@@ -48,6 +48,11 @@ $this->load->view('dashboard/medicine/_saltblockjs');
         <label class="formfield">Medicine Type <span class="required">*</span></label>
         <?=form_input(array('id'=>'medicine_type', 'name'=>'medicine_type', 'class' => 'fields', 'size' => '60', 'onfocus' => "init(this, '/mtype/ajaxquery/');", 'onkeyup' => "handleKeyUp(event)"), set_value('medicine_type') )?>
         <?=form_error('medicine_type', '<p class="msgForm msgError">', '</p>')?>
+      </div>
+      <div class="formrow">
+        <label class="formfield">Notes</label>
+        <?=form_textarea(array('id'=>'notes', 'name'=>'notes', 'class' => 'fields', 'rows' =>'4', 'cols' =>'120'), set_value('notes') )?>
+        <?=form_error('notes', '<p class="msgForm msgError">', '</p>')?>
       </div>
 <?php 
 $this->load->view('dashboard/medicine/_saltblock'); 

@@ -43,7 +43,7 @@
         </tr>
         <tr>
           <td align="center"><img src="<?php echo base_url(); ?>common/admin/images/icons/settings.png" alt="settings" width="14" height="14" /></td>
-          <td class="navigation"><a href="#">Settings</a></td> <!--// Settings -->
+          <td class="navigation"><a href="<?php echo base_url()?>price">Pricing</a></td> <!--// Settings -->
         </tr>
         <tr>
           <td align="center"><img src="<?php echo base_url(); ?>common/admin/images/icons/support.png" alt="support" width="16" height="16" /></td>

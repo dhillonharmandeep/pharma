@@ -16,6 +16,9 @@ $this->load->view('dashboard/structure/_leftmenu', $heading);
 
 	<span class="add"><a href="<?= base_url()?>store/add">	Add a new store</a></span>
   <span class="edit"><a href="<?= base_url()?>store/chainbg/">View All Independent Stores</a></span>
+<?php 
+  $this->load->view('dashboard/ajax/search', array('search_module' => 'store'));
+?>
   
 					
 			<table class="t_results">

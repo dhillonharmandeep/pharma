@@ -10,8 +10,12 @@
 $this->load->view('dashboard/structure/_header', $title);
 $this->load->view('dashboard/structure/_leftmenu', $heading);
 ?>
-	<p class="add"><a href="<?= base_url()?>salt/add">	Add a new salt</a></p>
-					
+  <p>
+	<span class="add"><a href="<?= base_url()?>salt/add">	Add a new salt</a></span>
+<?php 
+  $this->load->view('dashboard/ajax/search', array('search_module' => 'salt'));
+?>
+	</p>		
 	<table class="t_results">
 		<caption>All Salts: Lists all salts (10 per page) <strong>[Total Records : <?php echo $tot_count?>]</strong></caption>
 		<tr>

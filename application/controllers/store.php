@@ -41,7 +41,7 @@ class Store extends Controller {
 			// If a chain/bg already exists, we do not allow another one to be created
 			if($store){
 				// Set the error message and fail
-				$this->form_validation->set_message('_check_chainname', "A $chaintype with the name '".$this->input->post('name')."' already exists.");
+				$this->form_validation->set_message('_check_name', "A $chaintype with the name '".$this->input->post('name')."' already exists.");
 				return false;
 			}
 		}
@@ -145,7 +145,7 @@ class Store extends Controller {
 	{
 		// Set the validations
 		if(!$edit)
-			$this->form_validation->set_rules('name', 'name', 'trim|required|max_length[256]|callback__check_name');
+			$this->form_validation->set_rules('name', 'name', 'trim|required|max_length[256]');
 		else 
 			$this->form_validation->set_rules('name', 'name', 'trim|required|max_length[256]');
 		
@@ -238,7 +238,7 @@ class Store extends Controller {
 		
 		// Get all users (not deleted)
 		$data['stores'] = $this->m_stores->ReadStores(array('limit' => $per_page, 'offset' => $offset, 'sortBy' => 'name', 'sortDirection' => 'ASC'));
-    $data['tot_count'] = $pag_config['total_rows']; 
+    	$data['tot_count'] = $pag_config['total_rows']; 
 		
 		// Initialise the pagination
 		$this->pagination->initialize($pag_config);
@@ -270,6 +270,7 @@ class Store extends Controller {
       // Set the page data
       $data['title'] = "All independent Stores";
       $data['heading'] = "All independent Stores";
+      $data['tot_count'] = $this->m_stores->ReadStores(array('type' => 'Ind', 'count' => true));
     }
     else{
       $data['stores'] = $this->m_stores->ReadStores(array('chainbg_id' => $chainbg_id));
@@ -279,6 +280,7 @@ class Store extends Controller {
       // Set the page data
       $data['title'] = "Stores for $chainbg_name";
       $data['heading'] = "Stores for $chainbg_name";
+      $data['tot_count'] = $this->m_stores->ReadStores(array('chainbg_id' => $chainbg_id, 'count' => true));
     } 
     
     // Load the view with this data

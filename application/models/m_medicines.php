@@ -73,7 +73,10 @@ class M_medicines extends Model
 		if(isset($options['company_name']))
 			$this->db->where('company_name', $options['company_name']);
 			
-		if(isset($options['status']))
+    if(isset($options['notes']))
+      $this->db->where('notes', $options['notes']);
+			
+    if(isset($options['status']))
 			$this->db->where('status', $options['status']);
 		else 
 			$this->db->where('status !=', 'Deleted');
@@ -138,6 +141,9 @@ class M_medicines extends Model
 			
 		if(isset($options['company_name']))
 			$this->db->set('company_name', $options['company_name']);
+
+    if(isset($options['notes']))
+      $this->db->set('notes', $options['notes']);
 			
 		if(isset($options['status']))
 			$this->db->set('status', $options['status']);
@@ -159,4 +165,47 @@ class M_medicines extends Model
 	{
 		return($this->UpdateMedicines(array('id' => $id, 'status' => 'Deleted')));
 	}
+
+  /**
+   * Finds possible name matches 
+   * @param $options
+   *  term      : The string to match with
+   *  status    : The status of rows (default: all records where status != 'Deleted')
+   *  limit     : Limit these namy results
+   *  offset    : Start showing results from this offset onwards
+   *  sortBy    : Sort by this column name
+   *  sortDirection : Asc/desc
+   *  
+   * @return  The rows of possible matches
+   */
+	function FindMedicines($options = array())
+	{
+		// Set all where clauses (if given)
+		$this->db->where('name like', "%".$options['term']."%");
+
+		// Dont show deleted
+		if(isset($options['status']))
+			$this->db->where('status', $options['status']);
+		else 
+			$this->db->where('status !=', 'Deleted');
+				
+		// Set the limits
+		if(isset($options['limit']) && isset($options['offset']))
+			$this->db->limit($options['limit'], $options['offset']);
+		else if(isset($options['limit']))
+			$this->db->limit($options['limit']);
+			
+		// Sorting
+		if(isset($options['sortBy']) && isset($options['sortDirection']))
+			$this->db->order_by($options['sortBy'], $options['sortDirection']);
+			
+		// Run the query
+		$query = $this->db->get("medicines");
+		
+		// Check if only the count is required
+		if(isset($options['count']) && $options['count']) return $query->num_rows(); 	
+		
+		return $query->result();
+	}
+	
 }

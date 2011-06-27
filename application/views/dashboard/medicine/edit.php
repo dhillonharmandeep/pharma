@@ -12,11 +12,6 @@ $this->load->view('dashboard/structure/_leftmenu', array('heading' => $heading."
 //  Load the js part of the medicine_salt 
 $this->load->view('dashboard/medicine/_saltblockjs'); 
 ?>
-  <p class="msgInfo">
-    You cannot edit the salts' information. <br/>
-    Hence, if there is a mistake in creating the salt, simply delete that salt and create a new one.      
-  </p>
-
   <p class="back"><a href="<?= base_url()?>medicine">Back to medicine listings</a></p>
 
   <?= form_open(base_url().'medicine/edit/'.$medicine->id)?>
@@ -53,7 +48,13 @@ $this->load->view('dashboard/medicine/_saltblockjs');
         </div>
         <?=form_error('medicine_type', '<p class="msgForm msgError">', '</p>')?>
       </div>
+      <div class="formrow">
+        <label class="formfield">Notes</label>
+        <?=form_textarea(array('id'=>'notes', 'name'=>'notes', 'class' => 'fields', 'rows' =>'4', 'cols' =>'120'), set_value('notes', $medicine->notes) )?>
+        <?=form_error('notes', '<p class="msgForm msgError">', '</p>')?>
+      </div>
 
+      <div class="formrow">
      <table class="t_results">
       <caption>All salts in this medicine</caption>
       <tr>
@@ -81,6 +82,11 @@ $this->load->view('dashboard/medicine/_saltblockjs');
       </tr>
     <?endif?>
     </table>
+        <p class="msgInfo">
+          You cannot edit the salts' information. <br/>
+          Hence, if there is a mistake in creating the salt, simply delete that salt and create a new one.      
+        </p>
+    </div>      
 <?php 
 $this->load->view('dashboard/medicine/_saltblock'); 
 ?>      

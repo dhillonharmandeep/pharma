@@ -11,9 +11,10 @@ $this->load->view('dashboard/structure/_header', array('title' => $title, 'googl
 $this->load->view('dashboard/structure/_leftmenu', array('heading' => $heading.": '$chainbg->name' ( $chainbg->state )"));
 ?>
 	<p>
-	<span class="back"><a href="<?= base_url()?>chainbg">Back to chain/banner group listings</a></span>
+	<span class="back"><a href="<?= base_url()?>chainbg">Back to listings</a></span>
   <span class="edit"><a href="<?= base_url()?>chainbg/edit/<?=$chainbg->id?>">Edit details</a></span>
   <span class="delete"><a href="<?= base_url()?>chainbg/delete/<?=$chainbg->id?>">Delete this chain/bg</a></span>
+  <span class="eye"><a href="<?php echo base_url().'store/chainbg/'.$chainbg->id;?>">Stores under this</a></span>
 	</p>
 	
 	<div class="fieldset">

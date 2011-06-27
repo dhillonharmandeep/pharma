@@ -10,8 +10,13 @@
 $this->load->view('dashboard/structure/_header', $title);
 $this->load->view('dashboard/structure/_leftmenu', $heading);
 ?>
-	<p class="add"><a href="<?= base_url()?>mtype/add">	Add a new medicine type</a></p>
-					
+  <p>
+	<span class="add"><a href="<?= base_url()?>mtype/add">	Add a new medicine type</a></span>
+<?php 
+  $this->load->view('dashboard/ajax/search', array('search_module' => 'medicine_type'));
+?>
+	</p>
+			
 	<table class="t_results">
 		<caption>All Medicine types: Lists all medicine types (10 per page) <strong>[Total Records : <?php echo $tot_count?>]</strong></caption>
 		<tr>
