@@ -19,7 +19,10 @@ class Mtype extends Controller {
 		}
 
 		// Load the the chainbg model - autloaded
-    $this->load->model('m_medicine_types');
+    	$this->load->model('m_medicine_types');
+		// CR 29JUL2011: Tags functionality
+		$this->load->model('tags');
+		// CR 29JUL2011: End
 	}
 
 	// Helper methods
@@ -54,7 +57,12 @@ class Mtype extends Controller {
 	function _form_validations($edit = false)
 	{
 		// Set the validations
-		$this->form_validation->set_rules('name', 'name', 'trim|required|max_length[256]|callback__check_name');
+		if(!$edit)
+			$this->form_validation->set_rules('name', 'name', 'trim|required|max_length[256]|callback__check_name');
+		
+		// CR 29JUL2011: Tags functionality 
+		$this->form_validation->set_rules('tags', 'tags', 'trim|normaliseTags');
+		// CR 29JUL2011: End 
 	}
 	
 	// CRUD methods
@@ -78,6 +86,11 @@ class Mtype extends Controller {
 			if ($mtypeId)
 			{
 				$this->session->set_flashdata('flashConfirm', "A new medicine type with Id($mtypeId) has been created");
+				
+				// CR 29JUL2011: Tags functionality
+				// Also update the tag information
+				$this->tags->updateFrequency('',$_POST['tags']);
+				// CR 29JUL2011: End
 			}
 			else
 			{
@@ -140,6 +153,10 @@ class Mtype extends Controller {
 	{
 		// Get the data for this user
 		$data['mtype'] = $this->m_medicine_types->ReadMedicine_types(array('id' => $id));
+		// CR 29JUL2011: Tags functionality
+		// Find the old tags and set it
+		$oldTags = $data['mtype']->tags;
+		// CR 29JUL2011: End
 
 		// Check if any data was retrieved
 		if(!$data['mtype'])
@@ -161,7 +178,12 @@ class Mtype extends Controller {
 			// Check for success
 			if ($this->m_medicine_types->UpdateMedicine_types($_POST))
 			{
-				$this->session->set_flashdata('flashConfirm', 'Medicine type ( '.$_POST['name'].' ) has been updated');
+				$this->session->set_flashdata('flashConfirm', 'Medicine type updated');
+				// CR 29JUL2011: Tags functionality
+				// Also update the tag information
+				$this->tags->updateFrequency($oldTags,$_POST['tags']);
+				// CR 29JUL2011: End
+
 			}
 			else
 			{
@@ -200,6 +222,10 @@ class Mtype extends Controller {
 		
 		// Delete the user
 		$this->m_medicine_types->DeleteMedicine_type($id);
+		// CR 29JUL2011: Tags functionality
+		// Also update the tag information
+		$this->tags->updateFrequency($data['mtype']->tags, '');
+		// CR 29JUL2011: End
 		
 		// set the flashdata
 		$this->session->set_flashdata('flashConfirm', "Medicine type ( id = $id ) has been deleted");

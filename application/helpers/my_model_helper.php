@@ -40,3 +40,27 @@ if ( ! function_exists('_default'))
 		return array_merge($default, $option);
 	}
 }
+
+// CR 29JUL2011: Tags functionality 
+/**
+ * method to convert the string of tags to arrays
+ */
+if ( ! function_exists('_string2array'))
+{
+ 	function _string2array($tags)
+	{
+		return preg_split('/\s*,\s*/',trim($tags),-1,PREG_SPLIT_NO_EMPTY);
+	}
+}
+
+/**
+ * method to convert array back to string of tags
+ */
+if ( ! function_exists('_array2string'))
+{
+ 	function _array2string($tags)
+	{
+		return implode(', ',$tags);
+	}
+}
+// CR 29JUL2011: End

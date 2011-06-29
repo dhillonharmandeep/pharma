@@ -99,8 +99,6 @@ class M_medicine_types extends Model
 	 */
 	function UpdateMedicine_types($options = array())
 	{
-		$flagAddressChanged = false;
-		 
 		// Check for required columns
 		if(!_required(array('id'), $options)) return false;
 
@@ -116,6 +114,12 @@ class M_medicine_types extends Model
 
 		if(isset($options['value']))
 			$this->db->set('value', $options['value']);
+
+		// CR 29JUL2011: Tags functionality
+		if(isset($options['tags']))
+			$this->db->set('tags', $options['tags']);
+
+		// CR 29JUL2011: Ends
 			
 		if(isset($options['status']))
 			$this->db->set('status', $options['status']);

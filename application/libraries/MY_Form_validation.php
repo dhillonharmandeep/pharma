@@ -32,4 +32,8 @@ class MY_Form_validation extends CI_Form_validation {
   function valid_fax($str){
     return (bool)preg_match( '/^[\-+ ]?[0-9\- ]*$/', $str);
   }
+  
+  function normaliseTags($str){
+	return _array2string(array_unique(_string2array($str)));
+  }
 }
