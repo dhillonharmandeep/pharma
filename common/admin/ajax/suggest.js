@@ -12,7 +12,7 @@ var userKeyword = "";
 /* number of suggestions received as results for the keyword */
 var suggestions = 0;
 /* the maximum number of characters to be displayed for a suggestion */
-var suggestionMaxLength = 30;
+var suggestionMaxLength = 250;
 /* flag that indicates if the up or down arrow keys were pressed
    the last time a keyup event occurred  */
 var isKeyUpDownPressed = false;
