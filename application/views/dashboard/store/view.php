@@ -19,6 +19,12 @@ $this->load->view('dashboard/structure/_leftmenu', array('heading' => $heading."
 	<div class="fieldset">
 	  <h2><?php echo $store->name;?> details:</h2>
     <div>
+       <span class="label">Tags</span>
+       <span class="value">
+         <?php echo $store->tags; ?>
+       </span>
+    </div>
+    <div>
        <span class="label">Type</span>
        <span class="value">
          <?php 

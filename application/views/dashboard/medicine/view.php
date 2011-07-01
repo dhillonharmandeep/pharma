@@ -49,6 +49,12 @@ $this->load->view('dashboard/structure/_leftmenu', array('heading' => $heading."
        </span>
     </div>
     <div>
+       <span class="label">Tags</span>
+       <span class="value">
+         <?php echo $medicine->tags; ?>
+       </span>
+    </div>
+    <div>
        <span class="label">Notes</span>
        <span class="value">
          <?php echo $medicine->notes; ?>

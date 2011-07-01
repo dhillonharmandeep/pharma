@@ -19,9 +19,13 @@ class Medicine extends Controller {
 		}
 
 		// Load the the chainbg model - autloaded
-    $this->load->model('m_medicines');
-    $this->load->model("m_medicine_types");
-    $this->load->model("m_medicine_salts");
+	    $this->load->model('m_medicines');
+	    $this->load->model("m_medicine_types");
+	    $this->load->model("m_medicine_salts");
+		// CR 29JUL2011: Tags functionality
+		$this->load->model('tags');
+		// CR 29JUL2011: End
+		
 	}
 
 	// Helper methods
@@ -181,6 +185,9 @@ class Medicine extends Controller {
       $this->form_validation->set_rules('company_name', 'company_name', 'trim');
       $this->form_validation->set_rules('notes', 'notes', 'trim');
       $this->form_validation->set_rules('medicine_type', 'medicine type', 'trim|required');
+		// CR 29JUL2011: Tags functionality 
+		$this->form_validation->set_rules('tags', 'tags', 'trim|normaliseTags');
+		// CR 29JUL2011: End 
 	}
 
   /**
@@ -277,8 +284,13 @@ class Medicine extends Controller {
 			// Check for success
 			if ($medicineId)
 			{
-        // For loop ends here
-        $this->session->set_flashdata('flashConfirm', "A new medicine with Id($medicineId) has been created");
+		        // For loop ends here
+		        $this->session->set_flashdata('flashConfirm', "A new medicine with Id($medicineId) has been created");
+
+				// CR 29JUL2011: Tags functionality
+				// Also update the tag information
+				$this->tags->updateFrequency('',$_POST['tags']);
+				// CR 29JUL2011: End
 				
         // Now that the medicine has been added, we need to add the each of the medicine_salts data
 				// For loop starts here
@@ -375,6 +387,11 @@ class Medicine extends Controller {
 			redirect('medicine/index');
 		}
 
+		// CR 29JUL2011: Tags functionality
+		// Find the old tags and set it
+		$oldTags = $data['medicine']->tags;
+		// CR 29JUL2011: End
+
 		// Find the medicine_salts
 		$data['medicine_salts'] = $this->m_medicine_salts->FindSaltsForMedicine($id);
 
@@ -412,6 +429,10 @@ class Medicine extends Controller {
 			if ($this->m_medicines->UpdateMedicines($_POST))
 			{
 				$this->session->set_flashdata('flashConfirm', 'Medicine ( '.$_POST['name'].' ) has been updated');
+				// CR 29JUL2011: Tags functionality
+				// Also update the tag information
+				$this->tags->updateFrequency($oldTags,$_POST['tags']);
+				// CR 29JUL2011: End
 			}
 
       // Now that the medicine has been updated, we need to add the each of the medicine_salts data
@@ -501,6 +522,10 @@ class Medicine extends Controller {
 		
 		// set the flashdata
 		$this->session->set_flashdata('flashConfirm', "Medicine ( id = $id ) has been deleted");
+		// CR 29JUL2011: Tags functionality
+		// Also update the tag information
+		$this->tags->updateFrequency($data['medicine']->tags, '');
+		// CR 29JUL2011: End
 	
 		// Redirect to user index
 		redirect('medicine/index');

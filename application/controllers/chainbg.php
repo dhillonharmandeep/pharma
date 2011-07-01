@@ -19,7 +19,10 @@ class Chainbg extends Controller {
 		}
 
 		// Load the the chainbg model - autloaded
-    $this->load->model('m_chainbgs');
+    	$this->load->model('m_chainbgs');
+		// CR 29JUL2011: Tags functionality
+		$this->load->model('tags');
+		// CR 29JUL2011: End
 	}
 
 	// Helper methods
@@ -81,6 +84,9 @@ class Chainbg extends Controller {
 		$this->form_validation->set_rules('fax1', 'fax1', 'trim|valid_fax');
 		$this->form_validation->set_rules('fax2', 'fax2', 'trim|valid_fax');
 		$this->form_validation->set_rules('fax3', 'fax3', 'trim|valid_fax');
+		// CR 29JUL2011: Tags functionality 
+		$this->form_validation->set_rules('tags', 'tags', 'trim|normaliseTags');
+		// CR 29JUL2011: End 
 	}
 	
 	// CRUD methods
@@ -104,6 +110,10 @@ class Chainbg extends Controller {
 			if ($chainbgId)
 			{
 				$this->session->set_flashdata('flashConfirm', "A new chain/banner group with Id($chainbgId) has been created");
+				// CR 29JUL2011: Tags functionality
+				// Also update the tag information
+				$this->tags->updateFrequency('',$_POST['tags']);
+				// CR 29JUL2011: End
 			}
 			else
 			{
@@ -195,7 +205,15 @@ class Chainbg extends Controller {
 			$this->session->set_flashdata('flashError', 'This chain/banner group does not exist');
 			redirect('chainbg/index');
 		}
-		
+
+		// CR 29JUL2011: Tags functionality
+		// Find the old tags and set it
+		$oldTags = $data['chainbg']->tags;
+		// CR 29JUL2011: End
+
+		// BUG: the postcode by default is 0 which causes validation error on submit
+		if($data['chainbg']->postcode ==  0) $data['chainbg']->postcode = ''; 		
+
 		// TODO: Set the validations (argument true if both the chain name and state are not changed)
 		$this->_form_validations(true);
 
@@ -209,6 +227,10 @@ class Chainbg extends Controller {
 			if ($this->m_chainbgs->UpdateChainbgs($_POST))
 			{
 				$this->session->set_flashdata('flashConfirm', 'Chain/Banner Group ( '.$_POST['name'].' ) has been updated');
+				// CR 29JUL2011: Tags functionality
+				// Also update the tag information
+				$this->tags->updateFrequency($oldTags,$_POST['tags']);
+				// CR 29JUL2011: End
 			}
 			else
 			{
@@ -272,6 +294,10 @@ class Chainbg extends Controller {
 		
 		// Delete the user
 		$this->m_chainbgs->DeleteChainbg($id);
+		// CR 29JUL2011: Tags functionality
+		// Also update the tag information
+		$this->tags->updateFrequency($data['chainbg']->tags, '');
+		// CR 29JUL2011: End
 		
 		// set the flashdata
 		$this->session->set_flashdata('flashConfirm', "Chain/Banner Group ( id = $id ) has been deleted");

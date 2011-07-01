@@ -19,7 +19,10 @@ class Store extends Controller {
 		}
 
 		// Load the the store model - autloaded
-    $this->load->model('m_stores');
+    	$this->load->model('m_stores');
+		// CR 29JUL2011: Tags functionality
+		$this->load->model('tags');
+		// CR 29JUL2011: End
 	}
 
 	// Helper methods
@@ -171,6 +174,9 @@ class Store extends Controller {
 		$this->form_validation->set_rules('fax1', 'fax1', 'trim|valid_fax');
 		$this->form_validation->set_rules('fax2', 'fax2', 'trim|valid_fax');
 		$this->form_validation->set_rules('fax3', 'fax3', 'trim|valid_fax');
+		// CR 29JUL2011: Tags functionality 
+		$this->form_validation->set_rules('tags', 'tags', 'trim|normaliseTags');
+		// CR 29JUL2011: End 
 	}
 	
 	// CRUD methods
@@ -202,6 +208,10 @@ class Store extends Controller {
 			if ($storeId)
 			{
 				$this->session->set_flashdata('flashConfirm', "A new store with Id($storeId) has been created");
+				// CR 29JUL2011: Tags functionality
+				// Also update the tag information
+				$this->tags->updateFrequency('',$_POST['tags']);
+				// CR 29JUL2011: End
 			}
 			else
 			{
@@ -307,6 +317,11 @@ class Store extends Controller {
 			$this->session->set_flashdata('flashError', 'This store does not exist');
 			redirect('store/index');
 		}
+
+ 		// CR 29JUL2011: Tags functionality
+		// Find the old tags and set it
+		$oldTags = $data['store']->tags;
+		// CR 29JUL2011: End
 		
     // Manipulate the chainbg_id we get from the database
     $data['store']->chainbg = $this->_findChainbgById($data['store']->chainbg_id); 
@@ -332,6 +347,10 @@ class Store extends Controller {
 			if ($this->m_stores->UpdateStores($_POST))
 			{
 				$this->session->set_flashdata('flashConfirm', 'Store ( '.$_POST['name'].' ) has been updated');
+				// CR 29JUL2011: Tags functionality
+				// Also update the tag information
+				$this->tags->updateFrequency($oldTags,$_POST['tags']);
+				// CR 29JUL2011: End
 			}
 			else
 			{
@@ -400,6 +419,10 @@ class Store extends Controller {
 		
 		// Delete the user
 		$this->m_stores->DeleteStore($id);
+		// CR 29JUL2011: Tags functionality
+		// Also update the tag information
+		$this->tags->updateFrequency($data['store']->tags, '');
+		// CR 29JUL2011: End
 		
 		// set the flashdata
 		$this->session->set_flashdata('flashConfirm', "Store ( id = $id ) has been deleted");

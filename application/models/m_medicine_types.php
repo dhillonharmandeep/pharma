@@ -118,7 +118,6 @@ class M_medicine_types extends Model
 		// CR 29JUL2011: Tags functionality
 		if(isset($options['tags']))
 			$this->db->set('tags', $options['tags']);
-
 		// CR 29JUL2011: Ends
 			
 		if(isset($options['status']))

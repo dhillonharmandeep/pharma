@@ -40,6 +40,7 @@ $this->load->view('dashboard/structure/_leftmenu', array('heading' => $heading."
 
   <p class="back"><a href="<?= base_url()?>store">Back to store listings</a></p>
  
+	<?php echo validation_errors('<p class="msgForm msgError">', '</p>'); ?>    
   <?= form_open(base_url().'store/edit/'.$store->id)?>
   <fieldset onclick="hideSuggestions();">
     <legend>Store details</legend>
@@ -67,6 +68,12 @@ $this->load->view('dashboard/structure/_leftmenu', array('heading' => $heading."
         <?=form_error('chainbg', '<p class="msgForm msgError">', '</p>')?>
       </div>
       
+		<div class="formrow">
+			<label class="formfield">Tags</label>
+			<?=form_input(array('id'=>'tags', 'name'=>'tags', 'class' => 'fields', 'style' => 'width:600px'), set_value('tags', $store->tags) )?>
+			<?=form_error('tags', '<p class="msgForm msgError">', '</p>')?>
+		</div>
+
       <div class="formrow">
         <label class="formfield">Street </label>
         <?=form_input(array('id'=>'street', 'name'=>'street', 'class' => 'fields', 'size' => '100'), set_value('street',$store->street))?>

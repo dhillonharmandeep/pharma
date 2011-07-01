@@ -19,7 +19,11 @@ class Salt extends Controller {
 		}
 
 		// Load the the chainbg model - autloaded
-    $this->load->model('m_salts');
+    	$this->load->model('m_salts');
+		// CR 29JUL2011: Tags functionality
+		$this->load->model('tags');
+		// CR 29JUL2011: End
+		
 	}
 
 	// Helper methods
@@ -54,7 +58,12 @@ class Salt extends Controller {
 	function _form_validations($edit = false)
 	{
 		// Set the validations
-		$this->form_validation->set_rules('name', 'name', 'trim|required|max_length[256]|callback__check_name');
+		if(!$edit)
+			$this->form_validation->set_rules('name', 'name', 'trim|required|max_length[256]|callback__check_name');
+
+		// CR 29JUL2011: Tags functionality 
+		$this->form_validation->set_rules('tags', 'tags', 'trim|normaliseTags');
+		// CR 29JUL2011: End 
 	}
 	
 	// CRUD methods
@@ -78,6 +87,10 @@ class Salt extends Controller {
 			if ($saltId)
 			{
 				$this->session->set_flashdata('flashConfirm', "A new salt with Id($saltId) has been created");
+				// CR 29JUL2011: Tags functionality
+				// Also update the tag information
+				$this->tags->updateFrequency('',$_POST['tags']);
+				// CR 29JUL2011: End
 			}
 			else
 			{
@@ -149,6 +162,11 @@ class Salt extends Controller {
 			redirect('salt/index');
 		}
 		
+		// CR 29JUL2011: Tags functionality
+		// Find the old tags and set it
+		$oldTags = $data['salt']->tags;
+		// CR 29JUL2011: End
+
 		// Set the validations 
 		$this->_form_validations(true);
 
@@ -161,7 +179,11 @@ class Salt extends Controller {
 			// Check for success
 			if ($this->m_salts->UpdateSalts($_POST))
 			{
-				$this->session->set_flashdata('flashConfirm', 'Salt ( '.$_POST['name'].' ) has been updated');
+				$this->session->set_flashdata('flashConfirm', 'Salt has been updated');
+				// CR 29JUL2011: Tags functionality
+				// Also update the tag information
+				$this->tags->updateFrequency($oldTags,$_POST['tags']);
+				// CR 29JUL2011: End
 			}
 			else
 			{
@@ -203,6 +225,10 @@ class Salt extends Controller {
 		
 		// set the flashdata
 		$this->session->set_flashdata('flashConfirm', "Salt ( id = $id ) has been deleted");
+		// CR 29JUL2011: Tags functionality
+		// Also update the tag information
+		$this->tags->updateFrequency($data['salt']->tags, '');
+		// CR 29JUL2011: End
 	
 		// Redirect to user index
 		redirect('salt/index');

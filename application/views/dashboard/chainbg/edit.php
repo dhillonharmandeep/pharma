@@ -11,7 +11,8 @@ $this->load->view('dashboard/structure/_header', array('title' => $title, 'googl
 $this->load->view('dashboard/structure/_leftmenu', array('heading' => $heading." '$chainbg->name' ( $chainbg->state )"));
 ?>
   <p class="back"><a href="<?= base_url()?>chainbg">Back to chain/banner group listings</a></p>
-    
+
+	<?php echo validation_errors('<p class="msgForm msgError">', '</p>'); ?>    
 
   <?= form_open(base_url().'chainbg/edit/'.$chainbg->id)?>
   <fieldset>
@@ -29,6 +30,11 @@ $this->load->view('dashboard/structure/_leftmenu', array('heading' => $heading."
                         'BG' => 'Banner Group'), set_value('type',$chainbg->type), 'class="fields"')?>
         <?=form_error('type', '<p class="msgForm msgError">', '</p>')?>
       </div>
+		<div class="formrow">
+			<label class="formfield">Tags</label>
+			<?=form_input(array('id'=>'tags', 'name'=>'tags', 'class' => 'fields', 'style' => 'width:600px'), set_value('tags', $chainbg->tags) )?>
+			<?=form_error('tags', '<p class="msgForm msgError">', '</p>')?>
+		</div>
       <div class="formrow">
         <label class="formfield">Street </label>
         <?=form_input(array('id'=>'street', 'name'=>'street', 'class' => 'fields', 'size' => '100'), set_value('street',$chainbg->street))?>

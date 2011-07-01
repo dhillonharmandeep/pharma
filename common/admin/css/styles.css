@@ -82,6 +82,13 @@ h3 {
   background-color: #EEEEEE;
   border: 1px solid #EEDDDD;
 }
+.disabled-form{
+	background-color: #EEEEEE;
+	border: 1px solid #EEDDDD;
+	width: 250px;
+	height: 23px; 
+	padding:2px 5px;
+}
 /* fields style  */
 .instructions {
 	color: #999999;

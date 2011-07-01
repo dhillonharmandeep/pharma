@@ -44,11 +44,17 @@ $this->load->view('dashboard/medicine/_saltblockjs');
         <?=form_input(array('id'=>'company_name', 'name'=>'company_name', 'class' => 'fields'), set_value('company_name') )?>
         <?=form_error('company_name', '<p class="msgForm msgError">', '</p>')?>
       </div>
-      <div class="formrow" id="chainbg_div">
+      <div class="formrowhalf" id="chainbg_div">
         <label class="formfield">Medicine Type <span class="required">*</span></label>
         <?=form_input(array('id'=>'medicine_type', 'name'=>'medicine_type', 'class' => 'fields', 'size' => '60', 'onfocus' => "init(this, '/mtype/ajaxquery/');", 'onkeyup' => "handleKeyUp(event)"), set_value('medicine_type') )?>
         <?=form_error('medicine_type', '<p class="msgForm msgError">', '</p>')?>
       </div>
+		<div class="formrowhalf">
+			<label class="formfield">Tags</label>
+			<?=form_input(array('id'=>'tags', 'name'=>'tags', 'class' => 'fields', 'style' => 'width:340px'), set_value('tags') )?>
+			<?=form_error('tags', '<p class="msgForm msgError">', '</p>')?>
+		</div>
+      
       <div class="formrow">
         <label class="formfield">Notes</label>
         <?=form_textarea(array('id'=>'notes', 'name'=>'notes', 'class' => 'fields', 'rows' =>'4', 'cols' =>'120'), set_value('notes') )?>

@@ -12,6 +12,7 @@ $this->load->view('dashboard/structure/_leftmenu', array('heading' => "Price for
 ?>
   <p class="back"><a href="<?= base_url()?>price">Back to all price listings</a></p>
     
+	<?php echo validation_errors('<p class="msgForm msgError">', '</p>'); ?>    
   <?= form_open(base_url().'price/edit/'.$price->id)?>
   <fieldset>
     <legend>Medicine price details</legend>

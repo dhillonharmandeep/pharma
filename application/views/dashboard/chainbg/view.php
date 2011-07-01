@@ -20,6 +20,12 @@ $this->load->view('dashboard/structure/_leftmenu', array('heading' => $heading."
 	<div class="fieldset">
 	  <h2><?php echo $chainbg->name;?> details:</h2>
     <div>
+       <span class="label">Tags</span>
+       <span class="value">
+         <?php echo $chainbg->tags; ?>
+       </span>
+    </div>
+    <div>
        <span class="label">Address</span>
        <span class="value">
          <?php echo $chainbg->street.", ".$chainbg->street2.", ".$chainbg->suburb.", ".$chainbg->postcode.", ".$chainbg->city ; ?>

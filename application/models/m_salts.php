@@ -105,6 +105,11 @@ class M_salts extends Model
 		if(isset($options['name']))
 			$this->db->set('name', $options['name']);
 
+		// CR 29JUL2011: Tags functionality
+		if(isset($options['tags']))
+			$this->db->set('tags', $options['tags']);
+		// CR 29JUL2011: Ends
+
 		if(isset($options['status']))
 			$this->db->set('status', $options['status']);
 			

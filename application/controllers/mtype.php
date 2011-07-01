@@ -153,10 +153,6 @@ class Mtype extends Controller {
 	{
 		// Get the data for this user
 		$data['mtype'] = $this->m_medicine_types->ReadMedicine_types(array('id' => $id));
-		// CR 29JUL2011: Tags functionality
-		// Find the old tags and set it
-		$oldTags = $data['mtype']->tags;
-		// CR 29JUL2011: End
 
 		// Check if any data was retrieved
 		if(!$data['mtype'])
@@ -166,6 +162,11 @@ class Mtype extends Controller {
 			redirect('mtype/index');
 		}
 		
+		// CR 29JUL2011: Tags functionality
+		// Find the old tags and set it
+		$oldTags = $data['mtype']->tags;
+		// CR 29JUL2011: End
+
 		// Set the validations 
 		$this->_form_validations(true);
 

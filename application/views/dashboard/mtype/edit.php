@@ -12,6 +12,7 @@ $this->load->view('dashboard/structure/_leftmenu', array('heading' => $heading."
 ?>
   <p class="back"><a href="<?= base_url()?>mtype">Back to medicine type listings</a></p>
     
+	<?php echo validation_errors('<p class="msgForm msgError">', '</p>'); ?>    
 
   <?= form_open(base_url().'mtype/edit/'.$mtype->id)?>
   <fieldset>
@@ -19,7 +20,7 @@ $this->load->view('dashboard/structure/_leftmenu', array('heading' => $heading."
     
       <div class="formrowhalf">
         <label class="formfield">Name </label>
-        <?php echo $mtype->name;?>
+        <div class="disabled-form"><?php echo $mtype->name;?></div>
         <?=form_error('name', '<p class="msgForm msgError">', '</p>')?>
       </div>
 		<div class="formrowhalf">

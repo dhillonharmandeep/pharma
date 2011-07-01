@@ -145,6 +145,12 @@ class M_medicines extends Model
     if(isset($options['notes']))
       $this->db->set('notes', $options['notes']);
 			
+		// CR 29JUL2011: Tags functionality
+		if(isset($options['tags']))
+			$this->db->set('tags', $options['tags']);
+		// CR 29JUL2011: Ends
+
+
 		if(isset($options['status']))
 			$this->db->set('status', $options['status']);
 			

@@ -12,16 +12,23 @@ $this->load->view('dashboard/structure/_leftmenu', array('heading' => $heading."
 ?>
   <p class="back"><a href="<?= base_url()?>salt">Back to salt listings</a></p>
     
+	<?php echo validation_errors('<p class="msgForm msgError">', '</p>'); ?>    
 
   <?= form_open(base_url().'salt/edit/'.$salt->id)?>
   <fieldset>
     <legend>Salt details</legend>
     
-      <div class="formrow">
+      <div class="formrowhalf">
         <label class="formfield">Name <span class="required">*</span></label>
-        <?=form_input(array('id'=>'name', 'name'=>'name', 'class' => 'fields'), set_value('name', $salt->name) )?>
+        <div class="disabled-form"><?php echo $salt->name;?></div>
         <?=form_error('name', '<p class="msgForm msgError">', '</p>')?>
       </div>
+		<div class="formrowhalf">
+			<label class="formfield">Tags</label>
+			<?=form_input(array('id'=>'tags', 'name'=>'tags', 'class' => 'fields', 'style' => 'width:340px'), set_value('tags', $salt->tags) )?>
+			<?=form_error('tags', '<p class="msgForm msgError">', '</p>')?>
+		</div>
+      
       <div class="formrow">
         <?=form_submit(array('name'=>'','class'=>'button', 'value'=> 'Submit'))?>
       </div>

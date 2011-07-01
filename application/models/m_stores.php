@@ -295,6 +295,11 @@ class M_stores extends Model
 		if(isset($options['fax3']))
 			$this->db->set('fax3', $options['fax3']);
 			
+		// CR 29JUL2011: Tags functionality
+		if(isset($options['tags']))
+			$this->db->set('tags', $options['tags']);
+		// CR 29JUL2011: Ends
+
 		if(isset($options['status']))
 			$this->db->set('status', $options['status']);
 			
