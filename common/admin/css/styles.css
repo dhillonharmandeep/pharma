@@ -229,3 +229,7 @@ a > img {
 	font-weight:bold;
 	width:70%;
 }
+ul{
+	margin: 10px 50px;
+	list-style-type: square;
+}

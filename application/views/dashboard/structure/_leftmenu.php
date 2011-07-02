@@ -61,15 +61,15 @@
   	<!--// articles edit starts -->
   
   <div id="latest"><img src="<?php echo base_url(); ?>common/admin/images/title_bg.png" alt="titlebg" width="180" height="49" />
-    <div class="toplinks style1" id="latestitle"><strong>Latest Articles<br /> <!--// Title -->
+    <div class="toplinks style1" id="latestitle"><strong><a href="<?php echo base_url()?>scripts">Scripts</a><br /> <!--// Title -->
       <br />
     </strong>
     
     
       <table>
         <tr>
-          <td align="center"><a href="#"><img src="<?php echo base_url(); ?>common/admin/images/icons/add.png" alt="add" width="18" height="17" border="0" /></a></td>
-          <td class="navigation"><a href="#">Add Article</a></td> <!--// Add article -->
+          <td align="center"><a href="<?php echo base_url()?>scripts/upload_medicine"><img src="<?php echo base_url(); ?>common/admin/images/icons/add.png" alt="add" width="18" height="17" border="0" /></a></td>
+          <td class="navigation"><a href="<?php echo base_url()?>scripts/upload_medicine">Upload Medicines</a></td> <!--// Add article -->
         </tr>
           <tr>
             <td width="18" align="center"><a href="#"><img src="<?php echo base_url(); ?>common/admin/images/icons/edit.png" alt="edit" width="18" height="18" border="0" /></a></td>
