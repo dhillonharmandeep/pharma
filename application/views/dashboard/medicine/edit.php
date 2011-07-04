@@ -8,12 +8,28 @@
  * Created on 	: Oct 22, 2010
  */
 $this->load->view('dashboard/structure/_header', array('title' => $title, 'ajax' => true));
-$this->load->view('dashboard/structure/_leftmenu', array('heading' => $heading." : ".$medicine->name));
+$this->load->view('dashboard/structure/_leftmenu', array('heading' => $heading));
 //  Load the js part of the medicine_salt 
 $this->load->view('dashboard/medicine/_saltblockjs'); 
 ?>
   <p class="back"><a href="<?= base_url()?>medicine">Back to medicine listings</a></p>
 
+	<div style="font-size:20px">
+	<?php
+		if(isset($medicine->CMI1_link)) echo anchor($medicine->CMI1_link, '<img src="'.base_url().'common/admin/images/icons/pdf.png" alt="PDF" width="16" height="16" />CMI1', array('target'=>'_blank','style'=>"margin-right:8px"));
+		if(isset($medicine->CMI2_link)) echo anchor($medicine->CMI2_link, '<img src="'.base_url().'common/admin/images/icons/pdf.png" alt="PDF" width="16" height="16"/>CMI2', array('target'=>'_blank','style'=>"margin-right:8px"));
+		if(isset($medicine->CMI3_link)) echo anchor($medicine->CMI3_link, '<img src="'.base_url().'common/admin/images/icons/pdf.png" alt="PDF" width="16" height="16"/>CMI3', array('target'=>'_blank','style'=>"margin-right:8px"));
+		if(isset($medicine->CMI4_link)) echo anchor($medicine->CMI4_link, '<img src="'.base_url().'common/admin/images/icons/pdf.png" alt="PDF" width="16" height="16"/>CMI4', array('target'=>'_blank','style'=>"margin-right:8px"));
+		if(isset($medicine->CMI5_link)) echo anchor($medicine->CMI5_link, '<img src="'.base_url().'common/admin/images/icons/pdf.png" alt="PDF" width="16" height="16"/>CMI5', array('target'=>'_blank','style'=>"margin-right:8px"));
+		if(isset($medicine->CMI6_link)) echo anchor($medicine->CMI6_link, '<img src="'.base_url().'common/admin/images/icons/pdf.png" alt="PDF" width="16" height="16"/>CMI6', array('target'=>'_blank','style'=>"margin-right:8px"));
+		if(isset($medicine->PI1_link)) echo anchor($medicine->PI1_link, '<img src="'.base_url().'common/admin/images/icons/pdf.png" alt="PDF" width="16" height="16"/>PI1', array('target'=>'_blank','style'=>"margin-right:8px"));
+		if(isset($medicine->PI2_link)) echo anchor($medicine->PI2_link, '<img src="'.base_url().'common/admin/images/icons/pdf.png" alt="PDF" width="16" height="16"/>PI2', array('target'=>'_blank','style'=>"margin-right:8px"));
+		if(isset($medicine->PI3_link)) echo anchor($medicine->PI3_link, '<img src="'.base_url().'common/admin/images/icons/pdf.png" alt="PDF" width="16" height="16"/>PI3', array('target'=>'_blank','style'=>"margin-right:8px"));
+		if(isset($medicine->PI4_link)) echo anchor($medicine->PI4_link, '<img src="'.base_url().'common/admin/images/icons/pdf.png" alt="PDF" width="16" height="16"/>PI4', array('target'=>'_blank','style'=>"margin-right:8px"));
+		if(isset($medicine->PI5_link)) echo anchor($medicine->PI5_link, '<img src="'.base_url().'common/admin/images/icons/pdf.png" alt="PDF" width="16" height="16"/>PI5', array('target'=>'_blank','style'=>"margin-right:8px"));
+		if(isset($medicine->PI6_link)) echo anchor($medicine->PI6_link, '<img src="'.base_url().'common/admin/images/icons/pdf.png" alt="PDF" width="16" height="16"/>PI6', array('target'=>'_blank','style'=>"margin-right:8px"));
+	?>
+	</div>
 	<?php echo validation_errors('<p class="msgForm msgError">', '</p>'); ?>    
   <?= form_open(base_url().'medicine/edit/'.$medicine->id)?>
   <fieldset  onclick="hideSuggestions();">
@@ -78,7 +94,11 @@ $this->load->view('dashboard/medicine/_saltblockjs');
       ?>
         
           <td><?=$salt->salt_name?></td>
-          <td><?=$salt->dosage?></td>
+          <td>
+<!--          <?=$salt->dosage?> -->
+<!--				<input type="text" name="msalt_'+id+'dosage" value="" id="msalt_'+$count+'dosage" class="fields"  /> -->          	
+          		<?=form_input(array('id'=>'msalt_'.$count.'dosage', 'name'=>'msalt_'.$count.'dosage', 'class' => 'fields'), set_value('',$salt->dosage) )?>
+          </td>
           <td><?=anchor(base_url().'medicine/delete_salt/'.$salt->id.'/'.$medicine->id, '<img src="'.base_url().'common/admin/images/icons/remove.png" alt="Edit" width="18" height="18" />')?></td>
         </tr>
       <?endforeach?>
@@ -88,10 +108,6 @@ $this->load->view('dashboard/medicine/_saltblockjs');
       </tr>
     <?endif?>
     </table>
-        <p class="msgInfo">
-          You cannot edit the salts' information. <br/>
-          Hence, if there is a mistake in creating the salt, simply delete that salt and create a new one.      
-        </p>
     </div>      
 <?php 
 $this->load->view('dashboard/medicine/_saltblock'); 

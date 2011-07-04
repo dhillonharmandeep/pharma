@@ -8,7 +8,7 @@
  * Created on 	: Nov 5, 2010
  */
 $this->load->view('dashboard/structure/_header', array('title' => $title));
-$this->load->view('dashboard/structure/_leftmenu', array('heading' => $heading." : ".$medicine->name));
+$this->load->view('dashboard/structure/_leftmenu', array('heading' => $heading));
 ?>
 	<p>
 	<span class="back"><a href="<?= base_url()?>medicine">Back to medicine listings</a></span>
@@ -39,7 +39,7 @@ $this->load->view('dashboard/structure/_leftmenu', array('heading' => $heading."
     <div>
        <span class="label">Medicine Type</span>
        <span class="value">
-         <?php echo $medicine->medicine_type ; ?>
+         <?php if(isset($medicine->medicine_type))echo $medicine->medicine_type ; ?>
        </span>
     </div>
     <div>

@@ -76,7 +76,7 @@ class M_salts extends Model
 		if(isset($options['count']) && $options['count']) return $query->num_rows(); 	
 		
 		// Return - first the unique column results
-		if(isset($options['id']))
+		if(isset($options['id']) || isset($options['name']))
 			return $query->row(0);
 		
 		return $query->result();
@@ -188,4 +188,18 @@ class M_salts extends Model
     
     return $query->result();
   }
+  
+ 	function FindOrCreateSaltByName($name){
+ 		$salt = $this->ReadSalts(array('name'=>$name));
+		
+		// Find if salt exists, else create recors
+		if($salt){
+			$saltID = $salt->id;
+		}
+		else{
+			$saltID = $this->CreateSalt(array('name'=>$name));
+		}
+
+		return $saltID;
+ 	}
 }

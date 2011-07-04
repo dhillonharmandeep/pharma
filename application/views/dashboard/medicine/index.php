@@ -30,7 +30,7 @@ $this->load->view('dashboard/structure/_leftmenu', $heading);
 				<th>Type</th>
         <th>Company</th>
         <th>Notes</th>
-				<th colspan="2">Actions</th>
+				<th colspan="3">Actions</th>
 			</tr>
 		<?if(isset($medicines) && is_array($medicines) && count($medicines)>0):?>
 		  <?php $count = 1;?>
@@ -41,14 +41,15 @@ $this->load->view('dashboard/structure/_leftmenu', $heading);
 			   $count++;
 			?>
 				
-					<td><a href="<?php echo base_url().'medicine/view/'.$medicine->id;?>"><?=$medicine->name?></a></td>
+					<td><a href="<?php echo base_url().'medicine/edit/'.$medicine->id;?>"><?=$medicine->name?></a></td>
           <td><?=$medicine->quantity?></td>
           <td><?=$medicine->dosage?></td>
-					<td><?=$medicine->medicine_type ?></td>
+		  <td><?php if(isset($medicine->medicine_type)) echo $medicine->medicine_type; ?></td>
           <td><?=$medicine->company_name?></td>
           <td><?=strlen($medicine->notes)<25?$medicine->notes:substr($medicine->notes, 0, 25).'...'?></td>
+          <td><?=anchor(base_url().'medicine/view/'.$medicine->id, '<img src="'.base_url().'common/admin/images/icons/search.png" alt="Edit" width="18" height="18" />')?></td>
           <td><?=anchor(base_url().'medicine/edit/'.$medicine->id, '<img src="'.base_url().'common/admin/images/icons/edit.png" alt="Edit" width="18" height="18" />')?></td>
-					<td><?=anchor(base_url().'medicine/delete/'.$medicine->id, '<img src="'.base_url().'common/admin/images/icons/remove.png" alt="Remove" width="18" height="18" />')?></td>
+		  <td><?=anchor(base_url().'medicine/delete/'.$medicine->id, '<img src="'.base_url().'common/admin/images/icons/remove.png" alt="Remove" width="18" height="18" />')?></td>
 				</tr>
 			<?endforeach?>
 		<?else:?>

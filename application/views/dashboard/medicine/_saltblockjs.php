@@ -51,7 +51,7 @@
     str += '  </div>';
     str += '  <div class="formrowhalf">';
     str += '    <label class="formfield">Salt '+id+' Dosage <span class="required">*</span></label>';
-    str += '    <input type="text" name="msalt_'+id+'dosage" value="" id="msalt_2dosage" class="fields"  />';                      
+    str += '    <input type="text" name="msalt_'+id+'dosage" value="" id="msalt_'+id+'dosage" class="fields"  />';                      
     str += '  </div>';
     str += '</div>';
     

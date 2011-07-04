@@ -347,11 +347,12 @@ class Medicine extends Controller {
 		
 		// Get all users (not deleted)
 		$data['medicines'] = $this->m_medicines->ReadMedicines(array('limit' => $per_page, 'offset' => $offset, 'sortBy' => 'name', 'sortDirection' => 'ASC'));
-    $data['tot_count'] = $pag_config['total_rows']; 
+    	$data['tot_count'] = $pag_config['total_rows']; 
 		
 		// Add the medicine type for each record
 		for ($ii=0; $ii< count($data['medicines']); $ii++){
-			$data['medicines'][$ii]->medicine_type = $this->_findMtypeById($data['medicines'][$ii]->medicine_type_id);
+			if(!empty($data['medicines'][$ii]->medicine_type_id))
+				$data['medicines'][$ii]->medicine_type = $this->_findMtypeById($data['medicines'][$ii]->medicine_type_id);
 		}
 		
 		// Initialise the pagination
@@ -396,11 +397,14 @@ class Medicine extends Controller {
 		$data['medicine_salts'] = $this->m_medicine_salts->FindSaltsForMedicine($id);
 
 		// medicine_type handling
-		$data['medicine']->medicine_type = $this->_findMtypeById($data['medicine']->medicine_type_id);
-
+		if(isset($data['medicine']->medicine_type_id))
+			$data['medicine']->medicine_type = $this->_findMtypeById($data['medicine']->medicine_type_id);
+		else
+			$data['medicine']->medicine_type = '';
+			
 		// Reverse calculation when(if) data is submitted
 		if(isset($_POST['medicine_type']))
-		$_POST['medicine_type_id'] = $this->_findMTypeByName($_POST['medicine_type']);
+			$_POST['medicine_type_id'] = $this->_findMTypeByName($_POST['medicine_type']);
 
 		// Find the salt_count
 		if(isset($_POST['salt_count'])){
@@ -486,7 +490,8 @@ class Medicine extends Controller {
     
     // Handle the chainbg_id
     // Manipulate the chainbg_id we get from the database
-    $data['medicine']->medicine_type = $this->_findMtypeById($data['medicine']->medicine_type_id); 
+    if(!empty($data['medicine']->medicine_type_id))
+    	$data['medicine']->medicine_type = $this->_findMtypeById($data['medicine']->medicine_type_id); 
     
     // Find the medicine_salts
     $data['medicine_salts'] = $this->m_medicine_salts->FindSaltsForMedicine($id);
