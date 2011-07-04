@@ -179,12 +179,13 @@ class Medicine extends Controller {
 	function _form_validations($edit = false)
 	{
 		// Set the validations
-			$this->form_validation->set_rules('name', 'name', 'trim|required|max_length[256]');
+		$this->form_validation->set_rules('name', 'name', 'trim|required|max_length[256]');
 	    $this->form_validation->set_rules('quantity', 'quantity', 'trim');
-      $this->form_validation->set_rules('dosage', 'dosage', 'trim');
-      $this->form_validation->set_rules('company_name', 'company_name', 'trim');
-      $this->form_validation->set_rules('notes', 'notes', 'trim');
-      $this->form_validation->set_rules('medicine_type', 'medicine type', 'trim|required');
+      	$this->form_validation->set_rules('dosage', 'dosage', 'trim');
+      	$this->form_validation->set_rules('company_name', 'company_name', 'trim');
+      	$this->form_validation->set_rules('notes', 'notes', 'trim');
+      	$this->form_validation->set_rules('description', 'description', 'trim');
+      	$this->form_validation->set_rules('medicine_type', 'medicine type', 'trim|required');
 		// CR 29JUL2011: Tags functionality 
 		$this->form_validation->set_rules('tags', 'tags', 'trim|normaliseTags');
 		// CR 29JUL2011: End 
@@ -254,11 +255,11 @@ class Medicine extends Controller {
 	{
 		//print_r($_POST); die();
 		// medicine_type handling
-    if(!empty($_POST['medicine_type'])){
-      $_POST['medicine_type_id'] = $this->_findMTypeByName($_POST['medicine_type']);
-    }
+	    if(!empty($_POST['medicine_type'])){
+	      $_POST['medicine_type_id'] = $this->_findMTypeByName($_POST['medicine_type']);
+	    }
 
-    // Set the form validations
+    	// Set the form validations
 		$this->_form_validations();
 		
 		if(isset($_POST['salt_count'])){
@@ -292,25 +293,24 @@ class Medicine extends Controller {
 				$this->tags->updateFrequency('',$_POST['tags']);
 				// CR 29JUL2011: End
 				
-        // Now that the medicine has been added, we need to add the each of the medicine_salts data
+        		// Now that the medicine has been added, we need to add the each of the medicine_salts data
 				// For loop starts here
 				for($kk = 1; $kk <=$salt_count; $kk++){	
-          // Add the salt_id column
-			    if(!empty($_POST['msalt_'.$kk.'name'])){
-			      $_POST['msalt_'.$kk.'salt_id'] = $this->_findSaltByName($_POST['msalt_'.$kk.'name']);
-			    }
+          			// Add the salt_id column
+				    if(!empty($_POST['msalt_'.$kk.'name'])){
+				      $_POST['msalt_'.$kk.'salt_id'] = $this->_findSaltByName($_POST['msalt_'.$kk.'name']);
+				    }
 			
-			    // add the medicine_id column
-			    $_POST['msalt_'.$kk.'medicine_id'] = $medicineId;
+				    // add the medicine_id column
+				    $_POST['msalt_'.$kk.'medicine_id'] = $medicineId;
 		     
-			    // Insert the medicine_salt details 
-          $medicine_salt_id = $this->m_medicine_salts->CreateMedicine_salt($this->_MedicineSaltData($kk));
+				    // Insert the medicine_salt details 
+	          		$medicine_salt_id = $this->m_medicine_salts->CreateMedicine_salt($this->_MedicineSaltData($kk));
           
-          if(!$medicine_salt_id){
-            $this->session->set_flashdata('flashError', "Error: Medicine Salts could not be linked because of DB error. Please contact your administrator");
-          }
-				}  
-        // For loop ends here          
+					if(!$medicine_salt_id){
+						$this->session->set_flashdata('flashError', "Error: Medicine Salts could not be linked because of DB error. Please contact your administrator");
+					}
+				}// For loop ends here          
 			}
 			else
 			{
@@ -417,8 +417,7 @@ class Medicine extends Controller {
 		// Set the validation for all the medicine salts
 		for($zz = 1;$zz <=$salt_count; $zz++){
 			$this->_form_validations_medicine_salt($zz, false);
-    }
-    // end of for()      
+    	}// end of for()      
       
 		// Set the validations 
 		$this->_form_validations(true);
@@ -429,6 +428,15 @@ class Medicine extends Controller {
 			// Validations successful - update database
 			$_POST['id'] = $id;
 
+			foreach($_POST as $post => $val){
+				if(strpos($post,'curr_msalt_dosage_')!==false)
+				{
+					$msid = explode('curr_msalt_dosage_', $post);
+//echo $msid[1]." => $val<br/>";
+					$this->m_medicine_salts->UpdateMedicine_salt(array('id'=>$msid[1], 'dosage' => $val));
+				}
+			}
+//die();
 			// Check for success
 			if ($this->m_medicines->UpdateMedicines($_POST))
 			{

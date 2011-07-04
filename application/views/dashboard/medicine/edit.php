@@ -77,6 +77,12 @@ $this->load->view('dashboard/medicine/_saltblockjs');
       </div>
 
       <div class="formrow">
+        <label class="formfield">Description</label>
+        <?=form_textarea(array('id'=>'description', 'name'=>'description', 'class' => 'fields', 'rows' =>'4', 'cols' =>'120'), set_value('description', $medicine->description) )?>
+        <?=form_error('description', '<p class="msgForm msgError">', '</p>')?>
+      </div>
+
+      <div class="formrow">
      <table class="t_results">
       <caption>All salts in this medicine</caption>
       <tr>
@@ -95,9 +101,7 @@ $this->load->view('dashboard/medicine/_saltblockjs');
         
           <td><?=$salt->salt_name?></td>
           <td>
-<!--          <?=$salt->dosage?> -->
-<!--				<input type="text" name="msalt_'+id+'dosage" value="" id="msalt_'+$count+'dosage" class="fields"  /> -->          	
-          		<?=form_input(array('id'=>'msalt_'.$count.'dosage', 'name'=>'msalt_'.$count.'dosage', 'class' => 'fields'), set_value('',$salt->dosage) )?>
+          		<?=form_input(array('id'=>'curr_msalt_dosage_'.$salt->id, 'name'=>'curr_msalt_dosage_'.$salt->id, 'class' => 'fields'), set_value('curr_msalt_dosage_'.$salt->id, $salt->dosage) )?>
           </td>
           <td><?=anchor(base_url().'medicine/delete_salt/'.$salt->id.'/'.$medicine->id, '<img src="'.base_url().'common/admin/images/icons/remove.png" alt="Edit" width="18" height="18" />')?></td>
         </tr>

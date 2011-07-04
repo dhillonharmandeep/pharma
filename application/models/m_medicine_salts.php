@@ -100,17 +100,46 @@ class M_medicine_salts extends Model
 	 */
 	function DeleteMedicine_salt($id)
 	{
-    // Set the where condition
-    $this->db->where('id', $id);
-    
-    // Set the value
-    $this->db->set('status', 'Deleted');
-      
-    // Update the database
-    $this->db->update('medicine_salt');
-    
-    //return
-    return $this->db->affected_rows();
+		$this->db->delete('medicine_salt', array('id' => $id));
+		
+/*		 
+	    // Set the where condition
+	    $this->db->where('id', $id);
+	    
+	    // Set the value
+	    $this->db->set('status', 'Deleted');
+	      
+	    // Update the database
+	    $this->db->update('medicine_salt');
+*/	    
+	    //return
+	    return $this->db->affected_rows();
+
+  	}
+
+	/**
+	 * Updates a medicines salt information
+	 * @param $options
+	 * 	id			:	The id of the medicines_salt record to update
+	 *  dosage
+	 *  
+	 * @return	The number of rows affected.
+	 */
+	function UpdateMedicine_salt($options = array())
+	{
+		// Check for required columns
+		if(!_required(array('id', 'dosage'), $options)) return false;
+		
+		// Set the where condition
+		$this->db->where('id', $options['id']);
+      	$this->db->set('dosage', $options['dosage']);
+		
+//$this->db->_compile_select();  	
+		// Update the database
+		$this->db->update('medicine_salt');
+//echo " ".$this->db->last_query();  
+		//return
+		return $this->db->affected_rows();
 	}
 	
 	function FindSaltsForMedicine($id){
