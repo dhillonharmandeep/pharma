@@ -23,11 +23,11 @@ class M_medicines extends Model
 	function CreateMedicine($options = array())
 	{
 		// Check for mandatory columns
-		if(!_required(array('name', 'medicine_type_id'), $options)) return false;
+		if(!_required(array('name'), $options)) return false;
 		
 		// Default columns
 		$options = _default(array('status' => 'Active', 'created_at' => date('Y-m-d h:i:s')), $options);
-		
+
 		// Run the insert query
 		$this->db->insert('medicines', $options);
 		
@@ -59,7 +59,7 @@ class M_medicines extends Model
 			$this->db->where('id', $options['id']);
 
 		if(isset($options['name']))
-			$this->db->where('name', $options['name']);
+			$this->db->where('name like', '%'.$options['name'].'%');
 
 		if(isset($options['quantity']))
 			$this->db->where('quantity', $options['quantity']);

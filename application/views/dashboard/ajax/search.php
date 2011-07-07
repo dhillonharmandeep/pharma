@@ -1,5 +1,5 @@
   <span class="ui-widget">
-    <label for="searchBox">Search: </label>
+    <label for="searchBox">Search:</label>
     <input id="searchBox" />
   </span>
 

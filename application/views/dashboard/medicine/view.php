@@ -11,9 +11,10 @@ $this->load->view('dashboard/structure/_header', array('title' => $title));
 $this->load->view('dashboard/structure/_leftmenu', array('heading' => $heading));
 ?>
 	<p>
-	<span class="back"><a href="<?= base_url()?>medicine">Back to medicine listings</a></span>
-  <span class="edit"><a href="<?= base_url()?>medicine/edit/<?=$medicine->id?>">Edit details</a></span>
-  <span class="delete"><a href="<?= base_url()?>medicine/delete/<?=$medicine->id?>">Delete this medicine</a></span>
+	<span class="back"><a href="<?= base_url()?>medicine">All medicine</a></span>
+  	<span class="edit"><a href="<?= base_url()?>medicine/edit/<?=$medicine->id?>">Edit details</a></span>
+  	<span class="delete"><a href="<?= base_url()?>medicine/delete/<?=$medicine->id?>">Delete this medicine</a></span>
+  	<span class="eye"><a href="<?= base_url()?>medicine/index/<?=$medicine->name?>">Same name medicines</a></span>
 	</p>
 	
 	<div class="fieldset">

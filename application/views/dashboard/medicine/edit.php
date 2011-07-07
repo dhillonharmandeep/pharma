@@ -12,8 +12,9 @@ $this->load->view('dashboard/structure/_leftmenu', array('heading' => $heading))
 //  Load the js part of the medicine_salt 
 $this->load->view('dashboard/medicine/_saltblockjs'); 
 ?>
-  <p class="back"><a href="<?= base_url()?>medicine">Back to medicine listings</a></p>
-
+  <p class="back"><a href="<?= base_url()?>medicine">Back to medicine listings</a>
+  <span class="edit"><a href="<?= base_url()?>medicine/create_copy/<?=$medicine->id?>">Create Copy</a></span>
+  <span class="eye"><a href="<?= base_url()?>medicine/index/<?=$medicine->name?>">Same name medicines</a></span></p>
 	<div style="font-size:20px">
 	<?php
 		if(isset($medicine->CMI1_link)) echo anchor("https://www.ebs.tga.gov.au/ebs/picmi/picmirepository.nsf/pdf?OpenAgent&amp;id=".$medicine->CMI1_target, '<img src="'.base_url().'common/admin/images/icons/pdf.png" alt="PDF" width="16" height="16" />CMI1', array('target'=>'_blank','style'=>"margin-right:8px"));

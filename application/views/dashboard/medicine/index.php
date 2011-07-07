@@ -17,6 +17,7 @@ $this->load->view('dashboard/structure/_leftmenu', $heading);
 	<span class="add"><a href="<?= base_url()?>medicine/add">	Add a new medicine</a></span>
 <?php 
 	$this->load->view('dashboard/ajax/search', array('search_module' => 'medicine'));
+	$this->load->view('dashboard/ajax/filter', array('filter'=> $filter,'destination' => 'medicine'));
 ?>
 			<table class="t_results">
 			<caption>	
@@ -47,7 +48,7 @@ $this->load->view('dashboard/structure/_leftmenu', $heading);
 		  <td><?php if(isset($medicine->medicine_type)) echo $medicine->medicine_type; ?></td>
           <td><?=$medicine->company_name?></td>
           <td><?=strlen($medicine->notes)<25?$medicine->notes:substr($medicine->notes, 0, 25).'...'?></td>
-          <td><?=anchor(base_url().'medicine/view/'.$medicine->id, '<img src="'.base_url().'common/admin/images/icons/search.png" alt="Edit" width="18" height="18" />')?></td>
+          <td><?=anchor(base_url().'medicine/view/'.$medicine->id, '<img src="'.base_url().'common/admin/images/icons/view.png" alt="View" width="18" height="18" />')?></td>
           <td><?=anchor(base_url().'medicine/edit/'.$medicine->id, '<img src="'.base_url().'common/admin/images/icons/edit.png" alt="Edit" width="18" height="18" />')?></td>
 		  <td><?=anchor(base_url().'medicine/delete/'.$medicine->id, '<img src="'.base_url().'common/admin/images/icons/remove.png" alt="Remove" width="18" height="18" />')?></td>
 				</tr>

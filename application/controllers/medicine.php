@@ -334,19 +334,20 @@ class Medicine extends Controller {
 	 * @param $per_page: The number of records to be shown per page (pagination)
 	 * Nov 29, 2010
 	 */
-	function index($offset = 0, $per_page = 10)
+	function index($medname = '',$offset = 0, $per_page = 10)
 	{
+//		echo "Medname = '$medname'"; die();
 		// Laod the pagination
 		$this->load->library('pagination');
 		
 		// Prepare the pagination config
-		$pag_config['base_url'] = base_url(). 'medicine/index/'; 
-		$pag_config['total_rows'] =  $this->m_medicines->ReadMedicines(array('count' => true));
+		$pag_config['base_url'] = base_url(). 'medicine/index/'.$medname.'/'; 
+		$pag_config['total_rows'] =  $this->m_medicines->ReadMedicines(array('name' => $medname,'count' => true));
 		$pag_config['per_page'] = $per_page; 
-		$pag_config['uri_segment'] = 3; 
+		$pag_config['uri_segment'] = 4; 
 		
 		// Get all users (not deleted)
-		$data['medicines'] = $this->m_medicines->ReadMedicines(array('limit' => $per_page, 'offset' => $offset, 'sortBy' => 'name', 'sortDirection' => 'ASC'));
+		$data['medicines'] = $this->m_medicines->ReadMedicines(array('name' => $medname, 'limit' => $per_page, 'offset' => $offset, 'sortBy' => 'name', 'sortDirection' => 'ASC'));
     	$data['tot_count'] = $pag_config['total_rows']; 
 		
 		// Add the medicine type for each record
@@ -360,6 +361,7 @@ class Medicine extends Controller {
 		
 		// create the links
 		$data['pagination'] = $this->pagination->create_links(); 
+		$data['filter'] = $medname;
 		
 		// Set the page data
 		$data['title'] = "All Medicines";
@@ -571,5 +573,55 @@ class Medicine extends Controller {
   
     // Redirect to user index
     redirect('medicine/edit/'.$id);
+  }
+  
+  function create_copy($id)
+  {
+    // Get the data for this medicine
+    $medicine = (array)$this->m_medicines->ReadMedicines(array('id' => $id));
+    
+	// Unset
+	unset($medicine['id']);
+	//print_r($medicine); die();
+	
+    // Check if any data was retrieved
+    if(!$medicine)
+    {
+      // Set the flash error
+      $this->session->set_flashdata('flashError', 'This medicine does not exist');
+      redirect('medicine/index');
+    }
+
+	$medicineId = $this->m_medicines->CreateMedicine($medicine);
+			
+	// Check for success
+	if ($medicineId)
+	{
+        // For loop ends here
+        $this->session->set_flashdata('flashConfirm', "A new medicine with Id($medicineId) has been created");
+
+		// Also update the tag information
+		$this->tags->updateFrequency('',$medicine['tags']);
+
+				
+		// Now that the medicine has been added, we need to add the each of the medicine_salts data
+		$medicine_salts = $this->m_medicine_salts->FindSaltsForMedicine($id);
+
+		foreach ($medicine_salts as $salt)
+		{
+			$salt = (array)$salt;
+			unset($salt['id']);unset($salt['salt_name']);
+			$salt['medicine_id'] = $medicineId; 
+			$this->m_medicine_salts->CreateMedicine_salt($salt);
+		}
+	}
+	else
+	{
+		$this->session->set_flashdata('flashError', "Error: Medicine could not be created because of DB error. Please contact your administrator");
+	}
+
+	
+    // Redirect to user index
+    redirect('medicine/edit/'.$medicineId);
   }
 }
