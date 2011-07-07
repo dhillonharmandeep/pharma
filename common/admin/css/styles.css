@@ -233,3 +233,16 @@ ul{
 	margin: 10px 50px;
 	list-style-type: square;
 }
+.pagination a{
+    background-color: #EEE;
+    border: 1px solid black;
+    margin: 0;
+    padding: 2px 10px;	
+}
+.pagination strong{
+    background-color: #000;
+    color: #FFF;
+    border: 1px solid black;
+    margin: 0;
+    padding: 2px 10px;	
+}

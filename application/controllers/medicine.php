@@ -334,7 +334,7 @@ class Medicine extends Controller {
 	 * @param $per_page: The number of records to be shown per page (pagination)
 	 * Nov 29, 2010
 	 */
-	function index($medname = '',$offset = 0, $per_page = 10)
+	function index($medname = 'ALL',$offset = 0, $per_page = 10)
 	{
 //		echo "Medname = '$medname'"; die();
 		// Laod the pagination
@@ -342,9 +342,14 @@ class Medicine extends Controller {
 		
 		// Prepare the pagination config
 		$pag_config['base_url'] = base_url(). 'medicine/index/'.$medname.'/'; 
+		
+		if($medname == 'ALL')$medname = '';
+		
 		$pag_config['total_rows'] =  $this->m_medicines->ReadMedicines(array('name' => $medname,'count' => true));
 		$pag_config['per_page'] = $per_page; 
 		$pag_config['uri_segment'] = 4; 
+		$pag_config['num_links'] = 6;
+		//$pag_config['page_query_string'] = TRUE;
 		
 		// Get all users (not deleted)
 		$data['medicines'] = $this->m_medicines->ReadMedicines(array('name' => $medname, 'limit' => $per_page, 'offset' => $offset, 'sortBy' => 'name', 'sortDirection' => 'ASC'));
