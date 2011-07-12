@@ -282,6 +282,15 @@ class M_chainbgs extends Model
 			}
 		}		
 		
+		// 12 July 2011: Code added to allow direclty updating lat lng
+		if(isset($options['lat']))
+			$this->db->set('lat', $options['lat']);
+
+		if(isset($options['lng']))
+			$this->db->set('lng', $options['lng']);
+		// 12 July 2011: End of code addition
+		
+		
 		if(isset($options['website']))
 			$this->db->set('website', $options['website']);
 
