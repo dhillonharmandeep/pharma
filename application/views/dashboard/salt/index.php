@@ -33,7 +33,7 @@ $this->load->view('dashboard/structure/_leftmenu', $heading);
 				
 			<td><a href="<?php echo base_url().'salt/edit/'.$salt->id;?>"><?=$salt->name?></a></td>
 	        <td><?=anchor(base_url().'salt/edit/'.$salt->id, '<img src="'.base_url().'common/admin/images/icons/edit.png" alt="Edit" width="18" height="18" />')?></td>
-			<td><?=anchor(base_url().'salt/delete/'.$salt->id, '<img src="'.base_url().'common/admin/images/icons/remove.png" alt="Remove" width="18" height="18" />')?></td>
+			<td><?=anchor(base_url().'salt/delete/'.$salt->id, '<img src="'.base_url().'common/admin/images/icons/remove.png" alt="Remove" width="18" height="18" />', array('onclick' => "return confirm('Are you sure you wish to delete?');"))?></td>
 		</tr>
 		<?endforeach?>
 	<?else:?>

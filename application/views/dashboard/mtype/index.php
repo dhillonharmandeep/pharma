@@ -34,7 +34,7 @@ $this->load->view('dashboard/structure/_leftmenu', $heading);
 				
 			<td><a href="<?php echo base_url().'mtype/edit/'.$mtype->id;?>"><?=$mtype->name?></a></td>
 	        <td><?=anchor(base_url().'mtype/edit/'.$mtype->id, '<img src="'.base_url().'common/admin/images/icons/edit.png" alt="Edit" width="18" height="18" />')?></td>
-			<td><?=anchor(base_url().'mtype/delete/'.$mtype->id, '<img src="'.base_url().'common/admin/images/icons/remove.png" alt="Remove" width="18" height="18" />')?></td>
+			<td><?=anchor(base_url().'mtype/delete/'.$mtype->id, '<img src="'.base_url().'common/admin/images/icons/remove.png" alt="Remove" width="18" height="18" />', array('onclick' => "return confirm('Are you sure you wish to delete?');"))?></td>
 		</tr>
 		<?endforeach?>
 	<?else:?>

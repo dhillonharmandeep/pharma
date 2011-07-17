@@ -55,7 +55,7 @@ $this->load->view('dashboard/structure/_leftmenu', $heading);
 					<td><?=$chain->state?></td>
           <td><?php if ($chain->lat != 0 && $chain->lng != 0)echo anchor(base_url().'chainbg/view/'.$chain->id, '<img src="'.base_url().'common/admin/images/icons/maps.png" alt="View" width="18" height="18" />'); ?></td>
           <td><?=anchor(base_url().'chainbg/edit/'.$chain->id, '<img src="'.base_url().'common/admin/images/icons/edit.png" alt="Edit" width="18" height="18" />')?></td>
-					<td><?=anchor(base_url().'chainbg/delete/'.$chain->id, '<img src="'.base_url().'common/admin/images/icons/remove.png" alt="Remove" width="18" height="18" />')?></td>
+					<td><?=anchor(base_url().'chainbg/delete/'.$chain->id, '<img src="'.base_url().'common/admin/images/icons/remove.png" alt="Remove" width="18" height="18" />', array('onclick' => "return confirm('Are you sure you wish to delete?');"))?></td>
 				</tr>
 			<?endforeach?>
 		<?else:?>

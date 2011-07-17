@@ -13,7 +13,7 @@ $this->load->view('dashboard/structure/_leftmenu', array('heading' => $heading."
 	<p>
 	<span class="back"><a href="<?= base_url()?>chainbg">Back to listings</a></span>
   <span class="edit"><a href="<?= base_url()?>chainbg/edit/<?=$chainbg->id?>">Edit details</a></span>
-  <span class="delete"><a href="<?= base_url()?>chainbg/delete/<?=$chainbg->id?>">Delete this chain/bg</a></span>
+  <span class="delete"><a onclick="return confirm('Are you sure you wish to delete?');" href="<?= base_url()?>chainbg/delete/<?=$chainbg->id?>">Delete this chain/bg</a></span>
   <span class="eye"><a href="<?php echo base_url().'store/chainbg/'.$chainbg->id;?>">Stores under this</a></span>
 	</p>
 	
@@ -40,7 +40,7 @@ $this->load->view('dashboard/structure/_leftmenu', array('heading' => $heading."
     <div>
        <span class="label">Website</span>
        <span class="value">
-         <?php echo anchor($chainbg->website) ; ?>
+         <?php if (!empty($chainbg->website)) echo anchor($chainbg->website) ; ?>
        </span>
     </div>
     <?php if(!empty($chainbg->email1) || !empty($chainbg->email2) || !empty($chainbg->email3)) { ?>

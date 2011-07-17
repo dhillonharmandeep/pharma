@@ -13,7 +13,7 @@ $this->load->view('dashboard/structure/_leftmenu', array('heading' => $heading."
 	<p>
 	<span class="back"><a href="<?= base_url()?>store">Back to store listings</a></span>
   <span class="edit"><a href="<?= base_url()?>store/edit/<?=$store->id?>">Edit details</a></span>
-  <span class="delete"><a href="<?= base_url()?>store/delete/<?=$store->id?>">Delete this store</a></span>
+  <span class="delete"><a onclick="return confirm('Are you sure you wish to delete?');" href="<?= base_url()?>store/delete/<?=$store->id?>">Delete this store</a></span>
 	</p>
 	
 	<div class="fieldset">
@@ -58,7 +58,7 @@ $this->load->view('dashboard/structure/_leftmenu', array('heading' => $heading."
     <div>
        <span class="label">Website</span>
        <span class="value">
-         <?php echo anchor($store->website) ; ?>
+         <?php if (!empty($store->website)) echo anchor($store->website) ; ?>
        </span>
     </div>
     <?php if(!empty($store->email1) || !empty($store->email2) || !empty($store->email3)) { ?>

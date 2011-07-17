@@ -45,7 +45,7 @@ $this->load->view('dashboard/structure/_leftmenu', $heading);
 					<td><?=$store->state?></td>
           <td><?php if ($store->lat != 0 && $store->lng != 0)echo anchor(base_url().'store/view/'.$store->id, '<img src="'.base_url().'common/admin/images/icons/maps.png" alt="View" width="18" height="18" />'); ?></td>
           <td><?=anchor(base_url().'store/edit/'.$store->id, '<img src="'.base_url().'common/admin/images/icons/edit.png" alt="Edit" width="18" height="18" />')?></td>
-					<td><?=anchor(base_url().'store/delete/'.$store->id, '<img src="'.base_url().'common/admin/images/icons/remove.png" alt="Remove" width="18" height="18" />')?></td>
+					<td><?=anchor(base_url().'store/delete/'.$store->id, '<img src="'.base_url().'common/admin/images/icons/remove.png" alt="Remove" width="18" height="18" />', array('onclick' => "return confirm('Are you sure you wish to delete?');"))?></td>
 				</tr>
 			<?endforeach?>
 		<?else:?>
