@@ -228,6 +228,13 @@ class M_stores extends Model
 			$this->db->set('street', $options['street']);
 			$flagAddressChanged = true;
 		}
+
+		if(isset($options['clean_address']))
+		{
+			$this->db->set('clean_address', $options['clean_address']);
+			$flagAddressChanged = true;
+		}
+
 		if(isset($options['street2']))
 		{
 			$this->db->set('street2', $options['street2']);

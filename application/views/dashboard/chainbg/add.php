@@ -60,7 +60,7 @@ $this->load->view('dashboard/structure/_leftmenu', $heading);
 				<?=form_error('postcode', '<p class="msgForm msgError">', '</p>')?>
 			</div>
 			<div class="formrowhalf">
-				<label class="formfield">State <span class="required">*</span></label>
+				<label class="formfield">State</label>
 				<?=form_dropdown('state', array('' => '',
 												'ACT' => 'Australian Capital Territory', 
 												'NSW' => 'New South Wales', 

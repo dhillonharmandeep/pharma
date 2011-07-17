@@ -61,27 +61,15 @@ class Store extends Controller {
 	 * @param $name: the name of the chainbg to search in the format of "name[State]"
 	 * Dec 16, 2010
 	 */
-	function _findChainbgByName($name){		
+	function _findChainbgByName($name, $type){		
     // Split the name and state
 		$preg = preg_split("/[\[\]-]/", $name);
     
 		$name = $preg[0];
-		
-		// Check if a state was found
-		if (count($preg)>2){
-      $type = $preg[1];
-      $state = $preg[2];
-		}
-		else{
-			// Find the state from the post data
-			$state = $this->input->post('state');
-	    // Find if the user is trying to create a chain or a banner group 
-	    $type = $this->input->post('type');  
-		}
 
 //		echo "<script>alert('name = $name \\nstate = $state\\ntype = $type');</script>";
 		// Check if we have all the data to proceed
-		if ($type == '' || $state == ''){
+		if ($type == ''){
 			$chainbg_id = -1; 
 		}
 		else{
@@ -89,18 +77,18 @@ class Store extends Controller {
 			$this->load->model("m_chainbgs");
 
 			// Get the data for this user
-			$chainbg = $this->m_chainbgs->ReadChainbgs(array('name' => $name, 'state' => $state, 'type' => $type));
+			$chainbg = $this->m_chainbgs->ReadChainbgs(array('name' => $name, 'type' => $type));
 	      
-	    // Check if any data was retrieved
-	    if(!$chainbg)
-	    {
-	    	// Insert the data and get the new id
-        $chainbg_id = $this->m_chainbgs->CreateChainbg(array('name' => $name, 'type' => $type,'state' => $state));
-	    }
-	    else{
-	    	// retrieve the id
-	    	$chainbg_id = $chainbg[0]->id;
-	    }
+		    // Check if any data was retrieved
+		    if(!$chainbg)
+		    {
+		    	// Insert the data and get the new id
+	        	$chainbg_id = $this->m_chainbgs->CreateChainbg(array('name' => $name, 'type' => $type));
+		    }
+		    else{
+		    	// retrieve the id
+		    	$chainbg_id = $chainbg[0]->id;
+		    }
 		}    
 
 //		echo "<script>alert('chainbg_id = $chainbg_id');</script>";
@@ -159,6 +147,7 @@ class Store extends Controller {
 		  $this->form_validation->set_rules('chainbg', 'Chain/Banner Group', 'trim|required');
 		
 		$this->form_validation->set_rules('street', 'street', 'trim|max_length[512]');
+		$this->form_validation->set_rules('street', 'clean_address', 'trim|max_length[1024]');
 		$this->form_validation->set_rules('street2', 'street2', 'trim|max_length[512]');
 		$this->form_validation->set_rules('suburb', 'suburb', 'trim|max_length[100]');
 		$this->form_validation->set_rules('city', 'city', 'trim|max_length[512]');
@@ -189,7 +178,7 @@ class Store extends Controller {
 	{
 		// the chainbg_id manipulation comes here
 		if(isset($_POST['chainbg']))
-		  $_POST['chainbg_id'] = $this->_findChainbgByName($_POST['chainbg']);
+		  $_POST['chainbg_id'] = $this->_findChainbgByName($_POST['chainbg'], $_POST['type']);
 		
 		// Set the form validations
 		$this->_form_validations();
@@ -338,7 +327,7 @@ class Store extends Controller {
 //    echo "<script>alert('".$_POST['chainbg']."')</script>";
 			// the chainbg_id manipulation comes here
 	    //if(isset($_POST['chainbg']))
-	      $_POST['chainbg_id'] = $this->_findChainbgByName($_POST['chainbg']);
+	      $_POST['chainbg_id'] = $this->_findChainbgByName($_POST['chainbg'], $_POST['type']);
 
 //	    //remove the chainbg
 //      unset($_POST['chainbg']);

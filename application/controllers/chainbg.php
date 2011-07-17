@@ -73,7 +73,7 @@ class Chainbg extends Controller {
 		$this->form_validation->set_rules('suburb', 'suburb', 'trim|max_length[100]');
 		$this->form_validation->set_rules('city', 'city', 'trim|max_length[512]');
 		$this->form_validation->set_rules('postcode', 'postcode', 'trim|numeric|exact_length[4]');
-		$this->form_validation->set_rules('state', 'state', 'trim|required');
+		$this->form_validation->set_rules('state', 'state', 'trim');
 		$this->form_validation->set_rules('website', 'website', 'trim|valid_url');
 		$this->form_validation->set_rules('email1', 'email1', 'trim|valid_email');
 		$this->form_validation->set_rules('email2', 'email2', 'trim|valid_email');

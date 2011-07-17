@@ -77,6 +77,11 @@ $this->load->view('dashboard/structure/_leftmenu', $heading);
         <?=form_input(array('id'=>'street', 'name'=>'street', 'class' => 'fields', 'size' => '100'), set_value('street'))?>
         <?=form_error('street', '<p class="msgForm msgError">', '</p>')?>
       </div>
+     <div class="formrow">
+        <label class="formfield">Clean Address (Geocode Friendly) </label>
+        <?=form_input(array('id'=>'clean_address', 'name'=>'clean_address', 'class' => 'fields', 'size' => '100'), set_value('clean_address'))?>
+        <?=form_error('clean_address', '<p class="msgForm msgError">', '</p>')?>
+      </div>
       <div class="formrow">
         <label class="formfield">Street Line 2</label>
         <?=form_input(array('id'=>'street2', 'name'=>'street2', 'class' => 'fields', 'size' => '100'), set_value('street2'))?>

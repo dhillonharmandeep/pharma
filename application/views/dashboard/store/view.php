@@ -49,6 +49,14 @@ $this->load->view('dashboard/structure/_leftmenu', array('heading' => $heading."
          <?php echo $store->street.", ".$store->street2.", ".$store->suburb.", ".$store->postcode.", ".$store->city ; ?>
        </span>
     </div>
+<?php if (!empty($store->clean_address)): ?>    
+    <div>
+       <span class="label">Clean Address(Geocode Friendly)</span>
+       <span class="value">
+         <?php echo $store->clean_address ; ?>
+       </span>
+    </div>
+<?php endif; ?>
     <div>
        <span class="label">State</span>
        <span class="value">
