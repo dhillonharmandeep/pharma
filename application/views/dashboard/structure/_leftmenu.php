@@ -47,7 +47,7 @@
         </tr>
         <tr>
           <td align="center"><img src="<?php echo base_url(); ?>common/admin/images/icons/support.png" alt="support" width="16" height="16" /></td>
-          <td class="navigation"><a target="_blank" href="<?php echo base_url(); ?>phprojekt/">Project Planning</a></td> <!--// Support -->
+          <td class="navigation"><a target="_blank" href="<?php echo base_url(); ?>dotproject/">Project Planning</a></td> <!--// Support -->
         </tr>
       </table>
       <br />

@@ -17,14 +17,15 @@ $this->load->view('dashboard/structure/_leftmenu', $heading);
 <?endif ?>
 
 <?if(isset($states)):?>
-	<h2>
+	<ul>
 <?php 
 	foreach ($states as $state){
-		echo "<a href=\"$destination$state\">$state</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";		
+		echo "<li><a href=\"$destination$state\">$state</a></li>";		
 	} 
 ?>
-	</h2>
+	</ul>
 <? else: ?>
+	<h2>State : <?= $state ?></h2>
 	<?= "Total ".$model." : ".$count_tot ?> <br/>
 	<?= $model." without geocoding found : ".$count_all ?> <br/>
 	<?= $model." new geocoded : ".$count_upd ?> <br/>

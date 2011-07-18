@@ -102,6 +102,6 @@ if ( ! function_exists('_calcLatLngOfAdd'))
 		
 		// If address is not empty - only then try to geocode
 		if(!empty($address)) return _calculateLatLng($address.", Australia");
-		else return array('lat'=>'0.0', 'lng' => '0.0');		
+		else return array('lat'=>0, 'lng' => 0);		
 	}
 }
