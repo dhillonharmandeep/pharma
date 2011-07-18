@@ -64,7 +64,8 @@ class M_chainbgs extends Model
 			$coords['lng'] = "error";
 		}
 		else{
-			$coords = _calculateLatLng($address);
+			//$coords = _calculateLatLng($address);
+			$coords = _calcLatLngOfAdd($options);
 		}
 		
 		// If something was returned without error, add it to the options
@@ -272,7 +273,8 @@ class M_chainbgs extends Model
 		if($flagAddressChanged)
 		{
 			// Address is changes, re-calculate the lat/lng of new address
-			$coords = _calculateLatLng($options['street'].", ".$options['suburb'].", ".$options['postcode'].", ". $options['state']);
+			//$coords = _calculateLatLng($options['street'].", ".$options['suburb'].", ".$options['postcode'].", ". $options['state']);
+			$coords = _calcLatLngOfAdd($options);
 	
 			// If something was returned without error, add it to the options
 			if($coords['lat'] != "error" && $coords['lng'] != "error")

@@ -16,10 +16,20 @@ $this->load->view('dashboard/structure/_leftmenu', $heading);
 	</div>
 <?endif ?>
 
-<?= "Total ".$model." : ".$count_tot ?> <br/>
-<?= $model." without geocoding found : ".$count_all ?> <br/>
-<?= $model." new geocoded : ".$count_upd ?> <br/>
-<?= $model." still without geocoding : ".$count_miss ?> <br/>
+<?if(isset($states)):?>
+	<h2>
+<?php 
+	foreach ($states as $state){
+		echo "<a href=\"$destination$state\">$state</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";		
+	} 
+?>
+	</h2>
+<? else: ?>
+	<?= "Total ".$model." : ".$count_tot ?> <br/>
+	<?= $model." without geocoding found : ".$count_all ?> <br/>
+	<?= $model." new geocoded : ".$count_upd ?> <br/>
+	<?= $model." still without geocoding : ".$count_miss ?> <br/>
+<?endif ?>
 
 <?php
 $this->load->view('dashboard/structure/_footer');

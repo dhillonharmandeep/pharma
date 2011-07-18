@@ -46,7 +46,8 @@ class M_stores extends Model
 		$options = _default(array('status' => 'Active', 'created_at' => date('Y-m-d h:i:s')), $options);
 		
 		// Calculate and set the 'lat' & 'lng' columns using google maps
-		$coords = _calculateLatLng($options['street'].", ".$options['suburb'].", ".$options['postcode'].", ". $options['state']);
+		//$coords = _calculateLatLng($options['street'].", ".$options['suburb'].", ".$options['postcode'].", ". $options['state']);
+		$coords = _calcLatLngOfAdd($options);
 
 		// If something was returned without error, add it to the options
 		if($coords['lat'] != "error" && $coords['lng'] != "error")
@@ -268,7 +269,8 @@ class M_stores extends Model
 		if($flagAddressChanged)
 		{
 			// Address is changes, re-calculate the lat/lng of new address
-			$coords = _calculateLatLng($options['street'].", ".$options['suburb'].", ".$options['postcode'].", ". $options['state']);
+//			$coords = _calculateLatLng($options['street'].", ".$options['suburb'].", ".$options['postcode'].", ". $options['state']);
+			$coords = _calcLatLngOfAdd($options);
 	
 			// If something was returned without error, add it to the options
 			if($coords['lat'] != "error" && $coords['lng'] != "error")

@@ -30,7 +30,7 @@ if ( ! function_exists('_calculateLatLng'))
 		$geocode_pending = true;
 	
 		while ($geocode_pending) {
-			$request_url = $base_url . "&q=" . urlencode($address. ", Australia");
+			$request_url = $base_url . "&q=" . urlencode($address);
 			$xml = simplexml_load_file($request_url) or die("url not loading");
 	
 			$status = $xml->Response->Status->code;
@@ -56,5 +56,52 @@ if ( ! function_exists('_calculateLatLng'))
 		}
 	
 		return array('lat'=>'error', 'lng' => 'error');
+	}
+}
+
+/**
+ * Geocodes the address passed and returns the latlong using google maps api
+ * @param $options The array storing address components
+ * @return associative array containing the lat-long. Contains (lat=>error, lng=>error) if geocode fails
+ */
+if ( ! function_exists('_calcLatLngOfAdd'))
+{
+	function _calcLatLngOfAdd($options)
+	{
+		// calculate the address from the options
+		$address = "";// variable to store address
+		
+		// If clean address is given, prefer it over the street address 
+		if (isset($options['clean_address']) && !empty($options['clean_address']))
+		{
+			$address .= $options['clean_address'];
+		}
+		elseif (isset($options['street']) && !empty($options['street']))
+		{
+			$address .= $options['street'];
+		}
+			
+		// Check for remaining sections of address as well
+		if (isset($options['suburb']) && !empty($options['suburb']))
+		{
+			if(!empty($address))$address .= ", ";
+			$address .= $options['suburb'];
+		}
+		
+		if (isset($options['postcode']) && !empty($options['postcode']))
+		{
+			if(!empty($address))$address .= ", ";
+			$address .= $options['postcode'];
+		}
+		
+		if (isset($options['state']) && !empty($options['state']))
+		{
+			if(!empty($address))$address .= ", ";
+			$address .= $options['state'];
+		}		
+		
+		// If address is not empty - only then try to geocode
+		if(!empty($address)) return _calculateLatLng($address.", Australia");
+		else return array('lat'=>'0.0', 'lng' => '0.0');		
 	}
 }

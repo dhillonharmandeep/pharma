@@ -47,7 +47,7 @@
         </tr>
         <tr>
           <td align="center"><img src="<?php echo base_url(); ?>common/admin/images/icons/support.png" alt="support" width="16" height="16" /></td>
-          <td class="navigation"><a href="#">Help &amp; Support</a></td> <!--// Support -->
+          <td class="navigation"><a target="_blank" href="<?php echo base_url(); ?>phprojekt/">Project Planning</a></td> <!--// Support -->
         </tr>
       </table>
       <br />
@@ -68,16 +68,12 @@
     
       <table>
         <tr>
-          <td align="center"><a href="<?php echo base_url()?>scripts/upload_medicine"><img src="<?php echo base_url(); ?>common/admin/images/icons/add.png" alt="add" width="18" height="17" border="0" /></a></td>
-          <td class="navigation"><a href="<?php echo base_url()?>scripts/upload_medicine">Upload Medicines</a></td> <!--// Add article -->
+          <td align="center"><a href="<?php echo base_url()?>scripts"><img src="<?php echo base_url(); ?>common/admin/images/icons/add.png" alt="add" width="18" height="17" border="0" /></a></td>
+          <td class="navigation"><a href="<?php echo base_url()?>scripts">All Scripts</a></td> <!--// Add article -->
         </tr>
           <tr>
             <td width="18" align="center"><a href="#"><img src="<?php echo base_url(); ?>common/admin/images/icons/edit.png" alt="edit" width="18" height="18" border="0" /></a></td>
-            <td width="130" class="navigation"><a href="#">Artictle Title #1</a></td> <!--// Article #1... -->
-        </tr>
-          <tr>
-            <td align="center"><a href="#"><img src="<?php echo base_url(); ?>common/admin/images/icons/edit.png" alt="edit" width="18" height="18" border="0" /></a></td>
-            <td class="navigation"><a href="#">Artictle Title #2</a></td>
+            <td width="130" class="navigation"><a href="#">Article Title #1</a></td> <!--// Article #1... -->
         </tr>
         </table>
       <br />

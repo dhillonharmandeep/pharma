@@ -103,7 +103,7 @@ class Scripts extends Controller {
 		foreach ($chainbgs as $chainbg)
 		{
 			$count_all++;
-			// Prepare the address
+/*			// Prepare the address
 			$address = ""; 
 			if (!empty($chainbg->street))
 				$address .= $chainbg->street.", ";
@@ -116,10 +116,11 @@ class Scripts extends Controller {
 			
 			if (!empty($chainbg->state))
 				$address .= $chainbg->state;
-							
+*/							
 			// Try to Geocode
-			$coords = _calculateLatLng($address);
-		
+//			$coords = _calculateLatLng($address);
+			$coords = _calcLatLngOfAdd($chainbg);
+			
 			// If something was returned without error, update this record
 			if($coords['lat'] != "error" && $coords['lng'] != "error")
 			{
@@ -142,51 +143,61 @@ class Scripts extends Controller {
 		$data['heading'] = "Scripts - Geocode New Stores";
 		$data['model'] = "Stores";
 		
-		// Load the models
-		$this->load->model('m_stores');
-		
-		// Read all the chainbgs with lat,lng as 0,0
-		$data['count_tot'] = $this->m_stores->ReadStores(array('count'=>true));
-		$stores = $this->m_stores->ReadStores(array('lat'=>0, 'lng' => 0));
-		
-		// Counters
-		$count_all = 0;
-		$count_upd = 0;
-		
-		// Loop through each of them and geocode them
-		foreach ($stores as $store)
-		{
-			$count_all++;
-			// Prepare the address
-			$address = ""; 
-			if (!empty($store->street))
-				$address .= $store->street.", ";
-				
-			if (!empty($store->suburb))
-				$address .= $store->suburb.", ";
+		if(isset($_REQUEST['state'])){
+			$state = $_REQUEST['state'];
 			
-			if (!empty($store->postcode))
-				$address .= $store->postcode.", ";
+			// Load the models
+			$this->load->model('m_stores');
 			
-			if (!empty($store->state))
-				$address .= $store->state;
-							
-			// Try to Geocode
-			$coords = _calculateLatLng($address);
-		
-			// If something was returned without error, update this record
-			if($coords['lat'] != "error" && $coords['lng'] != "error")
+			// Read all the chainbgs with lat,lng as 0,0
+			$data['count_tot'] = $this->m_stores->ReadStores(array('count'=>true, 'state' => $state));
+			$stores = $this->m_stores->ReadStores(array('lat'=>0, 'lng' => 0, 'state' => $state));
+			
+			// Counters
+			$count_all = 0;
+			$count_upd = 0;
+			
+			// Loop through each of them and geocode them
+			foreach ($stores as $store)
 			{
-				$this->m_stores->UpdateStores(array('id'=>$store->id, 'lat' => $coords['lat'], 'lng' => $coords['lng']));
-				$count_upd++;
-			}
-		}
-		
-		$data['count_all']	= $count_all;
-		$data['count_upd']	= $count_upd;
-		$data['count_miss'] = ($count_all-$count_upd);
+				$count_all++;
+				// Prepare the address
+		/*		$address = ""; 
+				if (!empty($store->street))
+					$address .= $store->street.", ";
+					
+				if (!empty($store->suburb))
+					$address .= $store->suburb.", ";
 				
-		$this->load->view('dashboard/scripts/geocode', $data);
+				if (!empty($store->postcode))
+					$address .= $store->postcode.", ";
+				
+				if (!empty($store->state))
+					$address .= $store->state;
+		*/						
+				// Try to Geocode
+	//			$coords = _calculateLatLng($address);
+	//			$coords = _calcLatLngOfAdd($chainbg);
+			
+				// If something was returned without error, update this record
+				if($coords['lat'] != "error" && $coords['lng'] != "error")
+				{
+					$this->m_stores->UpdateStores(array('id'=>$store->id, 'lat' => $coords['lat'], 'lng' => $coords['lng']));
+					$count_upd++;
+				}
+			}
+			
+			$data['count_all']	= $count_all;
+			$data['count_upd']	= $count_upd;
+			$data['count_miss'] = ($count_all-$count_upd);
+					
+			$this->load->view('dashboard/scripts/geocode', $data);			
+		}
+		else{
+			$data['states'] = array('ACT', 'NSW', 'NT', 'QLD', 'SA', 'TAS', 'VIC', 'WA');
+			$data['destination'] = base_url().'scripts/geocode_stores/?state=';
+			$this->load->view('dashboard/scripts/geocode', $data);
+		}
 	}
 
 	// The private function to upload the XML 
