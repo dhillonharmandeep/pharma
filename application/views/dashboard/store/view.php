@@ -10,6 +10,7 @@
 $this->load->view('dashboard/structure/_header', array('title' => $title, 'googlemaps' =>true));
 $this->load->view('dashboard/structure/_leftmenu', array('heading' => $heading.": '$store->name' ( $store->state )"));
 ?>
+
 	<p>
 	<span class="back"><a href="<?= base_url()?>store">Back to store listings</a></span>
   <span class="edit"><a href="<?= base_url()?>store/edit/<?=$store->id?>">Edit details</a></span>

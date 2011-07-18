@@ -1,7 +1,7 @@
 /* Main content styles */
 p {
 	width: 715px;
-	padding: 10px 2px;
+	padding: 2px;
 	margin: 0;
 }
 /* Header Styles */
@@ -35,10 +35,10 @@ h3 {
 /* msgbox styles  */
 .msgSuccess, .msgError, .msgInfo {
 	width: 80%;
-	line-height: 25px;
+	/*line-height: 25px;*/
 	z-index: 16;
 	margin: 10px 0px;
-	padding: 10px 10px 10px 60px;
+	padding: 2px 0px 2px 60px;
 	background-repeat: no-repeat;
 	background-position: 20px center;
 }
@@ -145,12 +145,12 @@ tr.even td {
 }
 /* CRUD specific styles */
 .back a, .add a, .edit a, .delete a , .eye a, .map_ico a{
-	line-height: 25px;
-	padding: 10px 10px 10px 25px;
+	/* line-height: 20px; */
+	padding: 5px 5px 5px 25px;
 	background-repeat: no-repeat;
 	background-position: 0px center;
 	font-size: 14px;
-	margin-left: 25px;
+	margin-left: 20px;
 }
 .back a {
 	background-image: url('../images/icons/left.png');

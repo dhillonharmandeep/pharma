@@ -224,19 +224,29 @@ class Store extends Controller {
 	 * @param $per_page: The number of recors to be shown per page (pagination)
 	 * Dec 15, 2010
 	 */
-	function index($offset = 0, $per_page = 10)
+	function index($state = 'ALL',$offset = 0, $per_page = 10)
 	{
 		// Laod the pagination
 		$this->load->library('pagination');
 		
 		// Prepare the pagination config
-		$pag_config['base_url'] = base_url(). 'store/index/'; 
-		$pag_config['total_rows'] =  $this->m_stores->ReadStores(array('count' => true));
+		$pag_config['base_url'] = base_url(). 'store/index/'.$state.'/';
+
+		// Set the page data
+		$data['title'] = "$state Stores";
+		$data['heading'] = "$state Stores";
+		$data['states'] = array('ALL', 'ACT', 'NSW', 'NT', 'QLD', 'SA', 'TAS', 'VIC', 'WA');
+
+		// Check if state is passed or ALL
+		if($state == 'ALL')$state = '';
+				 
+		$pag_config['total_rows'] =  $this->m_stores->ReadStores(array('count' => true, 'state' => $state));
 		$pag_config['per_page'] = $per_page; 
-		$pag_config['uri_segment'] = 3; 
+		$pag_config['uri_segment'] = 4; 
+		$pag_config['num_links'] = 6;
 		
 		// Get all users (not deleted)
-		$data['stores'] = $this->m_stores->ReadStores(array('limit' => $per_page, 'offset' => $offset, 'sortBy' => 'name', 'sortDirection' => 'ASC'));
+		$data['stores'] = $this->m_stores->ReadStores(array('state' => $state, 'limit' => $per_page, 'offset' => $offset, 'sortBy' => 'name', 'sortDirection' => 'ASC'));
     	$data['tot_count'] = $pag_config['total_rows']; 
 		
 		// Initialise the pagination
@@ -244,10 +254,6 @@ class Store extends Controller {
 		
 		// create the links
 		$data['pagination'] = $this->pagination->create_links(); 
-		
-		// Set the page data
-		$data['title'] = "All Stores";
-		$data['heading'] = "All Stores";
 		
 		// Load the view with this data
 		$this->load->view('dashboard/store/index', $data);

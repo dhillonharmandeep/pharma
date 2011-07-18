@@ -116,7 +116,7 @@ class M_stores extends Model
 		if(isset($options['postcode']))
 			$this->db->where('postcode', $options['postcode']);
 	
-		if(isset($options['state']))
+		if(isset($options['state']) && !empty($options['state']))
 			$this->db->where('state', $options['state']);
 		
 		if(isset($options['lat']))

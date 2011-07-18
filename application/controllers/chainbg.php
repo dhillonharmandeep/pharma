@@ -166,27 +166,6 @@ class Chainbg extends Controller {
 		$this->load->view('dashboard/chainbg/index', $data);
 	}
 
-  /**
-   * Function to retrieve all chains/banner groups
-   * 
-   * @param $offset: The offset for pagination
-   * @param $per_page: The number of recors to be shown per page (pagination)
-   * Nov 29, 2010
-   */
-  function state($code)
-  {
-    // Get all users (not deleted)
-    $data['chainbgs'] = $this->m_chainbgs->ReadChainbgs(array('state' => $code, 'sortBy' => 'name', 'sortDirection' => 'ASC'));
-    $data['tot_count'] =  $this->m_chainbgs->ReadChainbgs(array('state' => $code, 'count' => true));
-    
-    // Set the page data
-    $data['title'] = "$code Chains/Banner Groups";
-    $data['heading'] = "$code Chains/Banner Groups";
-    
-    // Load the view with this data
-    $this->load->view('dashboard/chainbg/index', $data);
-  }
-	
 	/**
 	 * Function to edit the details of the specified chain/banner group
 	 * 

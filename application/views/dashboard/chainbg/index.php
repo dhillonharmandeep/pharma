@@ -10,23 +10,13 @@
 $this->load->view('dashboard/structure/_header', $title);
 $this->load->view('dashboard/structure/_leftmenu', $heading);
 ?>
-  <p>
-    <span class="map_ico"><a href="<?php echo base_url()?>chainbg/state/ACT">ACT</a></span>
-    <span class="map_ico"><a href="<?php echo base_url()?>chainbg/state/NSW">NSW</a></span>
-    <span class="map_ico"><a href="<?php echo base_url()?>chainbg/state/NT">NT</a></span>
-    <span class="map_ico"><a href="<?php echo base_url()?>chainbg/state/QLD">QLD</a></span>
-    <span class="map_ico"><a href="<?php echo base_url()?>chainbg/state/SA">SA</a></span>
-    <span class="map_ico"><a href="<?php echo base_url()?>chainbg/state/TAS">TAS</a></span>
-    <span class="map_ico"><a href="<?php echo base_url()?>chainbg/state/VIC">VIC</a></span>
-    <span class="map_ico"><a href="<?php echo base_url()?>chainbg/state/WA">WA</a></span>
-  </p>
 
   <p class="msgInfo">
     Click on the chain/banner group name to list stores for that chain/banner group<br/> 
     Click on the address to view details for this chain. 
   </p>
 
-	<span class="add"><a href="<?= base_url()?>chainbg/add">	Add a chain/banner group</a></span>
+	<span class="add"><a href="<?= base_url()?>chainbg/add">Add a chain/banner group</a></span>
 <?php 
   $this->load->view('dashboard/ajax/search', array('search_module' => 'chainbg'));
 ?>

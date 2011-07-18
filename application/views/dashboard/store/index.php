@@ -10,12 +10,19 @@
 $this->load->view('dashboard/structure/_header', $title);
 $this->load->view('dashboard/structure/_leftmenu', $heading);
 ?>
+  <p>
+  	<?php 
+  		foreach($states as $state){
+    		echo "<span class=\"map_ico\"><a href=\"".base_url()."store/index/$state\">$state</a></span>";
+		}
+	?>
+  </p>
+  
   <p class="msgInfo">
     Click on the store name or the address to view details for this store. 
   </p>
 
-	<span class="add"><a href="<?= base_url()?>store/add">	Add a new store</a></span>
-  <span class="edit"><a href="<?= base_url()?>store/chainbg/">View All Independent Stores</a></span>
+  <span class="add"><a href="<?= base_url()?>store/add">Add Store</a></span>
 <?php 
   $this->load->view('dashboard/ajax/search', array('search_module' => 'store'));
 ?>

@@ -89,7 +89,10 @@ class Scripts extends Controller {
 		$data['model'] = "Chain/Banner Groups";
 		
 		if(!empty($state)){
-					// Load the models
+			// Set the time limit to high to allow long imports
+			set_time_limit(500);
+
+			// Load the models
 			$this->load->model('m_chainbgs');
 			
 			// Read all the chainbgs with lat,lng as 0,0
@@ -135,6 +138,9 @@ class Scripts extends Controller {
 		$data['model'] = "Stores";
 		
 		if(!empty($state)){
+			// Set the time limit to high to allow long imports
+			set_time_limit(500);
+
 			// Load the models
 			$this->load->model('m_stores');
 			
