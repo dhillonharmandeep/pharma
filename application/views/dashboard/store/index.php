@@ -13,7 +13,7 @@ $this->load->view('dashboard/structure/_leftmenu', $heading);
   <p>
   	<?php 
   		foreach($states as $state){
-    		echo "<span class=\"map_ico\"><a href=\"".base_url()."store/index/$state\">$state</a></span>";
+    		echo "<span class=\"map_ico\"><a href=\"".base_url()."store/index/$state/$chainbg\">$state</a></span>";
 		}
 	?>
   </p>

@@ -224,31 +224,58 @@ class Store extends Controller {
 	 * @param $per_page: The number of recors to be shown per page (pagination)
 	 * Dec 15, 2010
 	 */
-	function index($state = 'ALL',$offset = 0, $per_page = 10)
+	function index($state = 'ALL', $chainbg = 'ALL', $offset = 0, $per_page = 10)
 	{
 		// Laod the pagination
 		$this->load->library('pagination');
 		
 		// Prepare the pagination config
-		$pag_config['base_url'] = base_url(). 'store/index/'.$state.'/';
+		$pag_config['base_url'] = base_url(). 'store/index/'.$state.'/'.$chainbg.'/';
+		$pag_config['per_page'] = $per_page; 
+		$pag_config['uri_segment'] = 5; 
+		$pag_config['num_links'] = 6;
 
-		// Set the page data
-		$data['title'] = "$state Stores";
-		$data['heading'] = "$state Stores";
-		$data['states'] = array('ALL', 'ACT', 'NSW', 'NT', 'QLD', 'SA', 'TAS', 'VIC', 'WA');
+		// Prepare the storeconditions
+		$store_conditions = array();
+		$heading = '';
+		// Add the chainbg
+		if($chainbg == -1){
+			$store_conditions = array_merge($store_conditions, array('type' => 'Ind'));
+			// set chainbg name (for title) to independet
+			$heading .= 'Independent stores in ';
+		}
+		elseif($chainbg != 'ALL'){
+			$store_conditions = array_merge($store_conditions, array('chainbg_id' => $chainbg));
+			// Find the chainbg name for title
+			$heading .= $this->_findChainbgById($chainbg).' stores in '; 
+		}
+		else{
+			$heading .= 'All stores in ';
+		}
+			
 
 		// Check if state is passed or ALL
-		if($state == 'ALL')$state = '';
-				 
-		$pag_config['total_rows'] =  $this->m_stores->ReadStores(array('count' => true, 'state' => $state));
-		$pag_config['per_page'] = $per_page; 
-		$pag_config['uri_segment'] = 4; 
-		$pag_config['num_links'] = 6;
+		if($state == 'ALL'){
+			$heading .= 'ALL states';
+		}
+		else{
+			$heading .= $state;
+			$store_conditions = array_merge($store_conditions, array('state' => $state));
+		}
+			 
 		
-		// Get all users (not deleted)
-		$data['stores'] = $this->m_stores->ReadStores(array('state' => $state, 'limit' => $per_page, 'offset' => $offset, 'sortBy' => 'name', 'sortDirection' => 'ASC'));
+		
+		// Get the data and the rows			 
+		$pag_config['total_rows'] =  $this->m_stores->ReadStores(array_merge($store_conditions,array('count' => true)));
+		$data['stores'] = $this->m_stores->ReadStores(array_merge($store_conditions, array('limit' => $per_page, 'offset' => $offset, 'sortBy' => 'name', 'sortDirection' => 'ASC')));
     	$data['tot_count'] = $pag_config['total_rows']; 
 		
+		// Set the page data
+		$data['title'] = $heading;
+		$data['heading'] = $heading;
+		$data['chainbg'] = $chainbg;
+		$data['states'] = array('ALL', 'ACT', 'NSW', 'NT', 'QLD', 'SA', 'TAS', 'VIC', 'WA');
+
 		// Initialise the pagination
 		$this->pagination->initialize($pag_config);
 		
@@ -258,40 +285,6 @@ class Store extends Controller {
 		// Load the view with this data
 		$this->load->view('dashboard/store/index', $data);
 	}
-
-  /**
-   * Function to retrieve all stores for the chainbg_id provided
-   * 
-   * @param $chainbg_id: The id of the chainbg
-   * Dec 16, 2010
-   */	
-	function chainbg($chainbg_id = -1)
-  {
-    // TODO: make pagination work with arguments
-    
-    // Get all users (not deleted)
-    if($chainbg_id == -1){
-      $data['stores'] = $this->m_stores->ReadStores(array('type' => 'Ind'));
-      // Set the page data
-      $data['title'] = "All independent Stores";
-      $data['heading'] = "All independent Stores";
-      $data['tot_count'] = $this->m_stores->ReadStores(array('type' => 'Ind', 'count' => true));
-    }
-    else{
-      $data['stores'] = $this->m_stores->ReadStores(array('chainbg_id' => $chainbg_id));
-      // Find the details of the chain/banner group
-      $chainbg_name = $this->_findChainbgById($chainbg_id);  
-
-      // Set the page data
-      $data['title'] = "Stores for $chainbg_name";
-      $data['heading'] = "Stores for $chainbg_name";
-      $data['tot_count'] = $this->m_stores->ReadStores(array('chainbg_id' => $chainbg_id, 'count' => true));
-    } 
-    
-    // Load the view with this data
-    $this->load->view('dashboard/store/index', $data);
-  }
-	
 	
 	/**
 	 * Function to edit the details of the specified store

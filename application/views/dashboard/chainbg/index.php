@@ -39,7 +39,7 @@ $this->load->view('dashboard/structure/_leftmenu', $heading);
 			   $count++;
 			?>
 				
-					<td><a href="<?php echo base_url().'store/chainbg/'.$chain->id;?>"><?=$chain->name?></a></td>
+					<td><a href="<?php echo base_url().'store/index/ALL/'.$chain->id;?>"><?=$chain->name?></a></td>
           <td><?php echo ($chain->type =='Chain'? 'Chain': 'Banner Group'); ?></td>
 					<td><a href="<?php echo base_url().'chainbg/view/'.$chain->id;?>"><?=$chain->street .", ".$chain->suburb.", ".$chain->postcode ?></a></td>
 					<td><?=$chain->state?></td>
